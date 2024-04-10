@@ -36,12 +36,29 @@ body {
         background-color: var(--green);
         height: 100%;
         border-radius: 0 80px 80px 0;
+        font-size: 45px;
+        padding-top: 100px;
+        padding-left: 35px;
+        font-family: 'Sharpie';
+        color: var(--form-background);
+        font-style: italic;
+        font-weight: 700;
+        .slogan{
+            font-family: "Montserrat";
+            font-size: 18px;
+            padding-left: 20px;
+            font-weight: 500;
+
+        }
       }
       .heroLogin {
         position: absolute;
         bottom: 0;
         left: 0;
         width: 578px;
+        animation: moving 3s infinite;
+        animation-timing-function: ease;
+        /* animation-delay: .5s; */
       }
     }
 
@@ -68,7 +85,7 @@ body {
           }
 
           h3 {
-            font-size: 20px;
+            font-size:18px;
             font-weight: 400;
           }
         }
@@ -110,6 +127,7 @@ body {
         }
 
         .or {
+            margin-top: 10px;
           span {
             position: absolute;
             left: 0;
@@ -223,12 +241,16 @@ a{
     text-decoration: none;
 }
 
-@media (max-width:1170px) {
-    .mainContainer{
-        .container{
-            .loginSection{
-                /* width: 50%; */
-            }
-        }
+
+
+@keyframes moving {
+    0%{
+        scale: 1;
+    }
+ 50%{
+        scale: 1.010;
+    }
+    100%{
+        scale:1;
     }
 }

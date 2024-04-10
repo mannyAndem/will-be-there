@@ -11,7 +11,11 @@ const Login = () => {
       <div className="container">
         <div className="bannerSide">
           <div className="greenBackground greenRadius">
-
+          WILL.BE.THERE.....
+          <div className="slogan">
+          From vows to wow - manage any event 
+with ease!
+          </div>
           </div>
           <img src={loginHero} alt="A cartoon image of people creating an event next to a calendar." className="heroLogin" />
         </div>
