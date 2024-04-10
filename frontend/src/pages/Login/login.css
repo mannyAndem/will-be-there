@@ -47,7 +47,7 @@ body {
 
     .loginSection {
       width: 55%;
-      height: 70%;
+      /* height: 70%; */
       display: flex;
       .loginContainer {
         width: 85%;
