@@ -1,9 +1,9 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { JwtService, TokenExpiredError } from '@nestjs/jwt';
 import { Response } from 'express';
-import { LoginDto, RegisterDto } from 'src/dtos/authDto';
 import { comparePassword, hashPassword } from 'src/utils/password';
-import { PrismaService } from './prisma.service';
+import { PrismaService } from '../../prisma.service';
+import { LoginDto, RegisterDto } from './dto/authDto';
 
 @Injectable()
 export class AuthService {
