@@ -41,7 +41,7 @@ body {
         position: absolute;
         bottom: 0;
         left: 0;
-        width: 580px;
+        width: 578px;
       }
     }
 
@@ -223,9 +223,3 @@ a{
     text-decoration: none;
 }
 
-
-@media(max-width:2560px){
-    .mainContainer{
-        border: 1px solid red;
-    }
-}
