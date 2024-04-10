@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Ojuju:wght@200..800&display=swap');
 :root {
   --green: #23c55e;
   --text-color: #171d29;
@@ -39,7 +39,7 @@ body {
         font-size: 45px;
         padding-top: 100px;
         padding-left: 35px;
-        font-family: 'Sharpie';
+        font-family: 'Ojuju';
         color: var(--form-background);
         font-style: italic;
         font-weight: 700;
@@ -110,7 +110,7 @@ body {
             gap: 10px;
             width: 100%;
             text-decoration: none;
-            color: var(--text-color, #000);
+            color: var(--text-color);
             transition: all 0.3s ease-in-out;
             img{
                 width: 25px;
@@ -242,7 +242,103 @@ a{
 }
 
 
+@media (max-width:1024px) {
+  .mainContainer{
+    .container{
+        .bannerSide{
+            width:40%;
+            min-width: 200px;
 
+            .greenBackground{
+                font-size: 35px;
+                .slogan{
+                    font-size: 18px;
+                    padding-right: 10px;
+                }
+            }
+
+            .heroLogin{
+                width: 117%;
+                min-width: 78px;
+            }
+           }
+    }
+  }
+}
+
+
+@media (max-width:768px) {
+    .mainContainer{
+        height: 600px;
+        .container{
+            .bannerSide{
+                .greenBackground{
+                    font-size: 25px;
+                    .slogan{
+                        font-size: 13px;
+                    }
+                }
+        
+                
+            }
+
+            .loginSection{
+                .loginContainer{
+                    gap: 15px;
+                    .headingSection{
+                        h1{
+                            font-size: 30px;
+                        }
+                        h3{
+                            font-size: 12px;
+                        }
+                    }
+                    .googleAuth{
+                        a{
+                            padding: 10px;
+                        }
+                    }
+
+                    .formSection{
+                        .loginForm{
+                            .email,.password{
+                                label{
+                                    font-size: 14px;
+                                }
+                                input[type="email"], input[type="password"]{
+                                    font-size: 14px;
+                                    height: 40px;
+                                }
+
+                                .forgotPass{
+                                    a{
+                                        font-size: 14px;
+                                    }
+                                }
+                            }
+
+                            .sign{
+                                gap:10px;
+                                button.login{
+                                    padding: 15px;
+                                }
+                                .signUp{
+                                    font-size: 14px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
+/* Animation goes here */
 @keyframes moving {
     0%{
         scale: 1;
@@ -254,3 +350,5 @@ a{
         scale:1;
     }
 }
+
+/* Animation ends here */
