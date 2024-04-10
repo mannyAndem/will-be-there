@@ -47,6 +47,7 @@ body {
 
     .loginSection {
       width: 55%;
+      min-width: 30%;
       /* height: 70%; */
       display: flex;
       .loginContainer {
@@ -136,8 +137,7 @@ body {
               flex-direction: column;
               gap: 3px;
               .forgotPass{
-                margin-top: 5px;
-                margin-bottom: 20px;
+               margin: 10px 0 5px 0;
                 a{
                     color: #23c55e;
                     text-decoration: none;
@@ -223,3 +223,12 @@ a{
     text-decoration: none;
 }
 
+@media (max-width:1170px) {
+    .mainContainer{
+        .container{
+            .loginSection{
+                /* width: 50%; */
+            }
+        }
+    }
+}
