@@ -95,7 +95,6 @@ export class AuthService {
       });
       const access_token = this.generateAccessToken(payload);
 
-      // Set cookie with security options
       res.cookie('access_token', access_token, {
         httpOnly: true,
         secure: true,
@@ -107,7 +106,6 @@ export class AuthService {
         token: { access_token },
       };
     } catch (error) {
-      // Handle errors more informatively
       if (error instanceof TokenExpiredError) {
         return { status: 'error', message: 'Token has expired' };
       } else {

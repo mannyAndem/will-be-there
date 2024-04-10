@@ -7,7 +7,7 @@ import {
 } from '@nestjs/swagger';
 import { Response } from 'express';
 import { AuthService } from './auth.service';
-import { LoginDto, RegisterDto } from './dto/authDto';
+import { LoginDto, RefreshDto, RegisterDto } from './dto/authDto';
 
 @Controller('auth')
 @ApiTags('auth')
@@ -55,5 +55,27 @@ export class AuthController {
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   registerHandler(@Body() data: RegisterDto, @Res() response: Response) {
     return this.authService.register(data, response);
+  }
+
+  @Post('refresh')
+  @ApiOperation({ summary: 'Refresh token' })
+  @ApiOkResponse({
+    schema: {
+      example: {
+        status: 'success',
+        message: 'Token refreshed successfully',
+        token: {
+          access_token: 'string',
+        },
+      },
+    },
+  })
+  @ApiResponse({ status: 200, description: 'Successful refresh' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  refreshTokenHandler(
+    @Res({ passthrough: true }) response: Response,
+    @Body() data: RefreshDto,
+  ) {
+    return this.authService.refreshToken(data.refresh_token, response);
   }
 }
