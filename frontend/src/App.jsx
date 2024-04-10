@@ -5,11 +5,19 @@ import Login from "./pages/Login/Login";
 
 function App() {
   return (
+
+
+   
+    <div className="routes">
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
     </Routes>
+
+    
+    </div>
+
   );
 }
 
