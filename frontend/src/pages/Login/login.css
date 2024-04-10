@@ -29,7 +29,7 @@ body {
     height: 100%;
     align-items: center;
     .bannerSide {
-      width: 40%;
+      width: 500px;
       height: 100%;
       .greenBackground {
         width: 100%;
@@ -221,4 +221,11 @@ body {
 
 a{
     text-decoration: none;
+}
+
+
+@media(max-width:2560px){
+    .mainContainer{
+        border: 1px solid red;
+    }
 }
