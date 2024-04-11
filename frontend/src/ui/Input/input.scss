@@ -1,0 +1,27 @@
+@import "../../style/variables";
+
+.input {
+  padding: 20px 16px;
+  background-color: $gray;
+  border-radius: 12px;
+  font-family: "Montserrat";
+  font-size: 1.25rem;
+  border: none;
+  width: 100%;
+  color: $dark;
+
+  &:focus {
+    outline: 1px solid $green;
+  }
+
+  &[aria-invalid="true"] {
+    background-color: $veryLightRed;
+    outline-color: $error;
+  }
+
+  &::placeholder {
+    color: $dark;
+    opacity: 50%;
+    font-weight: 500;
+  }
+}

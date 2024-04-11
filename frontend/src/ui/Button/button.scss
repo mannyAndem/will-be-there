@@ -1,0 +1,28 @@
+@import "../../style/variables";
+
+button {
+  position: relative;
+  width: 70%;
+  background-color: $green;
+  border-radius: 12px;
+  padding: 1.5rem 2.5rem;
+  margin-top: 2.5rem;
+  align-self: center;
+  font-size: 1.25rem;
+  font-weight: 600;
+  font-family: "Montserrat";
+  border: none;
+  cursor: pointer;
+
+  div {
+    color: $gray;
+  }
+
+  &:disabled {
+    opacity: 50%;
+  }
+
+  .pending {
+    opacity: 0;
+  }
+}

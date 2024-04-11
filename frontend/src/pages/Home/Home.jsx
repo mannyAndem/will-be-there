@@ -1,9 +1,7 @@
-import Login from "../Login/Login";
-const Home = () => {
-  return <div>
-<Login/>
+import "./home.scss";
 
-  </div>
+const Home = () => {
+  return <div className="home">Home</div>;
 };
 
 export default Home;

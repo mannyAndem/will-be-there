@@ -1,0 +1,21 @@
+@import "../../../../style/variables";
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  .signup-btn {
+    width: 70%;
+    background-color: $green;
+    color: $gray;
+    border-radius: 12px;
+    padding: 1.5rem 2.5rem;
+    margin-top: 2.5rem;
+    align-self: center;
+    font-size: 1.25rem;
+    font-weight: 600;
+    font-family: "Montserrat";
+    border: none;
+  }
+}

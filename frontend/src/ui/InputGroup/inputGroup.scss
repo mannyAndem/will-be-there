@@ -1,0 +1,22 @@
+@import "../../style/variables";
+
+.input-group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  label {
+    font-family: "Montserrat", sans-serif;
+    line-height: 19.5px;
+    font-size: 1rem;
+    color: $dark;
+  }
+
+  .error {
+    font-family: "Montserrat", sans-serif;
+    line-height: 19.5px;
+    font-size: 1rem;
+    color: $error;
+  }
+}

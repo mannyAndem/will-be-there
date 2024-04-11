@@ -1,0 +1,30 @@
+@import "../../../../style/variables";
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  .forgot-pass {
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.25rem;
+    font-weight: 500;
+    text-decoration: underline;
+    color: $green;
+    margin-top: 6px;
+  }
+
+  .signup-btn {
+    width: 70%;
+    background-color: $green;
+    color: $gray;
+    border-radius: 12px;
+    padding: 1.5rem 2.5rem;
+    margin-top: 2.5rem;
+    align-self: center;
+    font-size: 1.25rem;
+    font-weight: 600;
+    font-family: "Montserrat";
+    border: none;
+  }
+}
