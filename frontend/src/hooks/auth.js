@@ -12,7 +12,12 @@ export const useLogin = () => {
 
   console.log(tokens);
   const { isError, isPending, isSuccess, data, error, mutate } = useMutation({
-    mutationFn: (data) => axios.post("auth/login", JSON.stringify(data)),
+    mutationFn: (data) =>
+      axios.post("auth/login", JSON.stringify(data), {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }),
   });
 
   useEffect(() => {
@@ -25,15 +30,23 @@ export const useLogin = () => {
     }
   }, [isSuccess, isError]);
 
-  return { login: mutate, isSuccess, isError, isPending };
+  return { login: mutate, isSuccess, isError, isPending, error };
 };
 
 export const useSignup = () => {
   const { setTokens, tokens } = useAuthContext();
 
-  console.log(tokens);
   const { isError, isPending, isSuccess, data, error, mutate } = useMutation({
-    mutationFn: (data) => axios.post("auth/register", JSON.stringify(data)),
+    mutationFn: (data) =>
+      axios.post(
+        "auth/register",
+        JSON.stringify({ ...data, provider: "local" }),
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      ),
   });
 
   useEffect(() => {
@@ -46,5 +59,5 @@ export const useSignup = () => {
     }
   }, [isSuccess, isError]);
 
-  return { signup: mutate, isSuccess, isError, isPending };
+  return { signup: mutate, isSuccess, isError, isPending, error };
 };

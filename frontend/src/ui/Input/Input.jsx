@@ -1,7 +1,16 @@
 import { Field } from "formik";
 import "./input.scss";
 
-const Input = ({ name, type, value, placeholder, id, onChange, ...rest }) => {
+const Input = ({
+  name,
+  type,
+  value,
+  placeholder,
+  id,
+  onChange,
+  error,
+  ...rest
+}) => {
   return (
     <Field
       className="input"
@@ -11,6 +20,8 @@ const Input = ({ name, type, value, placeholder, id, onChange, ...rest }) => {
       value={value}
       type={type ? type : "text"}
       placeholder={placeholder}
+      aria-invalid={!!error}
+      autocomplete="off"
       {...rest}
     />
   );

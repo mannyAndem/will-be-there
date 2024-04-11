@@ -8,11 +8,12 @@ const useInputGroupContext = () => {
   return useContext(InputGroupContext);
 };
 
-const InputGroup = ({ children, id, name }) => {
+const InputGroup = ({ children, id, name, error }) => {
   return (
     <div className="input-group">
-      <InputGroupContext.Provider value={{ id, name }}>
+      <InputGroupContext.Provider value={{ id, name, error }}>
         {children}
+        {error && <span className="error">{error}</span>}
       </InputGroupContext.Provider>
     </div>
   );
@@ -39,9 +40,10 @@ InputGroup.Input = ({ value, onChange, placeholder, ...rest }) => {
     throw new Error("InputGroup.Input must have a parent InputGroup.");
   }
 
-  const { id, name } = context;
+  const { id, name, error } = context;
   return (
     <Input
+      error={error}
       id={id ? id : name}
       name={name}
       value={value}

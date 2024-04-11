@@ -2,7 +2,7 @@ import { FcGoogle } from "react-icons/fc";
 import "./signup.scss";
 import SignupForm from "./components/SignupForm/SignupForm";
 import { Link } from "react-router-dom";
-import titleText from "../../assets/images/title.svg";
+import slogan from "../../assets/images/title.svg";
 import signupImg from "../../assets/images/pana.png";
 
 const Signup = () => {
@@ -10,7 +10,7 @@ const Signup = () => {
     <div className="container">
       <div>
         <div className="brand-container">
-          <img src={titleText} />
+          <img src={slogan} />
           <p>From vows to wow - manage any event with ease!</p>
           <div className="img-container">
             <img src={signupImg} />
