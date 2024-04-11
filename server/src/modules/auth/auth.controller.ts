@@ -53,7 +53,10 @@ export class AuthController {
   })
   @ApiResponse({ status: 200, description: 'Successful registration' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
-  registerHandler(@Body() data: RegisterDto, @Res() response: Response) {
+  registerHandler(
+    @Body() data: RegisterDto,
+    @Res({ passthrough: true }) response: Response,
+  ) {
     return this.authService.register(data, response);
   }
 
