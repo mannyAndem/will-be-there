@@ -1,9 +1,9 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { JwtService, TokenExpiredError } from '@nestjs/jwt';
 import { Response } from 'express';
-import { LoginDto, RegisterDto } from 'src/dtos/authDto';
 import { comparePassword, hashPassword } from 'src/utils/password';
-import { PrismaService } from './prisma.service';
+import { PrismaService } from '../../prisma.service';
+import { LoginDto, RegisterDto } from './dto/authDto';
 
 @Injectable()
 export class AuthService {
@@ -95,7 +95,6 @@ export class AuthService {
       });
       const access_token = this.generateAccessToken(payload);
 
-      // Set cookie with security options
       res.cookie('access_token', access_token, {
         httpOnly: true,
         secure: true,
@@ -107,7 +106,6 @@ export class AuthService {
         token: { access_token },
       };
     } catch (error) {
-      // Handle errors more informatively
       if (error instanceof TokenExpiredError) {
         return { status: 'error', message: 'Token has expired' };
       } else {
