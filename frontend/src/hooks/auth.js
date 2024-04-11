@@ -38,15 +38,11 @@ export const useSignup = () => {
 
   const { isError, isPending, isSuccess, data, error, mutate } = useMutation({
     mutationFn: (data) =>
-      axios.post(
-        "auth/register",
-        JSON.stringify({ ...data, provider: "local" }),
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      ),
+      axios.post("auth/register", JSON.stringify(data), {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }),
   });
 
   useEffect(() => {
