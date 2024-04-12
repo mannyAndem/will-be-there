@@ -1,15 +1,26 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { JwtService, TokenExpiredError } from '@nestjs/jwt';
 import { Response } from 'express';
 import { comparePassword, hashPassword } from 'src/utils/password';
 import { PrismaService } from '../../prisma.service';
-import { LoginDto, RegisterDto } from './dto/authDto';
+import { MailService } from '../mail/mail.service';
+import {
+  ChangePasswordDto,
+  ForgotPasswordDto,
+  LoginDto,
+  RegisterDto,
+} from './dto/authDto';
 
 @Injectable()
 export class AuthService {
   constructor(
     private prisma: PrismaService,
     private readonly jwtService: JwtService,
+    private mailService: MailService,
   ) {}
   async login(data: LoginDto, res: Response) {
     const account = await this.prisma.user.findUnique({
@@ -112,6 +123,43 @@ export class AuthService {
         return { status: 'error', message: 'Failed to refresh token' };
       }
     }
+  }
+
+  async forgotPassword(reqData: ForgotPasswordDto) {
+    const email = reqData.email;
+    // const findAccountByEmail = await this.prisma.user.findUnique({
+    //   where: { email },
+    // });
+
+    // if (!findAccountByEmail) throw new NotFoundException('User not found');
+
+    const token = await this.jwtService.sign({ email }, { expiresIn: '1d' });
+
+    // send mail
+    return this.mailService.sendForgotPasswordToken(reqData.email, token);
+  }
+
+  async changePassword(reqData: ChangePasswordDto) {
+    const { newPassword, token } = reqData;
+    const payload = await this.jwtService.verifyAsync(token);
+
+    const findAccountByEmail = await this.prisma.user.findUnique({
+      where: { email: payload?.email },
+    });
+
+    if (!findAccountByEmail) throw new NotFoundException('User not found');
+
+    await this.prisma.user.update({
+      where: { email: payload.email },
+      data: {
+        password: await hashPassword(newPassword),
+      },
+    });
+
+    return {
+      status: 'success',
+      message: 'Password successfully updated. Please login again',
+    };
   }
 
   generateAccessToken(payload: any): string {

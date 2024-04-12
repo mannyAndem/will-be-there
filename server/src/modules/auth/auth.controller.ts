@@ -7,7 +7,13 @@ import {
 } from '@nestjs/swagger';
 import { Response } from 'express';
 import { AuthService } from './auth.service';
-import { LoginDto, RefreshDto, RegisterDto } from './dto/authDto';
+import {
+  ChangePasswordDto,
+  ForgotPasswordDto,
+  LoginDto,
+  RefreshDto,
+  RegisterDto,
+} from './dto/authDto';
 
 @Controller('auth')
 @ApiTags('auth')
@@ -80,5 +86,37 @@ export class AuthController {
     @Body() data: RefreshDto,
   ) {
     return this.authService.refreshToken(data.refresh_token, response);
+  }
+
+  @Post('forgot-password')
+  @ApiOperation({ summary: 'Forgot Password' })
+  @ApiOkResponse({
+    schema: {
+      example: {
+        status: 'success',
+        message: 'Email sent successfully',
+      },
+    },
+  })
+  @ApiResponse({ status: 200, description: 'Email sent successfully' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  forgotPasswordHandler(@Body() data: ForgotPasswordDto) {
+    return this.authService.forgotPassword(data);
+  }
+
+  @Post('change-password')
+  @ApiOperation({ summary: 'Change Password' })
+  @ApiOkResponse({
+    schema: {
+      example: {
+        status: 'success',
+        message: 'Password updated successfully. Please login',
+      },
+    },
+  })
+  @ApiResponse({ status: 200, description: 'Password updated successfully' })
+  @ApiResponse({ status: 404, description: 'User not found' })
+  changePasswordHandler(@Body() data: ChangePasswordDto) {
+    return this.authService.changePassword(data);
   }
 }

@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { PrismaService } from 'src/prisma.service';
+import { MailModule } from '../mail/mail.module';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 
@@ -16,6 +17,7 @@ import { AuthService } from './auth.service';
       }),
       inject: [ConfigService],
     }),
+    MailModule,
   ],
 })
 export class AuthModule {}
