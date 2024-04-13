@@ -39,8 +39,14 @@ export class AuthService {
     );
     if (!validatePassword) throw new BadRequestException('Invalid credentials');
 
-    const access_token = this.generateAccessToken({ ...account });
-    const refresh_token = this.generateRefreshToken({ ...account });
+    const access_token = this.generateAccessToken({
+      email: account.email,
+      sub: account.id,
+    });
+    const refresh_token = this.generateRefreshToken({
+      email: account.email,
+      sub: account.id,
+    });
 
     res.cookie('access_token', access_token, {
       httpOnly: true,
@@ -79,8 +85,14 @@ export class AuthService {
       },
     });
 
-    const access_token = this.generateAccessToken({ ...account });
-    const refresh_token = this.generateRefreshToken({ ...account });
+    const access_token = this.generateAccessToken({
+      email: account.email,
+      sub: account.id,
+    });
+    const refresh_token = this.generateRefreshToken({
+      email: account.email,
+      sub: account.id,
+    });
 
     res.cookie('access_token', access_token, {
       httpOnly: true,
@@ -172,6 +184,47 @@ export class AuthService {
       status: 'success',
       message: 'Password successfully updated. Please login again',
     };
+  }
+
+  async googleLogin(req: any) {
+    if (!req.user) {
+      return 'No user from Google';
+    }
+
+    const payload = {
+      email: req.user.email,
+      sub: req.user.userId,
+    };
+
+    const access_token = this.generateAccessToken(payload);
+    const refresh_token = this.generateRefreshToken(payload);
+
+    return {
+      status: 'success',
+      message: 'Login successful',
+      user: req.user,
+      token: {
+        access_token,
+        refresh_token,
+      },
+    };
+  }
+
+  async validateUser(name: string, email: string) {
+    const user = await this.prisma.user.findFirst({ where: { email: email } });
+
+    if (user) {
+      return user;
+    }
+
+    const newUser = await this.prisma.user.create({
+      data: {
+        name,
+        email,
+        provider: 'google',
+      },
+    });
+    return newUser;
   }
 
   generateAccessToken(payload: any): string {
