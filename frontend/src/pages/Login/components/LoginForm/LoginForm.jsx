@@ -58,19 +58,21 @@ const LoginForm = () => {
                 onChange={handleChange}
               />
             </InputGroup>
-            <InputGroup
-              name="password"
-              error={touched.password && errors.password}
-            >
-              <InputGroup.Label>Password</InputGroup.Label>
-              <InputGroup.Input
-                type="password"
-                placeholder="Enter your password"
-                value={values.password}
-                onChange={handleChange}
-              />
-            </InputGroup>
-            <Link className="forgot-pass">Forgot Password?</Link>
+            <div>
+              <InputGroup
+                name="password"
+                error={touched.password && errors.password}
+              >
+                <InputGroup.Label>Password</InputGroup.Label>
+                <InputGroup.Input
+                  type="password"
+                  placeholder="Enter your password"
+                  value={values.password}
+                  onChange={handleChange}
+                />
+              </InputGroup>
+              <Link className="forgot-pass">Forgot Password?</Link>
+            </div>
             <Button pending={isPending}>Sign in</Button>
           </form>
         )}

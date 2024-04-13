@@ -42,7 +42,7 @@ const SignupForm = () => {
     if (isSuccess) {
       toast("Signed up successfully.");
       setTimeout(() => {
-        navigate("/home");
+        navigate("/");
       }, 1000);
     }
 
