@@ -3,6 +3,7 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { JwtService, TokenExpiredError } from '@nestjs/jwt';
 import { Response } from 'express';
 import { comparePassword, hashPassword } from 'src/utils/password';
@@ -21,6 +22,7 @@ export class AuthService {
     private prisma: PrismaService,
     private readonly jwtService: JwtService,
     private mailService: MailService,
+    private configService: ConfigService,
   ) {}
   async login(data: LoginDto, res: Response) {
     const account = await this.prisma.user.findUnique({
@@ -127,16 +129,26 @@ export class AuthService {
 
   async forgotPassword(reqData: ForgotPasswordDto) {
     const email = reqData.email;
-    // const findAccountByEmail = await this.prisma.user.findUnique({
-    //   where: { email },
-    // });
+    const findAccountByEmail = await this.prisma.user.findUnique({
+      where: { email },
+    });
 
-    // if (!findAccountByEmail) throw new NotFoundException('User not found');
+    if (!findAccountByEmail) throw new NotFoundException('User not found');
 
-    const token = await this.jwtService.sign({ email }, { expiresIn: '1d' });
+    const token = this.jwtService.sign({ email }, { expiresIn: '1d' }); // generate token
+    const templateId = this.configService.get('FORGOT_PASSWORD_TEMPLATE_ID'); // get email template ID
+
+    // frontend url
+    const baseUrl = this.configService.getOrThrow('FRONTEND_BASE_URL');
+    const resetUrl = `${baseUrl}/reset-password?token=${token}`;
 
     // send mail
-    return this.mailService.sendForgotPasswordToken(reqData.email, token);
+    return this.mailService.sendMail({
+      recipient: email,
+      templateId,
+      title: 'Password Reset for Your Account',
+      variables: { resetUrl },
+    });
   }
 
   async changePassword(reqData: ChangePasswordDto) {
