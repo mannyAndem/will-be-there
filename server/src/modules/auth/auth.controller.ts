@@ -1,4 +1,12 @@
-import { Body, Controller, Post, Res } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Req,
+  Res,
+  UseGuards,
+} from '@nestjs/common';
 import {
   ApiOkResponse,
   ApiOperation,
@@ -7,7 +15,14 @@ import {
 } from '@nestjs/swagger';
 import { Response } from 'express';
 import { AuthService } from './auth.service';
-import { LoginDto, RefreshDto, RegisterDto } from './dto/authDto';
+import {
+  ChangePasswordDto,
+  ForgotPasswordDto,
+  LoginDto,
+  RefreshDto,
+  RegisterDto,
+} from './dto/authDto';
+import { GoogleGuard } from './google.guard';
 
 @Controller('auth')
 @ApiTags('auth')
@@ -80,5 +95,64 @@ export class AuthController {
     @Body() data: RefreshDto,
   ) {
     return this.authService.refreshToken(data.refresh_token, response);
+  }
+
+  @Post('forgot-password')
+  @ApiOperation({ summary: 'Forgot Password' })
+  @ApiOkResponse({
+    schema: {
+      example: {
+        status: 'success',
+        message: 'Email sent successfully',
+      },
+    },
+  })
+  @ApiResponse({ status: 200, description: 'Email sent successfully' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  forgotPasswordHandler(@Body() data: ForgotPasswordDto) {
+    return this.authService.forgotPassword(data);
+  }
+
+  @Post('change-password')
+  @ApiOperation({ summary: 'Change Password' })
+  @ApiOkResponse({
+    schema: {
+      example: {
+        status: 'success',
+        message: 'Password updated successfully. Please login',
+      },
+    },
+  })
+  @ApiResponse({ status: 200, description: 'Password updated successfully' })
+  @ApiResponse({ status: 404, description: 'User not found' })
+  changePasswordHandler(@Body() data: ChangePasswordDto) {
+    return this.authService.changePassword(data);
+  }
+
+  @Get('google')
+  @ApiOperation({ summary: 'Google Login' })
+  @ApiOkResponse({
+    schema: {
+      example: {
+        status: 'success',
+        user: {},
+        token: {
+          access_token: 'string',
+          refresh_token: 'string',
+        },
+      },
+    },
+  })
+  @ApiResponse({ status: 200, description: 'Successful login' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  @UseGuards(GoogleGuard)
+  async googleAuth(@Req() req) {
+    return req.user;
+  }
+
+  @Get('google/redirect')
+  @UseGuards(GoogleGuard)
+  async googleAuthRedirect(@Req() req) {
+    return this.authService.googleLogin(req);
   }
 }

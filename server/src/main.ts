@@ -2,6 +2,7 @@ import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as cookieParser from 'cookie-parser';
+import * as session from 'express-session';
 import { AppModule } from './modules/app/app.module';
 
 async function bootstrap() {
@@ -31,6 +32,13 @@ async function bootstrap() {
   SwaggerModule.setup('doc', app, document);
 
   app.use(cookieParser());
+  app.use(
+    session({
+      secret: 'secret',
+      resave: false,
+      saveUninitialized: false,
+    }),
+  );
   await app.listen(5000);
 }
 bootstrap();

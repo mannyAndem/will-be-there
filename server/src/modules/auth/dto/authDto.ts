@@ -36,3 +36,19 @@ export class RefreshDto {
   @ApiProperty()
   refresh_token: string;
 }
+
+export class ForgotPasswordDto {
+  @IsEmail()
+  @ApiProperty()
+  email: string;
+}
+
+export class ChangePasswordDto {
+  @IsString()
+  @ApiProperty()
+  token: string;
+
+  @IsString()
+  @ApiProperty()
+  newPassword: string;
+}
