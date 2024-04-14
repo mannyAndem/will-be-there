@@ -15,17 +15,9 @@ form {
     margin-top: 6px;
   }
 
-  .signup-btn {
-    width: 70%;
-    background-color: $green;
-    color: $gray;
-    border-radius: 12px;
-    padding: 1.5rem 2.5rem;
-    margin-top: 2.5rem;
+  .button-container {
+    margin-top: 3rem;
+    width: 60%;
     align-self: center;
-    font-size: 1.25rem;
-    font-weight: 600;
-    font-family: "Montserrat";
-    border: none;
   }
 }

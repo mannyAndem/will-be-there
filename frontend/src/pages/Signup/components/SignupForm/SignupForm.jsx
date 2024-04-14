@@ -40,7 +40,7 @@ const SignupForm = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      toast("Signed up successfully.");
+      toast.success("Signed up successfully.");
       setTimeout(() => {
         navigate("/");
       }, 1000);
@@ -104,7 +104,9 @@ const SignupForm = () => {
                 onChange={handleChange}
               />
             </InputGroup>
-            <Button pending={isPending}>Sign up</Button>
+            <div className="button-container">
+              <Button pending={isPending}>Sign up</Button>
+            </div>
           </form>
         )}
       </Formik>

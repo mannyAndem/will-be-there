@@ -71,9 +71,13 @@ const LoginForm = () => {
                   onChange={handleChange}
                 />
               </InputGroup>
-              <Link className="forgot-pass">Forgot Password?</Link>
+              <Link className="forgot-pass" to="/forgot-password">
+                Forgot Password?
+              </Link>
             </div>
-            <Button pending={isPending}>Sign in</Button>
+            <div className="button-container">
+              <Button pending={isPending}>Sign in</Button>
+            </div>
           </form>
         )}
       </Formik>
