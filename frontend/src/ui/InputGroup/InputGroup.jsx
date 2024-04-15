@@ -33,7 +33,7 @@ InputGroup.Label = ({ children }) => {
   return <label htmlFor={id ? id : name}>{children}</label>;
 };
 
-InputGroup.Input = ({ value, onChange, placeholder, ...rest }) => {
+InputGroup.Input = ({ type, value, onChange, placeholder, ...rest }) => {
   const context = useInputGroupContext();
 
   if (!context) {
@@ -43,6 +43,7 @@ InputGroup.Input = ({ value, onChange, placeholder, ...rest }) => {
   const { id, name, error } = context;
   return (
     <Input
+      type={type}
       error={error}
       id={id ? id : name}
       name={name}

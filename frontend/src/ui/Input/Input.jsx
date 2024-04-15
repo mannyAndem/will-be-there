@@ -21,7 +21,7 @@ const Input = ({
       type={type ? type : "text"}
       placeholder={placeholder}
       aria-invalid={!!error}
-      autocomplete="off"
+      autoComplete="off"
       {...rest}
     />
   );

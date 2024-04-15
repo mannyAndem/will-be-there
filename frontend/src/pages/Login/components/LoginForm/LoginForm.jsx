@@ -58,20 +58,26 @@ const LoginForm = () => {
                 onChange={handleChange}
               />
             </InputGroup>
-            <InputGroup
-              name="password"
-              error={touched.password && errors.password}
-            >
-              <InputGroup.Label>Password</InputGroup.Label>
-              <InputGroup.Input
-                type="password"
-                placeholder="Enter your password"
-                value={values.password}
-                onChange={handleChange}
-              />
-            </InputGroup>
-            <Link className="forgot-pass">Forgot Password?</Link>
-            <Button pending={isPending}>Sign in</Button>
+            <div>
+              <InputGroup
+                name="password"
+                error={touched.password && errors.password}
+              >
+                <InputGroup.Label>Password</InputGroup.Label>
+                <InputGroup.Input
+                  type="password"
+                  placeholder="Enter your password"
+                  value={values.password}
+                  onChange={handleChange}
+                />
+              </InputGroup>
+              <Link className="forgot-pass" to="/forgot-password">
+                Forgot Password?
+              </Link>
+            </div>
+            <div className="button-container">
+              <Button pending={isPending}>Sign in</Button>
+            </div>
           </form>
         )}
       </Formik>
