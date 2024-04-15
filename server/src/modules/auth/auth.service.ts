@@ -5,8 +5,9 @@ import {
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
-import { CookieOptions, Request, Response } from 'express';
+import { CookieOptions, Response } from 'express';
 import { comparePassword, hashPassword } from 'src/utils/password';
+import { RequestInterfaceWithUser } from 'src/utils/requestInterface';
 import { PrismaService } from '../../prisma.service';
 import { MailService } from '../mail/mail.service';
 import {
@@ -108,7 +109,11 @@ export class AuthService {
     };
   }
 
-  async refreshToken(token: string, req: Request, res: Response) {
+  async refreshToken(
+    token: string,
+    req: RequestInterfaceWithUser,
+    res: Response,
+  ) {
     if (!token) {
       const refreshTokenFromCookie = req.cookies['refresh_token'];
       if (!refreshTokenFromCookie) {
@@ -133,6 +138,20 @@ export class AuthService {
       status: 'success',
       message: 'Token refreshed successfully',
       token: { access_token },
+    };
+  }
+
+  async getMe(req: RequestInterfaceWithUser) {
+    const user = await this.prisma.user.findUnique({
+      where: {
+        email: req.user.email,
+      },
+    });
+
+    return {
+      status: 'success',
+      message: 'User fetched successfully',
+      user,
     };
   }
 

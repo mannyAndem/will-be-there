@@ -13,8 +13,9 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { Request, Response } from 'express';
+import { Response } from 'express';
 import { AuthGuard } from 'src/guards/auth.guard';
+import { RequestInterfaceWithUser } from 'src/utils/requestInterface';
 import { AuthService } from './auth.service';
 import {
   ChangePasswordDto,
@@ -93,7 +94,7 @@ export class AuthController {
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   refreshTokenHandler(
     @Res({ passthrough: true }) response: Response,
-    @Req() req: Request,
+    @Req() req: RequestInterfaceWithUser,
     @Body() data: RefreshDto,
   ) {
     return this.authService.refreshToken(data.refresh_token, req, response);
@@ -113,12 +114,8 @@ export class AuthController {
   })
   @ApiResponse({ status: 200, description: 'Successful get me' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
-  getMeHandler(@Req() req: Request) {
-    return {
-      status: 'success',
-      message: 'User fetched successfully',
-      user: req.user,
-    };
+  getMeHandler(@Req() req: RequestInterfaceWithUser) {
+    return this.authService.getMe(req);
   }
 
   @Post('forgot-password')
