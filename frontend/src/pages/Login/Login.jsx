@@ -1,10 +1,10 @@
-import "./login.scss";
-import loginHero from "/public/amico.png";
-import { Link } from "react-router-dom";
-import React, { useEffect } from "react";
-import slogan from "../../assets/images/title.svg";
-import { FcGoogle } from "react-icons/fc";
-import LoginForm from "./components/LoginForm/LoginForm";
+import React from 'react'
+import { FcGoogle } from 'react-icons/fc'
+import { Link } from 'react-router-dom'
+import slogan from '../../assets/images/title.svg'
+import LoginForm from './components/LoginForm/LoginForm'
+import './login.scss'
+import loginHero from '/public/amico.png'
 
 const Login = () => {
   return (
@@ -24,11 +24,12 @@ const Login = () => {
       <div>
         <div className="header">
           <h1>Sign In</h1>
-          <p>
-            Streamline Your Event Experience: RSVP Easily and Seamlessly Today
-          </p>
+          <p>Streamline Your Event Experience: RSVP Easily and Seamlessly Today</p>
         </div>
-        <button className="signup-with-google">
+        <button
+          className="signup-with-google"
+          onClick={() => location.replace('http://localhost:5000/api/auth/google')}
+        >
           <FcGoogle size={30} />
           Sign In with Google
         </button>
@@ -45,7 +46,7 @@ const Login = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login
