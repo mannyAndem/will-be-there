@@ -3,7 +3,7 @@ import SignupForm from "./components/SignupForm/SignupForm";
 import { Link } from "react-router-dom";
 import slogan from "../../assets/images/title.svg";
 import signupImg from "../../assets/images/pana.png";
-import GoogleSignupButton from "./components/GoogleSignupButton/GoogleSignupButton";
+import GoogleSignupButton from "../../shared-components/GoogleSignupButton/GoogleSignupButton";
 
 const Signup = () => {
   return (
