@@ -28,12 +28,12 @@ export class LoginDto {
 
   @IsString()
   @ApiProperty()
-  password: string;
+  password?: string;
 }
 
 export class RefreshDto {
   @IsString()
-  @ApiProperty()
+  @ApiPropertyOptional()
   refresh_token: string;
 }
 

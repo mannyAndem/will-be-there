@@ -13,7 +13,8 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { Response } from 'express';
+import { Request, Response } from 'express';
+import { AuthGuard } from 'src/guards/auth.guard';
 import { AuthService } from './auth.service';
 import {
   ChangePasswordDto,
@@ -92,9 +93,32 @@ export class AuthController {
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   refreshTokenHandler(
     @Res({ passthrough: true }) response: Response,
+    @Req() req: Request,
     @Body() data: RefreshDto,
   ) {
-    return this.authService.refreshToken(data.refresh_token, response);
+    return this.authService.refreshToken(data.refresh_token, req, response);
+  }
+
+  @Get('me')
+  @UseGuards(AuthGuard)
+  @ApiOperation({ summary: 'Get me' })
+  @ApiOkResponse({
+    schema: {
+      example: {
+        status: 'success',
+        message: 'User fetched successfully',
+        user: {},
+      },
+    },
+  })
+  @ApiResponse({ status: 200, description: 'Successful get me' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  getMeHandler(@Req() req: Request) {
+    return {
+      status: 'success',
+      message: 'User fetched successfully',
+      user: req.user,
+    };
   }
 
   @Post('forgot-password')
@@ -152,7 +176,12 @@ export class AuthController {
 
   @Get('google/redirect')
   @UseGuards(GoogleGuard)
-  async googleAuthRedirect(@Req() req) {
-    return this.authService.googleLogin(req);
+  async googleAuthRedirect(
+    @Req() req,
+    @Res({ passthrough: true }) response: Response,
+  ) {
+    this.authService.googleLogin(req, response).then(() => {
+      return response.redirect(process.env.FRONTEND_BASE_URL);
+    });
   }
 }

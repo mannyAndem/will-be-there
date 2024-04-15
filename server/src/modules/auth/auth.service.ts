@@ -4,8 +4,8 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { JwtService, TokenExpiredError } from '@nestjs/jwt';
-import { Response } from 'express';
+import { JwtService } from '@nestjs/jwt';
+import { CookieOptions, Request, Response } from 'express';
 import { comparePassword, hashPassword } from 'src/utils/password';
 import { PrismaService } from '../../prisma.service';
 import { MailService } from '../mail/mail.service';
@@ -15,6 +15,13 @@ import {
   LoginDto,
   RegisterDto,
 } from './dto/authDto';
+
+const cookieConfig: CookieOptions = {
+  httpOnly: true,
+  secure: false,
+  domain: 'localhost',
+  sameSite: 'none',
+};
 
 @Injectable()
 export class AuthService {
@@ -48,14 +55,8 @@ export class AuthService {
       sub: account.id,
     });
 
-    res.cookie('access_token', access_token, {
-      httpOnly: true,
-      secure: true,
-    });
-    res.cookie('refresh_token', refresh_token, {
-      httpOnly: true,
-      secure: true,
-    });
+    res.cookie('access_token', access_token, cookieConfig);
+    res.cookie('refresh_token', refresh_token, cookieConfig);
 
     return {
       status: 'success',
@@ -94,14 +95,8 @@ export class AuthService {
       sub: account.id,
     });
 
-    res.cookie('access_token', access_token, {
-      httpOnly: true,
-      secure: true,
-    });
-    res.cookie('refresh_token', refresh_token, {
-      httpOnly: true,
-      secure: true,
-    });
+    res.cookie('access_token', access_token, cookieConfig);
+    res.cookie('refresh_token', refresh_token, cookieConfig);
 
     return {
       status: 'success',
@@ -113,30 +108,32 @@ export class AuthService {
     };
   }
 
-  async refreshToken(token: string, res: Response) {
-    try {
-      const payload = await this.jwtService.verifyAsync(token, {
-        secret: process.env.JWT_SECRET,
-      });
-      const access_token = this.generateAccessToken(payload);
-
-      res.cookie('access_token', access_token, {
-        httpOnly: true,
-        secure: true,
-      });
-
-      return {
-        status: 'success',
-        message: 'Token refreshed successfully',
-        token: { access_token },
-      };
-    } catch (error) {
-      if (error instanceof TokenExpiredError) {
-        return { status: 'error', message: 'Token has expired' };
-      } else {
-        return { status: 'error', message: 'Failed to refresh token' };
+  async refreshToken(token: string, req: Request, res: Response) {
+    if (!token) {
+      const refreshTokenFromCookie = req.cookies['refresh_token'];
+      if (!refreshTokenFromCookie) {
+        throw new NotFoundException('Refresh token not found');
       }
+      token = refreshTokenFromCookie;
     }
+
+    const payload = await this.jwtService.verifyAsync(token, {
+      secret: process.env.JWT_SECRET,
+    });
+
+    if (!payload) {
+      throw new BadRequestException('Invalid refresh token');
+    }
+
+    const access_token = this.generateAccessToken(payload);
+
+    res.cookie('access_token', access_token, cookieConfig);
+
+    return {
+      status: 'success',
+      message: 'Token refreshed successfully',
+      token: { access_token },
+    };
   }
 
   async forgotPassword(reqData: ForgotPasswordDto) {
@@ -186,7 +183,7 @@ export class AuthService {
     };
   }
 
-  async googleLogin(req: any) {
+  async googleLogin(req: any, res: Response) {
     if (!req.user) {
       return 'No user from Google';
     }
@@ -198,6 +195,9 @@ export class AuthService {
 
     const access_token = this.generateAccessToken(payload);
     const refresh_token = this.generateRefreshToken(payload);
+
+    res.cookie('access_token', access_token, cookieConfig);
+    res.cookie('refresh_token', refresh_token, cookieConfig);
 
     return {
       status: 'success',
