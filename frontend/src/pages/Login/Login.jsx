@@ -1,14 +1,52 @@
-import React from 'react'
+import { useGoogleLogin } from '@react-oauth/google'
+import axios from 'axios'
+import { useEffect } from 'react'
+import toast, { Toaster } from 'react-hot-toast'
 import { FcGoogle } from 'react-icons/fc'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import slogan from '../../assets/images/title.svg'
+import { useLogin } from '../../hooks/auth'
 import LoginForm from './components/LoginForm/LoginForm'
 import './login.scss'
 import loginHero from '/public/amico.png'
 
 const Login = () => {
+  const { error, isError, isSuccess, login } = useLogin()
+  const navigate = useNavigate()
+
+  const googleLogin = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      console.log(tokenResponse)
+      const userInfo = await axios
+        .get('https://www.googleapis.com/oauth2/v3/userinfo', {
+          headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
+        })
+        .then((res) => res.data)
+
+      const data = {
+        email: userInfo?.email,
+        provider: 'google',
+      }
+
+      login(data)
+    },
+  })
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success('Logged in successfully')
+      setTimeout(() => {
+        navigate('/')
+      }, 1000)
+    }
+    if (isError) {
+      toast.error(error.response?.data?.message ?? 'Something went wrong')
+    }
+  }, [isSuccess, isError, navigate, error?.response?.data?.message])
+
   return (
     <div className="container">
+      <Toaster containerStyle={{ fontFamily: 'Montserrat' }} />
       <div>
         <div className="brand-container">
           <img src={slogan} />
@@ -26,10 +64,7 @@ const Login = () => {
           <h1>Sign In</h1>
           <p>Streamline Your Event Experience: RSVP Easily and Seamlessly Today</p>
         </div>
-        <button
-          className="signup-with-google"
-          onClick={() => location.replace('http://localhost:5000/api/auth/google')}
-        >
+        <button className="signup-with-google" onClick={googleLogin}>
           <FcGoogle size={30} />
           Sign In with Google
         </button>

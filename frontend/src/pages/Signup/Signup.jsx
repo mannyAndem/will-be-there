@@ -1,13 +1,15 @@
-import "./signup.scss";
-import SignupForm from "./components/SignupForm/SignupForm";
-import { Link } from "react-router-dom";
-import slogan from "../../assets/images/title.svg";
-import signupImg from "../../assets/images/pana.png";
-import GoogleSignupButton from "./components/GoogleSignupButton/GoogleSignupButton";
+import { Toaster } from 'react-hot-toast'
+import { Link } from 'react-router-dom'
+import signupImg from '../../assets/images/pana.png'
+import slogan from '../../assets/images/title.svg'
+import GoogleSignupButton from './components/GoogleSignupButton/GoogleSignupButton'
+import SignupForm from './components/SignupForm/SignupForm'
+import './signup.scss'
 
 const Signup = () => {
   return (
     <div className="container">
+      <Toaster containerStyle={{ fontFamily: 'Montserrat' }} />
       <div>
         <div className="brand-container">
           <img src={slogan} />
@@ -38,7 +40,7 @@ const Signup = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Signup;
+export default Signup
