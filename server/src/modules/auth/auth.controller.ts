@@ -24,7 +24,6 @@ import {
   RefreshDto,
   RegisterDto,
 } from './dto/authDto';
-import { GoogleGuard } from './google.guard';
 
 @Controller('auth')
 @ApiTags('auth')
@@ -47,11 +46,8 @@ export class AuthController {
   })
   @ApiResponse({ status: 200, description: 'Successful login' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
-  loginHandler(
-    @Body() data: LoginDto,
-    @Res({ passthrough: true }) response: Response,
-  ) {
-    return this.authService.login(data, response);
+  loginHandler(@Body() data: LoginDto) {
+    return this.authService.login(data);
   }
 
   @Post('register')
@@ -70,11 +66,8 @@ export class AuthController {
   })
   @ApiResponse({ status: 200, description: 'Successful registration' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
-  registerHandler(
-    @Body() data: RegisterDto,
-    @Res({ passthrough: true }) response: Response,
-  ) {
-    return this.authService.register(data, response);
+  registerHandler(@Body() data: RegisterDto) {
+    return this.authService.register(data);
   }
 
   @Post('refresh')
@@ -148,37 +141,5 @@ export class AuthController {
   @ApiResponse({ status: 404, description: 'User not found' })
   changePasswordHandler(@Body() data: ChangePasswordDto) {
     return this.authService.changePassword(data);
-  }
-
-  @Get('google')
-  @ApiOperation({ summary: 'Google Login' })
-  @ApiOkResponse({
-    schema: {
-      example: {
-        status: 'success',
-        user: {},
-        token: {
-          access_token: 'string',
-          refresh_token: 'string',
-        },
-      },
-    },
-  })
-  @ApiResponse({ status: 200, description: 'Successful login' })
-  @ApiResponse({ status: 401, description: 'Unauthorized' })
-  @UseGuards(GoogleGuard)
-  async googleAuth(@Req() req) {
-    return req.user;
-  }
-
-  @Get('google/redirect')
-  @UseGuards(GoogleGuard)
-  async googleAuthRedirect(
-    @Req() req,
-    @Res({ passthrough: true }) response: Response,
-  ) {
-    this.authService.googleLogin(req, response).then(() => {
-      return response.redirect(process.env.FRONTEND_BASE_URL);
-    });
   }
 }

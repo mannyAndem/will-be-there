@@ -11,9 +11,10 @@ export class RegisterDto {
   @ApiProperty()
   email: string;
 
+  @ApiPropertyOptional()
+  @IsOptional()
   @IsString()
-  @ApiProperty()
-  password: string;
+  password?: string;
 
   @IsEnum(OAuth_enum)
   @IsOptional()
@@ -26,9 +27,14 @@ export class LoginDto {
   @ApiProperty()
   email: string;
 
+  @ApiPropertyOptional()
+  @IsOptional()
   @IsString()
-  @ApiProperty()
-  password?: string;
+  password: string;
+
+  @IsEnum(OAuth_enum)
+  @ApiProperty({ enum: OAuth_enum })
+  provider: OAuth_enum;
 }
 
 export class RefreshDto {

@@ -4,20 +4,11 @@ import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { PrismaService } from 'src/prisma.service';
 import { MailModule } from '../mail/mail.module';
-import { UsersService } from '../users/users.service';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
-import { GoogleStrategy } from './google.strategy';
-import { SessionSerializer } from './session.serializer';
 
 @Module({
-  providers: [
-    AuthService,
-    PrismaService,
-    SessionSerializer,
-    GoogleStrategy,
-    { provide: 'USER_SERVICE', useClass: UsersService },
-  ],
+  providers: [AuthService, PrismaService],
   controllers: [AuthController],
   imports: [
     PassportModule.register({ session: true }),

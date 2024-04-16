@@ -5,17 +5,26 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { useEffect } from 'react'
 import axios from '../api/axios'
+import { useAuthContext } from '../contexts/AuthContext'
 
 export const useGetCurrentUser = () => {
-  // const { user } = useAuthContext()
-  const { data, isSuccess, isPending, isError, error } = useQuery({
+  const { user, setUser } = useAuthContext()
+  const { data, isSuccess, isPending, isError, error, refetch } = useQuery({
     queryKey: ['user'],
     queryFn: () => axios.get('auth/me'),
+    enabled: false,
   })
+
+  useEffect(() => {
+    if (!user) {
+      refetch()
+    }
+  }, [])
 
   useEffect(() => {
     if (isSuccess) {
       console.log(data)
+      setUser(data.data.user)
     }
     if (isError) {
       console.error(error)
@@ -70,6 +79,7 @@ export const useForgotPassword = () => {
         headers: {
           'Content-Type': 'application/json',
         },
+        withCredentials: false,
       }),
   })
 
@@ -83,6 +93,7 @@ export const useResetPassword = () => {
         headers: {
           'Content-Type': 'application/json',
         },
+        withCredentials: false,
       }),
   })
 

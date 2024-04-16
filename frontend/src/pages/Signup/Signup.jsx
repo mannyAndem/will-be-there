@@ -2,7 +2,7 @@ import { Toaster } from 'react-hot-toast'
 import { Link } from 'react-router-dom'
 import signupImg from '../../assets/images/pana.png'
 import slogan from '../../assets/images/title.svg'
-import GoogleSignupButton from './components/GoogleSignupButton/GoogleSignupButton'
+import GoogleSignupButton from '../../shared-components/GoogleSignupButton/GoogleSignupButton'
 import SignupForm from './components/SignupForm/SignupForm'
 import './signup.scss'
 
@@ -24,7 +24,7 @@ const Signup = () => {
           <h1>Create An Account</h1>
           <p>Secure Your Spot: RSVP Now for an Unforgettable Event</p>
         </div>
-        <GoogleSignupButton />
+        <GoogleSignupButton type="signup" />
         <div className="or-container">
           <hr />
           <span>Or</span>

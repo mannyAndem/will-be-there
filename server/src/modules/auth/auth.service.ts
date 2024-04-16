@@ -17,12 +17,7 @@ import {
   RegisterDto,
 } from './dto/authDto';
 
-const cookieConfig: CookieOptions = {
-  httpOnly: true,
-  secure: false,
-  domain: 'localhost',
-  sameSite: 'none',
-};
+const cookieConfig: CookieOptions = {};
 
 @Injectable()
 export class AuthService {
@@ -32,7 +27,7 @@ export class AuthService {
     private mailService: MailService,
     private configService: ConfigService,
   ) {}
-  async login(data: LoginDto, res: Response) {
+  async login(data: LoginDto) {
     const account = await this.prisma.user.findUnique({
       where: {
         email: data.email,
@@ -41,11 +36,14 @@ export class AuthService {
 
     if (!account) throw new BadRequestException("Account doesn't exist");
 
-    const validatePassword = await comparePassword(
-      data.password,
-      account.password,
-    );
-    if (!validatePassword) throw new BadRequestException('Invalid credentials');
+    if (account.provider === 'local') {
+      const validatePassword = await comparePassword(
+        data.password,
+        account.password,
+      );
+      if (!validatePassword)
+        throw new BadRequestException('Invalid credentials');
+    }
 
     const access_token = this.generateAccessToken({
       email: account.email,
@@ -55,9 +53,6 @@ export class AuthService {
       email: account.email,
       sub: account.id,
     });
-
-    res.cookie('access_token', access_token, cookieConfig);
-    res.cookie('refresh_token', refresh_token, cookieConfig);
 
     return {
       status: 'success',
@@ -69,7 +64,7 @@ export class AuthService {
     };
   }
 
-  async register(data: RegisterDto, res: Response) {
+  async register(data: RegisterDto) {
     const accountExists = await this.prisma.user.count({
       where: {
         email: data.email,
@@ -95,9 +90,6 @@ export class AuthService {
       email: account.email,
       sub: account.id,
     });
-
-    res.cookie('access_token', access_token, cookieConfig);
-    res.cookie('refresh_token', refresh_token, cookieConfig);
 
     return {
       status: 'success',
@@ -200,50 +192,6 @@ export class AuthService {
       status: 'success',
       message: 'Password successfully updated. Please login again',
     };
-  }
-
-  async googleLogin(req: any, res: Response) {
-    if (!req.user) {
-      return 'No user from Google';
-    }
-
-    const payload = {
-      email: req.user.email,
-      sub: req.user.userId,
-    };
-
-    const access_token = this.generateAccessToken(payload);
-    const refresh_token = this.generateRefreshToken(payload);
-
-    res.cookie('access_token', access_token, cookieConfig);
-    res.cookie('refresh_token', refresh_token, cookieConfig);
-
-    return {
-      status: 'success',
-      message: 'Login successful',
-      user: req.user,
-      token: {
-        access_token,
-        refresh_token,
-      },
-    };
-  }
-
-  async validateUser(name: string, email: string) {
-    const user = await this.prisma.user.findFirst({ where: { email: email } });
-
-    if (user) {
-      return user;
-    }
-
-    const newUser = await this.prisma.user.create({
-      data: {
-        name,
-        email,
-        provider: 'google',
-      },
-    });
-    return newUser;
   }
 
   generateAccessToken(payload: any): string {
