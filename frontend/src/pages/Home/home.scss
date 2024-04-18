@@ -1,7 +1,79 @@
+@import "../../style/variables.scss";
+*{
+  padding: 0;
+  margin: 0;
+  position: relative;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
 .home {
+  width: 100%;
+  margin-top: 0;
   font-family: "Montserrat", sans-serif;
   text-align: center;
-  padding: 1rem;
+  // padding: 1rem;
   font-weight: 600;
   font-size: 2.5rem;
+ .header_class{
+  display: flex;
+  position:absolute;
+  z-index: 1;
+  top: 2.5rem;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 90%;
+  justify-content: space-between;
+
+ }
+ >.main_body{
+  background-color: $green;
+  background-image: linear-gradient(rgba(15, 23, 42, 0.5), rgba(15, 23, 42, 0.2)), url(../../assets/images/background.png);
+  background-position: center center;
+  background-size: cover;
+  height: $desktopHeight;
+  padding-top: 12rem;
+.slang{
+  font-size: 50px;
+  font-weight: 600;
+  width: fit-content; 
+  margin: 0 auto; 
+  margin-bottom: 10px;
+  &>div{
+    font-size: 50px;
+  }
 }
+
+.paragraph{
+  color: $gray;
+  font-size: 20px;
+  width: 700px;
+  margin: 30px auto 0;
+  font-weight:  500;
+  text-align: center;
+  .white{
+    color: $gray;
+  }
+
+}
+
+
+.buttonWrapper{
+  display: flex;
+  margin: 100px auto;
+  gap: 50px;
+  width: fit-content;
+  a{
+    display: flex;
+    text-decoration: none;
+  }
+}
+ }
+
+ .slogan{
+  color: $green;
+  font-family: "Sharpie";
+  text-decoration: none;
+ }
+ }
+

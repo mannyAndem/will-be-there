@@ -3,7 +3,7 @@ import "./button.scss";
 
 const Button = ({ children, pending, disabled }) => {
   return (
-    <button disabled={disabled}>
+    <button className="button" disabled={disabled}>
       {pending && <Loader />}
       <div className={pending ? "pending" : ""}>{children}</div>
     </button>

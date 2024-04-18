@@ -1,0 +1,25 @@
+@import "../../style/variables.scss";
+// Button.scss
+
+
+
+.homeButton {
+    width: 300px;
+    display:block;
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 0.25rem;
+    transition: all 0.2s ease-in-out;
+  
+    &.more,&.create {
+      background-color: $green;
+      color: #ffffff;
+  
+      &:hover {
+        background-color: $gray;
+        color: $green;
+      }
+    }
+  
+  }

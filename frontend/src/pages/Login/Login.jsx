@@ -4,7 +4,7 @@ import slogan from "../../assets/images/title.svg";
 import GoogleSignupButton from "../../shared-components/GoogleSignupButton/GoogleSignupButton";
 import LoginForm from "./components/LoginForm/LoginForm";
 import "./login.scss";
-import loginHero from "/public/amico.png";
+import loginHero from "/amico.png";
 
 const Login = () => {
   return (
