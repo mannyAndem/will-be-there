@@ -1,42 +1,45 @@
-import { Formik } from 'formik'
-import { useEffect } from 'react'
-import { toast } from 'react-hot-toast'
-import { Link, useNavigate } from 'react-router-dom'
-import * as yup from 'yup'
-import { useLogin } from '../../../../hooks/auth'
-import Button from '../../../../ui/Button/Button'
-import InputGroup from '../../../../ui/InputGroup/InputGroup'
-import './login-form.scss'
+import { Formik } from "formik";
+import { useEffect } from "react";
+import { toast } from "react-hot-toast";
+import { Link, useNavigate } from "react-router-dom";
+import * as yup from "yup";
+import { useLogin } from "../../../../hooks/auth";
+import Button from "../../../../ui/Button/Button";
+import InputGroup from "../../../../ui/InputGroup/InputGroup";
+import "./login-form.scss";
 
 const LoginForm = () => {
   const initialValues = {
-    email: '',
-    password: '',
-  }
+    email: "",
+    password: "",
+  };
 
-  const { login, isPending, isSuccess, isError, error } = useLogin()
-  const navigate = useNavigate()
+  const { login, isPending, isSuccess, isError, error } = useLogin();
+  const navigate = useNavigate();
 
   const handleSubmit = (values) => {
-    login({ ...values, provider: 'local' })
-  }
+    login({ ...values, provider: "local" });
+  };
 
   const formSchema = yup.object().shape({
-    email: yup.string().required('This field is required').email('Invalid email'),
-    password: yup.string().required('This field is required'),
-  })
+    email: yup
+      .string()
+      .required("This field is required")
+      .email("Invalid email"),
+    password: yup.string().required("This field is required"),
+  });
 
   useEffect(() => {
     if (isSuccess) {
-      toast.success('Logged in successfully')
+      toast.success("Logged in successfully");
       setTimeout(() => {
-        navigate('/')
-      }, 1000)
+        navigate("/");
+      }, 1000);
     }
     if (isError) {
-      toast.error(error.response?.data?.message ?? 'Something went wrong')
+      toast.error(error.response?.data?.message ?? "Something went wrong");
     }
-  }, [isSuccess, isError])
+  }, [isSuccess, isError]);
 
   return (
     <>
@@ -56,7 +59,10 @@ const LoginForm = () => {
               />
             </InputGroup>
             <div>
-              <InputGroup name="password" error={touched.password && errors.password}>
+              <InputGroup
+                name="password"
+                error={touched.password && errors.password}
+              >
                 <InputGroup.Label>Password</InputGroup.Label>
                 <InputGroup.Input
                   type="password"
@@ -76,7 +82,7 @@ const LoginForm = () => {
         )}
       </Formik>
     </>
-  )
-}
+  );
+};
 
-export default LoginForm
+export default LoginForm;
