@@ -1,14 +1,20 @@
-import './header.scss'
-import NavBar from "../../pages/Home/components/Header/NavBar/NavBar";
-import DashboardLogin from "../../pages/Home/components/LoginButton/LoginButton";
-const Header = () => {
-    return ( 
-      <div className="header">
-          <NavBar />
+import { Link } from "react-router-dom";
+import Navbar from "../Navbar/Navbar";
+import Button from "../Button/Button";
+import "./header.scss";
 
-<DashboardLogin />
+const Header = () => {
+  return (
+    <header className="header-container">
+      <Link to="/" className="brand">
+        WILL.BE.THERE
+      </Link>
+      <Navbar />
+      <div>
+        <Button size="sm">Log In</Button>
       </div>
-     );
-}
- 
+    </header>
+  );
+};
+
 export default Header;

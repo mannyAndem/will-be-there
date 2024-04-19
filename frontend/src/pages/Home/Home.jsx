@@ -12,13 +12,7 @@ const Home = () => {
   return (
     <div className="home">
       <div className="main_body">
-        <div className="header_class">
-          <Link to={"/"} className="slogan">
-            WILL.BE.THERE
-          </Link>
-
-          <Header />
-        </div>
+        <Header />
         <div className="slang">
           Make it memorable “Yes”!
           <div>
