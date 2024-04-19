@@ -6,6 +6,8 @@ import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
 import FAQ from "./pages/Faq/Faq";
 import Tracker from "./pages/Tracker/Tracker";
+import { useGetCurrentUser } from "./hooks/auth";
+
 function App() {
   return (
     <div className="routes">
@@ -15,8 +17,8 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password" element={<ResetPassword />} />
-        <Route path="/tracker" element={<Tracker/>} />
-        <Route path="/faq" element={<FAQ/>}/>
+        <Route path="/tracker" element={<Tracker />} />
+        <Route path="/faq" element={<FAQ />} />
       </Routes>
     </div>
   );
