@@ -11,7 +11,7 @@ const Header = () => {
       </Link>
       <Navbar />
       <div>
-        <Button size="sm">Log In</Button>
+        <Link to="/login"><Button size="sm">Log In</Button></Link>
       </div>
     </header>
   );

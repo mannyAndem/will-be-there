@@ -1,11 +1,13 @@
 @import "../../../../style/variables.scss";
 
 .albumContainer{
-    border: 1px solid green;
     width: 350px;
     border-radius: 20px;
     background-color: rgb(0, 0, 0);
     color: $white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     &:nth-child(2){
       background-color: $green;
       .mask{
@@ -32,7 +34,6 @@
         margin: 0 auto;
         padding: 25px ;
         text-align: left;
-        border: 1px solid orange;
         &>h2{
             font-weight: 400;
             font-size: 35px;
@@ -53,13 +54,16 @@
 
         .diagonalPoint{
             position: absolute;
-            top: 0;
-            right: 0;
+            top: 15px;
+            right: 15px;
             background-color: blue;
-            width: 20px;
-            height: 20px;
+            width: 30px;
+            height: 30px;
         }
 
 
+    }
+    img{
+        width: 100%;
     }
 }

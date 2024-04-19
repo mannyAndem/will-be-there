@@ -7,7 +7,7 @@ import EventForm from "./components/CreateEventForm/Event";
 import formPicture from "../../assets/images/form-picture.png";
 import Card from "./components/ComponentCard/MainComponent";
 import Brands from "../../assets/images/brands.png";
-
+import MainAlbum from "./components/Album/MainAlbum";
 const Home = () => {
   return (
     <div className="home">
@@ -81,7 +81,7 @@ const Home = () => {
         <img src={Brands} alt="Brands" />
       </div>
 
-{/* <MainAlbum/> */}
+<MainAlbum/>
     </div>
   );
 };
