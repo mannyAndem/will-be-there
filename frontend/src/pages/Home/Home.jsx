@@ -81,7 +81,7 @@ const Home = () => {
         <img src={Brands} alt="Brands" />
       </div>
 
-<MainAlbum/>
+{/* <MainAlbum/> */}
     </div>
   );
 };
