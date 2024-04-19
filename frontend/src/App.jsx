@@ -4,8 +4,11 @@ import Signup from "./pages/Signup/Signup";
 import Login from "./pages/Login/Login";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
+import { useGetCurrentUser } from "./hooks/auth";
 
 function App() {
+  const { isSuccess, isError } = useGetCurrentUser();
+
   return (
     <div className="routes">
       <Routes>
