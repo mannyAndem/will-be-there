@@ -1,6 +1,9 @@
 // Font imports
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
-
+@font-face {
+  font-family: "Sharpie";
+  src: url(./assets/fonts/Sharpie-Variable.ttf);
+}
 @import "./style/variables";
 
 * {
@@ -20,4 +23,7 @@ a,
 span,
 button {
   color: $dark;
+}
+button{
+  border: none;
 }
