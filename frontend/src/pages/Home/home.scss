@@ -150,41 +150,59 @@
         display: flex;
         align-items: center;
         justify-content: center;
-.form{
-  display: flex;
-  margin: 0 auto;
-  width: 70%;
-  padding: 20px;
-  justify-content: space-between;
-  border:2px solid $green;
-  border-radius: 25px;
-  background-color: $white;
-  z-index: 2;
-  &>img{
-    width: 250px;
-    height: fit-content;
-  }
-}
-        .blobLeft,.blobRight {
+
+        .form {
+          display: flex;
+          margin: 0 auto;
+          width: 70%;
+          padding: 20px;
+          justify-content: space-between;
+          border: 2px solid $green;
+          border-radius: 25px;
+          background-color: $white;
+          z-index: 2;
+
+          &>img {
+            width: 250px;
+            height: fit-content;
+          }
+        }
+
+        .blobLeft,
+        .blobRight {
           position: absolute;
           width: 200px;
           height: 200px;
           background-size: contain;
           background-repeat: no-repeat;
         }
-        .top{
+
+        .top {
           background-image: url(../../assets/images/Blobgrey.png);
           top: 0;
           left: 0;
         }
 
-        .bottom{
+        .bottom {
           background-image: url(../../assets/images/Blobgreen.png);
           bottom: 0;
           right: 0;
         }
 
       }
+    }
+  }
+
+
+  .brandsTrusts{
+    width:80%;
+    margin: 50px auto;
+    &>p{
+      font-size: 40px;
+    }
+    &>img{
+      margin-top: 30px;
+      width: 100%;
     }
   }
 

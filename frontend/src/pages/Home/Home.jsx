@@ -9,6 +9,7 @@ import topBanner from "../../assets/images/banner.png"
 import EventForm from "./components/CreateEventForm/Event";
 import formPicture from "../../assets/images/form-picture.png";
 import Card from "./components/ComponentCard/MainComponent";
+import Brands from "../../assets/images/brands.png"
 
 const Home = () => {
   const { user } = useAuthContext();
@@ -91,6 +92,12 @@ Effortlessly
     </div>
 
 <Card/>
+
+<div className="brandsTrusts">
+  <p>Trusted by Leading Brands</p>
+
+  <img src={Brands} alt="Brands" />
+</div>
 
   </div>;
 };
