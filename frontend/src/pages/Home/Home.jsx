@@ -32,7 +32,7 @@ const Home = () => {
             <HomePageButton className="more">Learn More</HomePageButton>
           </Link>
 
-          <Link to={"/create"}>
+          <Link to={"/events"}>
             <HomePageButton className="create">
               Create your own events now
             </HomePageButton>

@@ -9,7 +9,7 @@ const AlbumCard = ({ header, city, imageSrc }) => {
       <p>{city}</p>
 
       <div className="diagonalPoint">
-        
+      Alt + 8599
       </div>
     </div>
       <img src={imageSrc} alt="Content" />
