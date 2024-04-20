@@ -1,0 +1,31 @@
+@import "../../../../../style/variables";
+
+
+.navBar{
+    width: 500px;
+    background-color: $gray;
+    // border: 1px solid $dark;
+    border-radius: 30px;
+    padding: 5px 0;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    .Navhome,.event,.rsvp,.tracker,.faq{
+        font-size: 16px;
+        font-weight: normal;
+        transition: all .3s linear;
+        &:hover{
+            color: $green;
+            border-bottom: $green 1px solid;
+        }
+    }
+.active{
+    color: $green;
+    padding-bottom: 7x;
+    border-bottom: 2px solid $green;
+}
+    a{
+        text-decoration: none;
+    }
+}

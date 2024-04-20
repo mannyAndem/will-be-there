@@ -1,0 +1,114 @@
+@import "../../../../style/variables.scss";
+
+
+.formBody {
+    width: 50%;
+
+    .formEvent {
+        width: 100%;
+        margin: 0 auto;
+        display: flex;
+        gap: 10px;
+        font-size: 12px;
+
+        &>.eventForm {
+            width: 100%;
+            // border: 1px rgb(0, 0, 0) solid;
+
+            &>label {
+                display: block;
+                width: fit-content;
+                font-size: 12px;
+                font-weight: normal;
+            }
+
+            input[type="text"],
+            input[type="date"],
+            input[type="time"] {
+                width: 100%;
+                background-color: $gray;
+                outline-offset: none;
+                border: none;
+                padding: 10px;
+                font-family: "Montserrat";
+&::placeholder{
+    color: $dark;
+}
+            }
+        }
+
+        >.file {
+            color: red;
+            position: absolute;
+            right: 180%;
+            top: 30px;
+            width: 250px;
+            padding: 0;
+            background-color: $green;
+            border-radius: 16px;
+            color: $white;
+
+            label {
+                cursor: pointer;
+                font-size: 16px;
+                width: 100%;
+                padding: 10px;
+                margin: 0 auto;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+                text-align: left;
+
+                img {
+                    width: 25px;
+                }
+            }
+
+            input[type="file"] {
+                display: none;
+            }
+        }
+
+        >.location {
+            position: absolute;
+            left: 80%;
+            top: 150px;
+            background-color: $green;
+            color: $white;
+            border-radius: 16px;
+            padding: 0 10px;
+
+            label {
+                padding: 15px 10px;
+                font-size: 16px;
+                display: flex;
+                text-align: left;
+                // justify-content: space-between;
+                align-items: center;
+                gap: 40px;
+                img{
+                    width: 25px;
+                    height: 25px;
+                }
+            }
+
+            input {
+                display: none;
+            }
+
+        }
+
+
+    }
+}
+
+
+
+.errorClass {
+    position: absolute;
+    right: 0;
+    color: $error;
+    font-size: 12px;
+    font-weight: normal;
+}

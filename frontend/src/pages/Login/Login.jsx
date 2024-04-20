@@ -1,15 +1,14 @@
-import { Toaster } from 'react-hot-toast'
-import { Link } from 'react-router-dom'
-import slogan from '../../assets/images/title.svg'
-import GoogleSignupButton from '../../shared-components/GoogleSignupButton/GoogleSignupButton'
-import LoginForm from './components/LoginForm/LoginForm'
-import './login.scss'
-import loginHero from '/public/amico.png'
+import { Toaster } from "react-hot-toast";
+import { Link } from "react-router-dom";
+import slogan from "../../assets/images/title.svg";
+import GoogleSignupButton from "../../shared-components/GoogleSignupButton/GoogleSignupButton";
+import LoginForm from "./components/LoginForm/LoginForm";
+import "./login.scss";
+import loginHero from "/amico.png";
 
 const Login = () => {
   return (
     <div className="container">
-      <Toaster containerStyle={{ fontFamily: 'Montserrat' }} />
       <div>
         <div className="brand-container">
           <img src={slogan} />
@@ -25,7 +24,9 @@ const Login = () => {
       <div>
         <div className="header">
           <h1>Sign In</h1>
-          <p>Streamline Your Event Experience: RSVP Easily and Seamlessly Today</p>
+          <p>
+            Streamline Your Event Experience: RSVP Easily and Seamlessly Today
+          </p>
         </div>
         <GoogleSignupButton type="login" />
         <div className="or-container">
@@ -41,7 +42,7 @@ const Login = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

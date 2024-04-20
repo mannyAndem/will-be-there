@@ -1,0 +1,17 @@
+@import '../../../../style/variables';
+
+.login_button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+a{
+    margin: 0 auto;
+    background-color: $green;
+    padding: 10px 20px;
+    color: $gray;
+    font-size: 15px;
+    text-decoration: none;
+    border-radius: 7px;
+
+}
+}

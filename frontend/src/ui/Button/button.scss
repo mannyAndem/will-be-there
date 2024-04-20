@@ -1,11 +1,10 @@
 @import "../../style/variables";
 
-button {
+.button {
   position: relative;
   width: 100%;
   background-color: $green;
   border-radius: 12px;
-  padding: 1.5rem 2.5rem;
   font-size: 1.25rem;
   font-weight: 600;
   font-family: "Montserrat";
@@ -23,4 +22,12 @@ button {
   .pending {
     opacity: 0;
   }
+}
+
+.button-sm {
+  padding: 14px 24px;
+}
+
+.button-md {
+  padding: 24px 40px;
 }

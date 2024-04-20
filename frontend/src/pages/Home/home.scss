@@ -1,7 +1,193 @@
+@import "../../style/variables.scss";
+
+* {
+  padding: 0;
+  margin: 0;
+  position: relative;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
 .home {
+  width: 100%;
+  margin-top: 0;
   font-family: "Montserrat", sans-serif;
   text-align: center;
-  padding: 1rem;
+  // padding: 1rem;
   font-weight: 600;
   font-size: 2.5rem;
+
+  > .main_body {
+    background-color: $green;
+    background-image: linear-gradient(
+        rgba(15, 23, 42, 0.5),
+        rgba(15, 23, 42, 0.2)
+      ),
+      url(../../assets/images/background.png);
+    background-position: center center;
+    background-size: cover;
+    height: $desktopHeight;
+
+    .slang {
+      font-size: 50px;
+      font-weight: 600;
+      width: fit-content;
+      margin: 50px auto;
+      margin-bottom: 10px;
+
+      & > div {
+        font-size: 50px;
+      }
+    }
+
+    .paragraph {
+      color: $gray;
+      font-size: 20px;
+      width: 700px;
+      margin: 30px auto 0;
+      font-weight: 500;
+      text-align: center;
+
+      .white {
+        color: $gray;
+      }
+    }
+
+    .buttonWrapper {
+      display: flex;
+      margin: 100px auto;
+      gap: 50px;
+      width: fit-content;
+
+      a {
+        display: flex;
+        text-decoration: none;
+      }
+    }
+  }
+
+  .slogan {
+    color: $green;
+    font-family: "Sharpie";
+    text-decoration: none;
+  }
+
+  .switchSection {
+    width: 100%;
+
+    & > .toper {
+      width: 100%;
+      margin-bottom: 20px;
+
+      & > img {
+        width: 100%;
+      }
+    }
+
+    #switchTab {
+      width: fit-content;
+      margin: 0 auto;
+      border-radius: 50px;
+      display: flex;
+      padding: 5px;
+      background-color: $lightGreen;
+      font-size: 24px;
+      gap: 30px;
+      margin-bottom: 30px;
+
+      & > .organizer,
+      .guest {
+        padding: 10px 30px;
+        border-radius: 30px;
+      }
+
+      .active {
+        background-color: $green;
+        color: $gray;
+      }
+
+      & > :not(.active) {
+        cursor: pointer;
+      }
+    }
+
+    .organizerSection {
+      .heading {
+        font-size: 30px;
+        font-weight: 500;
+        width: 500px;
+        margin: 0 auto 20px;
+      }
+
+      > .details {
+        width: 750px;
+        margin: 0 auto 20px;
+        font-weight: normal;
+        font-size: 20px;
+
+        & > span {
+          font-family: "Sharpie";
+        }
+      }
+
+      .organizerFormLayout {
+        width: 850px;
+        margin: 0 auto 30px;
+        height: 500px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .form {
+          display: flex;
+          margin: 0 auto;
+          width: 70%;
+          padding: 20px;
+          justify-content: space-between;
+          border: 2px solid $green;
+          border-radius: 25px;
+          background-color: $white;
+          z-index: 2;
+
+          & > img {
+            width: 250px;
+            height: fit-content;
+          }
+        }
+
+        .blobLeft,
+        .blobRight {
+          position: absolute;
+          width: 200px;
+          height: 200px;
+          background-size: contain;
+          background-repeat: no-repeat;
+        }
+
+        .top {
+          background-image: url(../../assets/images/Blobgrey.png);
+          top: 0;
+          left: 0;
+        }
+
+        .bottom {
+          background-image: url(../../assets/images/Blobgreen.png);
+          bottom: 0;
+          right: 0;
+        }
+      }
+    }
+  }
+
+  .brandsTrusts {
+    width: 80%;
+    margin: 50px auto;
+    & > p {
+      font-size: 40px;
+    }
+    & > img {
+      margin-top: 30px;
+      width: 100%;
+    }
+  }
 }
