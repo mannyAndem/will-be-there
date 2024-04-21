@@ -10,8 +10,9 @@ const Footer = () => {
                 <h3>Lorem ipsum dolor sit amet consectetur. Lobortis lorem id nunc mi dictum parturient nisi. Lectus nunc eu velit volutpat facilisis eget ac. </h3>
             </div>
 <NavBarFooter/>
-{/* <SocialMedia/> */}
+
         </div>
+        <SocialMedia/>
         </footer>
       );
 }
