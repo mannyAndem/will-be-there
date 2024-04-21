@@ -1,6 +1,6 @@
 const Reviews = () => {
     return ( <>
-    Nothing here   </> );
+    Customers review section   </> );
 }
  
 export default Reviews;
