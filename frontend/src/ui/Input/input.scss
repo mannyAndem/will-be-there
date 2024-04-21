@@ -25,3 +25,52 @@
     font-weight: 500;
   }
 }
+
+.file-input-container {
+  width: 100%;
+
+  .file-input {
+    display: none;
+
+    &-label {
+      all: unset;
+      display: block;
+      padding: 20px 16px;
+      background-color: $gray;
+      border-radius: 12px;
+      font-family: "Montserrat";
+      font-size: 1.25rem !important;
+      border: none;
+      color: rgba($dark, 0.5) !important;
+      font-weight: 500 !important;
+      cursor: pointer;
+
+      span,
+      div {
+        color: rgba($dark, 0.5) !important;
+      }
+
+      &[aria-invalid="true"] {
+        background-color: $veryLightRed;
+        outline-color: $error;
+      }
+    }
+  }
+
+  .info {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    font-family: "Montserrat";
+    margin-top: 4px;
+
+    span {
+      font-size: inherit;
+    }
+
+    .icon {
+      color: #fcae1e;
+    }
+  }
+}

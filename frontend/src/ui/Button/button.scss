@@ -3,7 +3,6 @@
 .button {
   position: relative;
   width: 100%;
-  background-color: $green;
   border-radius: 12px;
   font-size: 1.25rem;
   font-weight: 600;
@@ -11,16 +10,28 @@
   border: none;
   cursor: pointer;
 
-  div {
-    color: $gray;
-  }
-
   &:disabled {
     opacity: 50%;
   }
 
   .pending {
     opacity: 0;
+  }
+}
+
+.secondary {
+  background-color: transparent;
+  border: 1px solid $smoke;
+  div {
+    color: $smoke;
+  }
+}
+
+.primary {
+  background-color: $green;
+  border: 1px solid none;
+  div {
+    color: $gray;
   }
 }
 

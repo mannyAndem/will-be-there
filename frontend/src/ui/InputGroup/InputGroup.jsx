@@ -1,6 +1,7 @@
 import { createContext, useContext } from "react";
 import "./inputGroup.scss";
 import Input from "../Input/Input";
+import TextArea from "../TextArea/TextArea";
 
 const InputGroupContext = createContext(null);
 
@@ -21,7 +22,7 @@ const InputGroup = ({ children, id, name, error }) => {
 
 export default InputGroup;
 
-InputGroup.Label = ({ children }) => {
+InputGroup.Label = ({ children, style }) => {
   const context = useInputGroupContext();
 
   if (!context) {
@@ -30,7 +31,11 @@ InputGroup.Label = ({ children }) => {
 
   const { id, name } = context;
 
-  return <label htmlFor={id ? id : name}>{children}</label>;
+  return (
+    <label style={style} htmlFor={id ? id : name}>
+      {children}
+    </label>
+  );
 };
 
 InputGroup.Input = ({ type, value, onChange, placeholder, ...rest }) => {
@@ -44,6 +49,27 @@ InputGroup.Input = ({ type, value, onChange, placeholder, ...rest }) => {
   return (
     <Input
       type={type}
+      error={error}
+      id={id ? id : name}
+      name={name}
+      value={value}
+      onChange={onChange}
+      placeholder={placeholder}
+      {...rest}
+    />
+  );
+};
+
+InputGroup.TextArea = ({ value, onChange, placeholder, ...rest }) => {
+  const context = useInputGroupContext();
+
+  if (!context) {
+    throw new Error("InputGroup.TextArea must have a parent InputGroup.");
+  }
+
+  const { id, name, error } = context;
+  return (
+    <TextArea
       error={error}
       id={id ? id : name}
       name={name}
