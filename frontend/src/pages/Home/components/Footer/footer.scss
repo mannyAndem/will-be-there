@@ -11,19 +11,27 @@ footer{
     &>.footerContents{
         width: 90%;
         display: flex;
-        margin: 30px auto 0;
-        border:  1px solid white;
+        margin: 40px auto 70px;
+        // border:  1px solid white;
+        justify-content: space-between;
 
         .company{
-            // display: flex;
+            display: flex;
+            flex-direction: column;
+            width: 360px;
             h1{
                 color: $green;
+                text-align: left;
                 font-family: "Sharpie";
                 font-size: 35px;
             }
             h3{
                 color: $gray;
-                font-size: 13px;
+                font-size: 14px;
+                text-align: left;
+             line-height: 24px;
+                font-weight: 500;
+                font-family: "Signika";
             }
             
         }
