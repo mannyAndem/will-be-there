@@ -1,0 +1,38 @@
+@import "../../../../style/variables";
+
+.create-event-form {
+  & > div:first-child {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 28px;
+    row-gap: 24px;
+
+    .time-container {
+      display: flex;
+      gap: 24px;
+    }
+    .location-container {
+      grid-row: span 2;
+
+      div {
+        height: 100%;
+      }
+    }
+
+    .image-input-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .document-icon {
+        color: rgba($dark, 0.5);
+      }
+    }
+  }
+
+  .button-container {
+    margin-top: 48px;
+    margin-inline: auto;
+    width: 40%;
+  }
+}

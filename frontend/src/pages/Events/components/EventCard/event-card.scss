@@ -1,0 +1,40 @@
+@import "../../../../style/variables";
+
+.event-card {
+  width: 150px;
+  aspect-ratio: 1;
+  border: 3px solid $green;
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+
+  .image-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .text-container {
+    background-color: #0f172a66;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .text {
+      display: block;
+      text-align: center;
+      font-family: "Sharpie", sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: white;
+    }
+  }
+}
