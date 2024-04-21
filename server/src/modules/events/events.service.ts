@@ -1,4 +1,5 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
+import cloudinary from 'src/lib/cloudinary';
 import { PrismaService } from 'src/prisma.service';
 import { CreateEventDto, UpdateEventDto } from './eventDto';
 
@@ -19,6 +20,12 @@ export class EventsService {
     const event = await this.prisma.event.create({
       data: {
         ...data,
+        media: {
+          createMany: {
+            data: data.media,
+            skipDuplicates: false,
+          },
+        },
         organizer: { connect: { id: userId } },
       },
     });
@@ -36,7 +43,15 @@ export class EventsService {
 
     const updatedEvent = await this.prisma.event.update({
       where: { id },
-      data,
+      data: {
+        ...data,
+        media: {
+          createMany: {
+            data: data.media,
+            skipDuplicates: false,
+          },
+        },
+      },
     });
 
     return {
@@ -57,9 +72,19 @@ export class EventsService {
   }
 
   async deleteEvent(id: number) {
-    const event = await this.prisma.event.findFirst({ where: { id } });
+    const event = await this.prisma.event.findFirst({
+      where: { id },
+      include: { media: true },
+    });
 
     if (!event) throw new BadRequestException('Event not found');
+
+    const mediaPromise = event.media.map(async (media) => {
+      await cloudinary.uploader.destroy(media.cloudinaryId);
+      return this.prisma.media.delete({ where: { id: media.id } });
+    });
+
+    await Promise.all(mediaPromise);
 
     const deletedEvent = await this.prisma.event.delete({ where: { id } });
     return {

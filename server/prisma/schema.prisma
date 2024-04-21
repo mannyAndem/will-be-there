@@ -31,7 +31,7 @@ model Event {
   start     DateTime
   end       DateTime
   location  String?
-  media     String[]
+  media     Media[]
 
   organizer      User      @relation(fields: [organizerId], references: [id])
   organizerId    String    @db.Uuid
@@ -39,6 +39,15 @@ model Event {
   rsvps     RSVP[]
 
   @@index([date], map: "idx_date_time")
+}
+
+model Media {
+  id        Int       @id @default(autoincrement())
+  eventId   Int
+  cloudinaryId String?
+  imageUrl    String
+
+  event      Event  @relation(fields: [eventId], references: [id])
 }
 
 model RSVP {

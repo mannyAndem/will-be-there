@@ -24,7 +24,10 @@ export class CreateEventDto {
 
   @IsString({ each: true })
   @ApiProperty({ isArray: true })
-  media: string[];
+  media: {
+    cloudinaryId: string;
+    imageUrl: string;
+  }[];
 }
 
 export class UpdateEventDto extends PartialType(CreateEventDto) {}
