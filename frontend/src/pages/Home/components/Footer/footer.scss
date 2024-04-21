@@ -1,0 +1,31 @@
+@import "../../../../style/variables.scss";
+
+footer{
+    width: 100%;
+    background-color: $dark;
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    &>.footerContents{
+        width: 90%;
+        display: flex;
+        margin: 30px auto 0;
+        border:  1px solid white;
+
+        .company{
+            // display: flex;
+            h1{
+                color: $green;
+                font-family: "Sharpie";
+                font-size: 35px;
+            }
+            h3{
+                color: $gray;
+                font-size: 13px;
+            }
+            
+        }
+    }
+}
