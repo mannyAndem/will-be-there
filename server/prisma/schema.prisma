@@ -28,14 +28,17 @@ model Event {
   id        Int       @id @default(autoincrement())
   name      String    @unique
   date      DateTime
-  time      DateTime  @unique
+  start     DateTime
+  end       DateTime
   location  String?
-  image     String    @unique
+  media     String[]
 
   organizer      User      @relation(fields: [organizerId], references: [id])
   organizerId    String    @db.Uuid
 
   rsvps     RSVP[]
+
+  @@index([date], map: "idx_date_time")
 }
 
 model RSVP {

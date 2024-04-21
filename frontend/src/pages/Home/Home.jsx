@@ -7,7 +7,9 @@ import EventForm from "./components/CreateEventForm/Event";
 import formPicture from "../../assets/images/form-picture.png";
 import Card from "./components/ComponentCard/MainComponent";
 import Brands from "../../assets/images/brands.png";
-
+import MainAlbum from "./components/Album/MainAlbum";
+import Reviews from "./components/CustomerRevs/CustomerReviews";
+import Footer from "./components/Footer/Footer";
 const Home = () => {
   return (
     <div className="home">
@@ -32,7 +34,7 @@ const Home = () => {
             <HomePageButton className="more">Learn More</HomePageButton>
           </Link>
 
-          <Link to={"/create"}>
+          <Link to={"/events"}>
             <HomePageButton className="create">
               Create your own events now
             </HomePageButton>
@@ -80,6 +82,12 @@ const Home = () => {
 
         <img src={Brands} alt="Brands" />
       </div>
+
+<MainAlbum/>
+
+<Reviews/>
+
+<Footer/>
     </div>
   );
 };
