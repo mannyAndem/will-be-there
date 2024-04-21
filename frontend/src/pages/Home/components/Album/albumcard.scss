@@ -15,7 +15,18 @@
             color: $dark;
             width: 200px;
         }
+        .diagonalPoint{
+            position: absolute;
+          
+            &::after{
+            content: url(../../../../assets/images/arrowGreen.png);
+            }
+            
+            background-color: $dark;
+            
+        }
       }
+   
     }
 
     &:nth-child(3){
@@ -55,10 +66,23 @@
         .diagonalPoint{
             position: absolute;
             top: 15px;
-            right: 15px;
-            background-color: blue;
-            width: 30px;
-            height: 30px;
+            right: 25px;
+            width: 35px;
+            height: 35px;
+            border-radius: 5px;
+            &::after{
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: -15px;
+            margin: 0 auto;
+            width: 15px;
+            height: 15px;
+            content: url(../../../../assets/images/arrowBlack.png);
+            }
+            
+            background-color: $green;
+            
         }
 
 

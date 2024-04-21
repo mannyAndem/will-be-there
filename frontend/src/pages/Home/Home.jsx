@@ -8,6 +8,8 @@ import formPicture from "../../assets/images/form-picture.png";
 import Card from "./components/ComponentCard/MainComponent";
 import Brands from "../../assets/images/brands.png";
 import MainAlbum from "./components/Album/MainAlbum";
+import Reviews from "./components/CustomerRevs/CustomerReviews";
+import Footer from "./components/Footer/Footer";
 const Home = () => {
   return (
     <div className="home">
@@ -82,6 +84,10 @@ const Home = () => {
       </div>
 
 <MainAlbum/>
+
+<Reviews/>
+
+<Footer/>
     </div>
   );
 };

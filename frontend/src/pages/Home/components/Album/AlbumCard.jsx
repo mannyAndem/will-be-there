@@ -1,5 +1,6 @@
 import React from 'react';
 import "./albumcard.scss"
+import { Link } from 'react-router-dom';
 const AlbumCard = ({ header, city, imageSrc }) => {
   return (
   
@@ -8,9 +9,9 @@ const AlbumCard = ({ header, city, imageSrc }) => {
     <h2>{header}</h2>
       <p>{city}</p>
 
-      <div className="diagonalPoint">
-      Alt + 8599
-      </div>
+      <Link className="diagonalPoint" to="#">
+     
+      </Link>
     </div>
       <img src={imageSrc} alt="Content" />
      </div>
