@@ -1,0 +1,56 @@
+@import "../../../../../style/variables.scss";
+
+.mediaContainer{
+    color: $fountainWhite;
+    font-size: 14px;
+    font-family: "Signika";
+    font-weight: 400;
+    
+
+    .socialMedia{
+        width: 100%;
+        gap: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .encasing{
+            width: 25px;
+            height: 25px;
+            background-color: $green;
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease-in;
+        .mediaLinks{
+            display: flex;
+            img{
+                width: initial;
+            }
+           
+        }
+
+        &:hover{
+            background-color: $fountainWhite;
+        }
+        }
+    }
+
+    .legalities{
+       margin: 15px 0;
+       display: flex;
+       align-items: center;
+       gap: 5px ;
+       a{
+        color: inherit;
+        text-decoration: none;
+       }
+       .vr{
+        display: inline-block;
+        width: 2px;
+        height: 20px;
+        background-color: $gray;
+        border-radius: 2px;
+       }
+    }
+}

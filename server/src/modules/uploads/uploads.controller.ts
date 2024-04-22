@@ -25,12 +25,12 @@ export class UploadsController {
   @ApiBody({
     required: true,
     description: 'The image to be uploaded',
-    type: File,
   })
   @ApiCreatedResponse({
     schema: {
       example: {
-        public_url: 'https://res.cloudinary.com/.../.jpeg',
+        imageUrl: 'upload.secure_url',
+        cloudinaryId: 'upload.public_id',
       },
     },
     description: 'Image uploaded',
@@ -44,15 +44,15 @@ export class UploadsController {
   @ApiBody({
     required: true,
     description: 'The images to be uploaded',
-    type: [File],
   })
   @ApiCreatedResponse({
     schema: {
-      example: {
-        1: 'https://res.cloudinary.com/.../.jpeg',
-        2: 'https://res.cloudinary.com/.../.jpeg',
-        3: 'https://res.cloudinary.com/.../.jpeg',
-      },
+      example: [
+        {
+          imageUrl: 'upload.secure_url',
+          cloudinaryId: 'upload.public_id',
+        },
+      ],
     },
     description: 'Images uploaded',
   })
