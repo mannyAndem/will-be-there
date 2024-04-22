@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import axios from "../api/axios";
 import { useAuthContext } from "../contexts/AuthContext";
 import { useGoogleLogin } from "@react-oauth/google";
+import { queryClient } from "../react-query/react-query";
 
 export const useGetCurrentUser = () => {
   const { user, setUser } = useAuthContext();
@@ -24,6 +25,7 @@ export const useGetCurrentUser = () => {
 
   useEffect(() => {
     if (isSuccess) {
+      console.log(data);
       setUser(data.data.user);
     }
     if (isError) {
@@ -43,6 +45,9 @@ export const useLogin = () => {
         },
         withCredentials: false,
       }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["user"] });
+    },
   });
 
   useEffect(() => {
@@ -64,6 +69,9 @@ export const useSignup = () => {
         },
         withCredentials: true,
       }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["user"] });
+    },
   });
 
   useEffect(() => {
