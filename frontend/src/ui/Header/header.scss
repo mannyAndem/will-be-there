@@ -14,4 +14,39 @@
     color: $green;
     text-decoration: none;
   }
+
+  .user-container {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+
+    .bell-container {
+      width: 70px;
+      aspect-ratio: 1;
+      background-color: $green;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .icon {
+        color: $gray;
+      }
+    }
+
+    .profile-image {
+      width: 70px;
+      aspect-ratio: 1;
+      background-color: $gray;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-transform: uppercase;
+      font-weight: 700;
+      font-size: 30px;
+      font-family: "Montserrat", sans-serif;
+      color: $green;
+    }
+  }
 }

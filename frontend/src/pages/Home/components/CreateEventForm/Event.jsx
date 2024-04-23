@@ -43,6 +43,7 @@ const EventForm = () => {
           onBlur={formik.handleBlur}
           value={formik.values.name}
           placeholder='Name of the Event'
+          disabled
         />
         {formik.touched.name && formik.errors.name ? (
           <div className='errorClass'>{formik.errors.name}</div>
@@ -58,6 +59,7 @@ const EventForm = () => {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.date}
+          disabled
         />
         {formik.touched.date && formik.errors.date ? (
           <div className='errorClass'>{formik.errors.date}</div>
@@ -74,6 +76,7 @@ const EventForm = () => {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.time}
+          disabled
         />
         {formik.touched.start_time && formik.errors.start_time ? (
           <div className='errorClass'>{formik.errors.start_time}</div>
@@ -91,6 +94,7 @@ const EventForm = () => {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.stop_time}
+          disabled
         />
         {formik.touched.stop_time && formik.errors.stop_time ? (
           <div className='errorClass'>{formik.errors.stop_time}</div>
@@ -102,6 +106,7 @@ const EventForm = () => {
           id="file"
           name="file"
           type="file"
+          disabled
           onChange={(event) => {
             formik.setFieldValue('file', event.currentTarget.files[0]);
           }}
