@@ -9,93 +9,119 @@ import CustomerImage2 from "../../../../assets/images/customer2.png"
 
 const Reviews = () => {
     const settings = {
-        dots: true,
-        infinite: true, 
+        accessibility:true,
+        arrows:false,
+        className: "center",
+        centerMode: true,
+        infinite: true,
+        centerPadding: "60px",
+        slidesToShow: 3,
+        slidesToScroll: 2,
         speed: 500,
-        slidesToShow: 2,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 3000,
-        centerMode: true, 
-        centerPadding: '60px',
-        initialSlide: 2
-      };
-    
+   autoplay:true,
+        dots: true,
+
+        // fade:true
+    };
+
     return (
 
-        <Slider {...settings} className="slickCustom">
-    {/* <div className="slideContainer"> */}
-    <div className="reviews">
-        <img src={Pan} alt="quote" className="quote" />
-        <div className="testimonial">
-        Lorem ipsum dolor sit amet consectetur. Massa lobortis est nunc pellentesque mi non tellus pulvinar. Nunc ornare a mauris diam est adipiscing tempor. Pellentesque fusce pellentesque integer nunc quis fames. Egestas lacus sit habitant molestie aliquam.
+        <div className="slider-container">
+            <h2>
+            Here’s What Our Customers Have To Say About Us
+            </h2>
+            <Slider {...settings} className="slickCustom">
+                {/* <div className="slideContainer"> */}
+                <div className="reviews">
+                    <img src={Pan} alt="quote" className="quote" />
+                    <div className="testimonial">
+                        Lorem ipsum dolor sit amet consectetur. Massa lobortis est nunc pellentesque mi non tellus pulvinar. Nunc ornare a mauris diam est adipiscing tempor. Pellentesque fusce pellentesque integer nunc quis fames. Egestas lacus sit habitant molestie aliquam.
+                    </div>
+
+                    <img src={CustomerImage} alt="customer" className="custImage" />
+
+                    <div className="containName">
+                        <div className="cName">
+                            John Boyega
+                        </div>
+                        <div className="cPosition">
+                            Executive Director
+                        </div>
+                    </div>
+                </div> <div className="reviews hide">
+                    <img src={Pan} alt="quote" className="quote" />
+                    <div className="testimonial">
+                        Lorem ipsum dolor sit amet consectetur. Massa lobortis est nunc pellentesque mi non tellus pulvinar. Nunc ornare a mauris diam est adipiscing tempor. Pellentesque fusce pellentesque integer nunc quis fames. Egestas lacus sit habitant molestie aliquam.
+                    </div>
+
+                    <img src={CustomerImage2} alt="customer" className="custImage" />
+
+                    <div className="containName">
+                        <div className="cName">
+                            John Boyega
+                        </div>
+                        <div className="cPosition">
+                            Executive Director
+                        </div>
+                    </div>
+                </div> <div className="reviews hide">
+                    <img src={Pan} alt="quote" className="quote" />
+                    <div className="testimonial">
+                        Lorem ipsum dolor sit amet consectetur. Massa lobortis est nunc pellentesque mi non tellus pulvinar. Nunc ornare a mauris diam est adipiscing tempor. Pellentesque fusce pellentesque integer nunc quis fames. Egestas lacus sit habitant molestie aliquam.
+                    </div>
+
+                    <img src={CustomerImage} alt="customer" className="custImage" />
+
+                    <div className="containName">
+                        <div className="cName">
+                            John Boyega
+                        </div>
+                        <div className="cPosition">
+                            Executive Director
+                        </div>
+                    </div>
+                </div> <div className="reviews">
+                    <img src={Pan} alt="quote" className="quote" />
+                    <div className="testimonial">
+                        Lorem ipsum dolor sit amet consectetur. Massa lobortis est nunc pellentesque mi non tellus pulvinar. Nunc ornare a mauris diam est adipiscing tempor. Pellentesque fusce pellentesque integer nunc quis fames. Egestas lacus sit habitant molestie aliquam.
+                    </div>
+
+                    <img src={CustomerImage2} alt="customer" className="custImage" />
+
+                    <div className="containName">
+                        <div className="cName">
+                            John Boyega
+                        </div>
+                        <div className="cPosition">
+                            Executive Director
+                        </div>
+                    </div>
+                </div>
+
+                <div className="reviews">
+                    <img src={Pan} alt="quote" className="quote" />
+                    <div className="testimonial">
+                        Lorem ipsum dolor sit amet consectetur. Massa lobortis est nunc pellentesque mi non tellus pulvinar. Nunc ornare a mauris diam est adipiscing tempor. Pellentesque fusce pellentesque integer nunc quis fames. Egestas lacus sit habitant molestie aliquam.
+                    </div>
+
+                    <img src={CustomerImage2} alt="customer" className="custImage" />
+
+                    <div className="containName">
+                        <div className="cName">
+                            John Boyega
+                        </div>
+                        <div className="cPosition">
+                            Executive Director
+                        </div>
+                    </div>
+                </div>
+
+            </Slider>
         </div>
 
-        <img src={CustomerImage} alt="customer" className="custImage"/>
+        
 
-        <div className="containName">
-            <div className="cName">
-                John Boyega
-            </div>
-            <div className="cPosition">
-                Executive Director
-            </div>
-        </div>
-     </div> <div className="reviews">
-        <img src={Pan} alt="quote" className="quote" />
-        <div className="testimonial">
-        Lorem ipsum dolor sit amet consectetur. Massa lobortis est nunc pellentesque mi non tellus pulvinar. Nunc ornare a mauris diam est adipiscing tempor. Pellentesque fusce pellentesque integer nunc quis fames. Egestas lacus sit habitant molestie aliquam.
-        </div>
-
-        <img src={CustomerImage2} alt="customer" className="custImage" />
-
-        <div className="containName">
-            <div className="cName">
-                John Boyega
-            </div>
-            <div className="cPosition">
-                Executive Director
-            </div>
-        </div>
-     </div> <div className="reviews">
-        <img src={Pan} alt="quote" className="quote" />
-        <div className="testimonial">
-        Lorem ipsum dolor sit amet consectetur. Massa lobortis est nunc pellentesque mi non tellus pulvinar. Nunc ornare a mauris diam est adipiscing tempor. Pellentesque fusce pellentesque integer nunc quis fames. Egestas lacus sit habitant molestie aliquam.
-        </div>
-
-        <img src={CustomerImage} alt="customer" className="custImage"/>
-
-        <div className="containName">
-            <div className="cName">
-                John Boyega
-            </div>
-            <div className="cPosition">
-                Executive Director
-            </div>
-        </div>
-     </div> <div className="reviews">
-        <img src={Pan} alt="quote" className="quote" />
-        <div className="testimonial">
-        Lorem ipsum dolor sit amet consectetur. Massa lobortis est nunc pellentesque mi non tellus pulvinar. Nunc ornare a mauris diam est adipiscing tempor. Pellentesque fusce pellentesque integer nunc quis fames. Egestas lacus sit habitant molestie aliquam.
-        </div>
-
-        <img src={CustomerImage2} alt="customer" className="custImage"/>
-
-        <div className="containName">
-            <div className="cName">
-                John Boyega
-            </div>
-            <div className="cPosition">
-                Executive Director
-            </div>
-        </div>
-     </div>
-   
-    {/* </div> */}
-
-    </Slider>
-
-);
+    );
 }
 
 export default Reviews;

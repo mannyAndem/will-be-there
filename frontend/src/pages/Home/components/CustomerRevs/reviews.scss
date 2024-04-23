@@ -7,6 +7,15 @@
     margin-bottom: 50px;
     // border: 1px saddlebrown solid;
     height: 400px;
+    
+}
+.slider-container{
+
+    h2{
+    font-size: 40px;
+    width: 60%;
+    margin: 30px auto 80px;
+    }
 }
 .reviews{
     padding: 20px;
@@ -16,7 +25,7 @@
     align-items: center;
     box-shadow: 4px 4px 4px $fountainWhite;
     border-radius: 20px;
-    gap: 10px;
+    gap: 20px;
     &>.testimonial{
         width: 470px;
         text-align: center;
@@ -45,8 +54,28 @@
     }
 }
 
+.reviews.hide{
+    visibility: hidden;
+    border: 1px solid red;
+}
+
 .slick-dots{
     bottom: 0;
+  
+    li{
+    font-size: 300px;
+        button{
+           
+            &:before{
+              font-size: 20px;
+            }
+        }
+   &.slick-active{
+    button:before{
+        color: $green;
+        opacity: 1;
+    }
+   } }
 }
 
 .slick-slide{
@@ -56,4 +85,9 @@
 .slick-track{
     display: flex !important;
     gap: 15px !important;
+}
+
+.slick-list{
+    transform: none;
+    width: 90%; margin: 0 auto;
 }
