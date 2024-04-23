@@ -5,7 +5,7 @@ import {
   UploadedFiles,
   UseInterceptors,
 } from '@nestjs/common';
-import { FileInterceptor } from '@nestjs/platform-express';
+import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import {
   ApiBody,
   ApiConsumes,
@@ -19,7 +19,7 @@ import { UploadsService } from './uploads.service';
 export class UploadsController {
   constructor(private uploadsService: UploadsService) {}
 
-  @Post('upload')
+  @Post('media')
   @UseInterceptors(FileInterceptor('media'))
   @ApiConsumes('multipart/form-data')
   @ApiBody({
@@ -35,11 +35,14 @@ export class UploadsController {
     },
     description: 'Image uploaded',
   })
-  async upload(@UploadedFile() file: Express.Multer.File) {
+  async upload(
+    @UploadedFile()
+    file: Express.Multer.File,
+  ) {
     return this.uploadsService.upload(file);
   }
 
-  @Post('uploads')
+  @Post('medias')
   @ApiConsumes('multipart/form-data')
   @ApiBody({
     required: true,
@@ -56,8 +59,8 @@ export class UploadsController {
     },
     description: 'Images uploaded',
   })
-  @UseInterceptors(FileInterceptor('media'))
-  async uploads(@UploadedFiles() files: Express.Multer.File[]) {
-    return this.uploadsService.uploads(files);
+  @UseInterceptors(FilesInterceptor('media'))
+  async uploads(@UploadedFiles() media: Array<Express.Multer.File>) {
+    return this.uploadsService.uploads(media);
   }
 }
