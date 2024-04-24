@@ -1,0 +1,49 @@
+@import "../../style/variables";
+
+.rsvp-container {
+  .header-container {
+    box-shadow: 0px 4px 6px 2px #0000001a;
+  }
+
+  .previous-events-header {
+    padding: 40px 64px 20px 64px;
+
+    h2 {
+      font-size: 2.5rem;
+      font-weight: 600;
+      font-family: "Montserrat", sans-serif;
+    }
+  }
+
+  .events-list {
+    padding: 42px 64px;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .rsvp-form-section {
+    padding: 40px 64px;
+
+    button {
+      div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+
+        span {
+          color: white;
+        }
+      }
+
+      .pen-icon {
+        color: white;
+      }
+    }
+
+    .rsvp-form-container {
+      margin-top: 60px;
+    }
+  }
+}

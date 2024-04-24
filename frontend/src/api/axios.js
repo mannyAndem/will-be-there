@@ -1,4 +1,5 @@
 import defaultAxios from "axios";
+import { queryClient } from "../react-query/react-query";
 
 const axios = defaultAxios.create({
   baseURL: import.meta.env.VITE_BACKEND_URL,
@@ -18,23 +19,29 @@ axios.interceptors.response.use(
   (response) => response,
   async (error) => {
     const initialRequest = error.config;
+    console.log(error);
 
-    if (error.status === 401 && !initialRequest._retry) {
+    if (error.response?.status === 401 && !initialRequest._retry) {
       initialRequest._retry = true;
 
       const refresh_token = localStorage.getItem("refresh_token");
       const data = { refresh_token };
-      const res = await axios.post("auth/refresh", JSON.stringify(data), {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      try {
+        const res = await axios.post("auth/refresh", JSON.stringify(data), {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
 
-      console.log(res);
-      const access_token = res.data.token.access_token;
-      localStorage.setItem("access_token", access_token);
-
-      initialRequest.headers.setAuthorization(`Bearer ${token}`);
+        console.log(res);
+        const access_token = res.data.token.access_token;
+        localStorage.setItem("access_token", access_token);
+        initialRequest.headers.setAuthorization(`Bearer ${access_token}`);
+      } catch (error) {
+        localStorage.removeItem("access_token");
+        localStorage.removeItem("refresh_token");
+        queryClient.invalidateQueries({ queryKey: ["user"] });
+      }
 
       return axios(initialRequest);
     }

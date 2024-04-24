@@ -1,0 +1,28 @@
+@import "../../../../style/variables";
+
+.create-event-form {
+  & > div:first-child {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 28px;
+    row-gap: 24px;
+
+    .guest-info-container {
+      display: flex;
+      gap: 24px;
+    }
+    .note-container {
+      grid-row: span 2;
+
+      div {
+        height: 100%;
+      }
+    }
+  }
+
+  .button-container {
+    margin-top: 48px;
+    margin-inline: auto;
+    width: 40%;
+  }
+}

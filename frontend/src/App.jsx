@@ -9,6 +9,7 @@ import Tracker from "./pages/Tracker/Tracker";
 import { useGetCurrentUser } from "./hooks/auth";
 import Events from "./pages/Events/Events";
 import ProtectedRoute from "./shared-components/ProtectedRoute/ProtectedRoute";
+import Rsvp from "./pages/RSVP/Rsvp";
 
 function App() {
   const { isPending } = useGetCurrentUser();
@@ -23,7 +24,15 @@ function App() {
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/tracker" element={<Tracker />} />
         <Route path="/faq" element={<FAQ />} />
-        <Route path="/events" element={<Events />} />
+        <Route
+          path="/events"
+          element={
+            <ProtectedRoute authPending={isPending}>
+              <Events />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/rsvp" element={<Rsvp />} />
       </Routes>
     </div>
   );

@@ -1,11 +1,11 @@
 import { useAuthContext } from "../../contexts/AuthContext";
 import { Navigate, useLocation } from "react-router-dom";
 
-const ProtectedRoute = ({ children }) => {
+const ProtectedRoute = ({ children, authPending }) => {
   const { user } = useAuthContext();
   const { pathname } = useLocation();
 
-  if (!user) {
+  if (!user && !authPending) {
     return <Navigate to="/login" state={{ from: pathname }} />;
   }
 
