@@ -42,8 +42,6 @@ axios.interceptors.response.use(
       } catch (error) {
         // localStorage.removeItem("access_token");
         // localStorage.removeItem("refresh_token");
-
-        queryClient.invalidateQueries({ queryKey: ["user"] });
       }
 
       return axios(initialRequest);
