@@ -1,15 +1,16 @@
+import { NavLink } from "react-router-dom";
 import "./event-card.scss";
 
-const EventCard = ({ img, title }) => {
+const EventCard = ({ event }) => {
   return (
-    <div className="event-card">
+    <NavLink to={`/events?id=${event.id}`} className="event-card">
       <div className="image-container">
-        <img src={img} />
+        <img src={event.media[0].imageUrl} />
       </div>
       <div className="text-container">
-        <span className="text">{title}</span>
+        <span className="text">{event.name}</span>
       </div>
-    </div>
+    </NavLink>
   );
 };
 

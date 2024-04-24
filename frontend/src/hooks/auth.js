@@ -20,8 +20,10 @@ export const useGetCurrentUser = () => {
     if (isSuccess) {
       console.log(data);
       setUser(data.data.user);
+      localStorage.setItem("user", JSON.stringify(data.data.user));
     }
     if (isError) {
+      localStorage.removeItem("user");
       console.error(error);
     }
   }, [isSuccess, isError]);
@@ -30,25 +32,40 @@ export const useGetCurrentUser = () => {
 };
 
 export const useLogin = () => {
-  const { isError, isPending, isSuccess, error, mutate, data } = useMutation({
-    mutationFn: async (data) =>
-      axios.post("auth/login", data, {
+  const [isPending, setIsPending] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+
+  const {
+    isError,
+    isPending: isLoginPending,
+    isSuccess: isLoginSuccess,
+    error,
+    mutate,
+    data,
+  } = useMutation({
+    mutationFn: async (data) => {
+      setIsPending(true);
+      return axios.post("auth/login", data, {
         headers: {
           "Content-Type": "application/json",
         },
         withCredentials: false,
-      }),
+      });
+    },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["user"] });
     },
   });
 
   useEffect(() => {
-    if (isSuccess) {
+    if (isLoginSuccess) {
+      console.log(data.data);
       localStorage.setItem("access_token", data?.data?.token.access_token);
       localStorage.setItem("refresh_token", data?.data?.token.refresh_token);
+      setIsSuccess(true);
+      setIsPending(false);
     }
-  }, [isSuccess, data]);
+  }, [isLoginSuccess, data]);
 
   return { login: mutate, isSuccess, isError, isPending, error };
 };
