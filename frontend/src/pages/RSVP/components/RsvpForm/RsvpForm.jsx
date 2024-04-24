@@ -4,6 +4,8 @@ import { Formik } from "formik";
 import Button from "../../../../ui/Button/Button";
 
 const RsvpForm = () => {
+  const initialValues = {};
+
   return (
     <Formik>
       {() => (

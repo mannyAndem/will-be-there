@@ -19,12 +19,14 @@ axios.interceptors.response.use(
   (response) => response,
   async (error) => {
     const initialRequest = error.config;
-    console.log(error);
+    const refresh_token = localStorage.getItem("refresh_token");
 
-    if (error.response?.status === 401 && !initialRequest._retry) {
+    if (
+      error.response?.status === 401 &&
+      !initialRequest._retry &&
+      refresh_token
+    ) {
       initialRequest._retry = true;
-
-      const refresh_token = localStorage.getItem("refresh_token");
       const data = { refresh_token };
       try {
         const res = await axios.post("auth/refresh", JSON.stringify(data), {
@@ -38,9 +40,8 @@ axios.interceptors.response.use(
         localStorage.setItem("access_token", access_token);
         initialRequest.headers.setAuthorization(`Bearer ${access_token}`);
       } catch (error) {
-        localStorage.removeItem("access_token");
-        localStorage.removeItem("refresh_token");
-        queryClient.invalidateQueries({ queryKey: ["user"] });
+        // localStorage.removeItem("access_token");
+        // localStorage.removeItem("refresh_token");
       }
 
       return axios(initialRequest);

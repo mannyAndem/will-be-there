@@ -11,19 +11,44 @@ import CreateTemplateButton from "./components/CreateTemplateButton/CreateTempla
 import Tab from "./Tab/Tab";
 import TemplateCard from "./components/TemplateCard/TemplateCard";
 import templateExampleImg from "../../assets/images/rsvp-image-example.jpg";
+import { useGetEvents } from "../../hooks/events";
+import { useEffect } from "react";
+import Loader from "../../ui/Loader/Loader";
+import ErrorMessage from "../../ui/ErrorMessage/ErrorMessage";
 
 const Events = () => {
+  const { data, isSuccess, isError, isPending, error } = useGetEvents();
+
+  useEffect(() => {
+    if (isSuccess) {
+      console.log(data);
+    }
+
+    if (isError) {
+      console.log(error);
+    }
+  }, [isSuccess, isError, data]);
+
   return (
     <div className="events-container">
       <div className="header-container">
         <Header />
       </div>
-      <div className="events-list">
-        <EventCard img={mockEventImg} title="Halimahs Lunch Date" />
-        <EventCard img={mockEventImg} title="Halimahs Lunch Date" />
-        <EventCard img={mockEventImg} title="Halimahs Lunch Date" />
-        <CreateEventButton />
-      </div>
+      {isSuccess ? (
+        <div className="events-list">
+          {data.map((event) => (
+            <EventCard event={event} />
+          ))}
+          <CreateEventButton />
+        </div>
+      ) : isPending ? (
+        <Loader variant="dark" size="md" />
+      ) : isError ? (
+        <ErrorMessage message="Something went wrong" />
+      ) : (
+        <div></div>
+      )}
+
       <section className="create-event-form-section">
         <div className="section-header">
           <h1>Create Event</h1>

@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "../api/axios";
 import { useEffect } from "react";
 
@@ -39,4 +39,16 @@ export const useCreateEvent = () => {
   }, [isError, isSuccess]);
 
   return { create: mutate, isPending, isSuccess, isError };
+};
+
+export const useGetEvents = () => {
+  const { isSuccess, isPending, isError, data, error } = useQuery({
+    queryFn: async () => {
+      const res = await axios.get("eventss");
+      return res.data.data;
+    },
+    queryKey: ["events"],
+  });
+
+  return { isSuccess, isError, isPending, data, error };
 };
