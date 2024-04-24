@@ -1,4 +1,5 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
+import { unlink } from 'fs/promises';
 import cloudinary from 'src/lib/cloudinary';
 
 @Injectable()
@@ -13,6 +14,11 @@ export class UploadsService {
     const upload = await cloudinary.uploader.upload(file.path, {
       filename_override: imagePath,
       folder: 'will-be-there',
+    });
+
+    // delete image after upload
+    await unlink(file.path).catch((err) => {
+      console.log('Unable to delete image after upload', err);
     });
 
     return {

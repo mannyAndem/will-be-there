@@ -33,7 +33,6 @@ export class AuthGuard implements CanActivate {
   }
 
   private extractTokenFromRequest(request: Request): string | undefined {
-    // If token is not found in cookies, try to extract it from the Authorization header
     const [type, token] = request.headers.authorization?.split(' ') ?? [];
     return type === 'Bearer' ? token : undefined;
   }

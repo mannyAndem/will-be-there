@@ -107,22 +107,22 @@ export class AuthService {
     res: Response,
   ) {
     if (!token) {
-      const refreshTokenFromCookie = req.cookies['refresh_token'];
-      if (!refreshTokenFromCookie) {
-        throw new NotFoundException('Refresh token not found');
-      }
-      token = refreshTokenFromCookie;
+      throw new NotFoundException('Refresh token not found');
     }
 
     const payload = await this.jwtService.verifyAsync(token, {
       secret: process.env.JWT_SECRET,
     });
 
+    console.log(payload);
+
     if (!payload) {
       throw new BadRequestException('Invalid refresh token');
     }
 
-    const access_token = this.generateAccessToken(payload);
+    const { email, sub } = payload;
+
+    const access_token = this.generateAccessToken({ email, sub });
 
     res.cookie('access_token', access_token, cookieConfig);
 

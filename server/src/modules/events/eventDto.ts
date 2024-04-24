@@ -1,33 +1,38 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
-import { IsString } from 'class-validator';
+import { IsDateString, IsString, ValidateNested } from 'class-validator';
+
+class MediaDto {
+  @IsString()
+  cloudinaryId: string;
+
+  @IsString()
+  imageUrl: string;
+}
 
 export class CreateEventDto {
   @IsString()
   @ApiProperty()
   name: string;
 
-  @IsString()
+  @IsDateString()
   @ApiProperty()
   date: string;
 
-  @IsString()
+  @IsDateString()
   @ApiProperty()
-  start: Date;
+  start: string;
 
-  @IsString()
+  @IsDateString()
   @ApiProperty()
-  end: Date;
+  end: string;
 
   @IsString()
   @ApiProperty()
   location: string;
 
-  @IsString({ each: true })
-  @ApiProperty({ isArray: true })
-  media: {
-    cloudinaryId: string;
-    imageUrl: string;
-  }[];
+  @ApiProperty({ type: [MediaDto] })
+  @ValidateNested()
+  media: MediaDto;
 }
 
 export class UpdateEventDto extends PartialType(CreateEventDto) {}
