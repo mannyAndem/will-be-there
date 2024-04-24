@@ -25,7 +25,7 @@ export class UploadsService {
     if (!files) throw new BadRequestException('No files uploaded');
 
     const mediaPromises = files.map(async (file) => {
-      if (!file.mimetype.includes('image') || !file.mimetype.includes('video'))
+      if (!file.mimetype.includes('image') && !file.mimetype.includes('video'))
         throw new BadRequestException('Only images and videos are allowed');
       return this.upload(file);
     });
