@@ -8,7 +8,9 @@ export class EventsService {
   constructor(private prisma: PrismaService) {}
 
   async getEvents() {
-    const events = await this.prisma.event.findMany();
+    const events = await this.prisma.event.findMany({
+      include: { media: true },
+    });
 
     return {
       status: 'success',
@@ -36,7 +38,7 @@ export class EventsService {
     };
   }
 
-  async updateEvent(id: number, data: UpdateEventDto) {
+  async updateEvent(id: string, data: UpdateEventDto) {
     const event = await this.prisma.event.findFirst({ where: { id } });
 
     if (!event) throw new BadRequestException('Event not found');
@@ -60,7 +62,7 @@ export class EventsService {
     };
   }
 
-  async getEvent(id: number) {
+  async getEvent(id: string) {
     const event = await this.prisma.event.findFirst({ where: { id } });
 
     if (!event) throw new BadRequestException('Event not found');
@@ -71,7 +73,7 @@ export class EventsService {
     };
   }
 
-  async deleteEvent(id: number) {
+  async deleteEvent(id: string) {
     const event = await this.prisma.event.findFirst({
       where: { id },
       include: { media: true },

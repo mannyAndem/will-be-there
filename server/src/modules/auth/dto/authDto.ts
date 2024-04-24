@@ -32,9 +32,10 @@ export class LoginDto {
   @IsString()
   password: string;
 
+  @ApiPropertyOptional({ enum: OAuth_enum })
   @IsEnum(OAuth_enum)
-  @ApiProperty({ enum: OAuth_enum })
-  provider: OAuth_enum;
+  @IsOptional()
+  provider?: OAuth_enum;
 }
 
 export class RefreshDto {

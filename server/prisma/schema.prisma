@@ -25,7 +25,7 @@ model User {
 }
 
 model Event {
-  id        Int       @id @default(autoincrement())
+  id        String       @id(map: "PK_e207aa15404e9b2ewee35910f9f7f") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
   name      String    @unique
   date      DateTime
   start     DateTime
@@ -33,7 +33,7 @@ model Event {
   location  String?
   media     Media[]
 
-  organizer      User      @relation(fields: [organizerId], references: [id])
+  organizer      User      @relation(fields: [organizerId], references: [id], onDelete: Cascade)
   organizerId    String    @db.Uuid
 
   rsvps     RSVP[]
@@ -42,22 +42,22 @@ model Event {
 }
 
 model Media {
-  id        Int       @id @default(autoincrement())
-  eventId   Int
+  id        String       @id(map: "PK_e207aa15404e9b2ce35910f9freewf") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  eventId   String       @db.Uuid
   cloudinaryId String?
   imageUrl    String
 
-  event      Event  @relation(fields: [eventId], references: [id])
+  event      Event  @relation(fields: [eventId], references: [id], onDelete: Cascade)
 }
 
 model RSVP {
-  id        Int      @id @default(autoincrement())
-  eventId   Int
+  id        String      @id(map: "PK_e207aa15404e9b2ce35910f9fruirhf") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  eventId   String      @db.Uuid
   guestName  String
   email     String   @unique
   // plusOnes  Int?
 
-  event     Event    @relation(fields: [eventId], references: [id])
+  event     Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
 }
 
 enum OAuth_enum {

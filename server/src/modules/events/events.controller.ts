@@ -73,7 +73,7 @@ export class EventsController {
   })
   @ApiResponse({ status: 200, description: 'Event updated' })
   @ApiResponse({ status: 400, description: 'Event not updated' })
-  updateEvent(@Param('id') id: number, @Body() data: UpdateEventDto) {
+  updateEvent(@Param('id') id: string, @Body() data: UpdateEventDto) {
     return this.eventsService.updateEvent(id, data);
   }
 
@@ -89,7 +89,7 @@ export class EventsController {
   })
   @ApiResponse({ status: 200, description: 'Event retrieved' })
   @ApiResponse({ status: 404, description: 'Event not found' })
-  getEvent(@Param('id') id: number) {
+  getEvent(@Param('id') id: string) {
     return this.eventsService.getEvent(id);
   }
 
@@ -106,7 +106,7 @@ export class EventsController {
   })
   @ApiResponse({ status: 200, description: 'Event deleted' })
   @ApiResponse({ status: 404, description: 'Event not found' })
-  deleteEvent(@Param('id') id: number) {
+  deleteEvent(@Param('id') id: string) {
     return this.eventsService.deleteEvent(id);
   }
 }
