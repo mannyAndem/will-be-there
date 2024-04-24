@@ -22,7 +22,7 @@ const Login = () => {
         </div>
       </div>
       <div>
-        <div className="header">
+        <div className="login-header">
           <h1>Sign In</h1>
           <p>
             Streamline Your Event Experience: RSVP Easily and Seamlessly Today

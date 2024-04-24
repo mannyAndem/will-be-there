@@ -44,11 +44,12 @@
   & > div:last-child {
     padding: 4rem;
 
-    .header {
+    .signup-header {
       display: flex;
       flex-direction: column;
       gap: 1rem;
       margin-bottom: 3rem;
+      text-align: left;
     }
 
     h1 {

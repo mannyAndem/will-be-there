@@ -1,7 +1,7 @@
 import { Formik } from "formik";
 import { useEffect } from "react";
 import { toast } from "react-hot-toast";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import { useLogin } from "../../../../hooks/auth";
 import Button from "../../../../ui/Button/Button";
@@ -16,6 +16,7 @@ const LoginForm = () => {
 
   const { login, isPending, isSuccess, isError, error } = useLogin();
   const navigate = useNavigate();
+  const { state } = useLocation();
 
   const handleSubmit = (values) => {
     login({ ...values, provider: "local" });
@@ -33,7 +34,7 @@ const LoginForm = () => {
     if (isSuccess) {
       toast.success("Logged in successfully");
       setTimeout(() => {
-        navigate("/");
+        navigate(state?.from ?? "/");
       }, 1000);
     }
     if (isError) {

@@ -4,10 +4,10 @@ import "./create-event-form.scss";
 import { HiOutlineDocumentArrowUp } from "react-icons/hi2";
 import Button from "../../../../ui/Button/Button";
 import * as yup from "yup";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import { useCreateEvent } from "../../../../hooks/events";
 
 const CreateEventForm = () => {
+  const { create } = useCreateEvent();
   const initialValues = {
     name: "",
     date: "",
@@ -34,13 +34,48 @@ const CreateEventForm = () => {
       .min(1, "You must add atleast one event image"),
   });
 
-  // TIME ZONE STUFF:
+  const handleSubmit = (values) => {
+    const data = { ...values };
+
+    let startTime = new Date(
+      +data.date.split("/")[2],
+      +data.date.split("/")[1] - 1,
+      +data.date.split("/")[0],
+      +data.start.split(":")[0],
+      +data.start.split(":")[1]
+    );
+
+    let endTime = new Date(
+      +data.date.split("/")[2],
+      +data.date.split("/")[1] - 1,
+      +data.date.split("/")[0],
+      +data.end.split(":")[0],
+      +data.end.split(":")[1]
+    );
+
+    data.start = startTime.toISOString();
+    data.end = endTime.toISOString();
+
+    create(data);
+  };
 
   return (
-    <Formik initialValues={initialValues} validationSchema={formSchema}>
-      {({ values, handleChange, errors, touched, setFieldValue }) => (
-        <form className="create-event-form">
-          {console.log(values)}
+    <Formik
+      initialValues={initialValues}
+      validationSchema={formSchema}
+      onSubmit={handleSubmit}
+    >
+      {({
+        values,
+        handleChange,
+        errors,
+        touched,
+        setFieldValue,
+        isValid,
+        dirty,
+        handleSubmit,
+      }) => (
+        <form className="create-event-form" onSubmit={handleSubmit}>
           <div>
             <InputGroup name="name" error={touched.name && errors.name}>
               <InputGroup.Label>Event Name</InputGroup.Label>
@@ -97,7 +132,6 @@ const CreateEventForm = () => {
                 />
               </InputGroup>
             </div>
-            {/* Change this to the correct name later!!!!! */}
             <InputGroup name="media">
               <InputGroup.Label>Image</InputGroup.Label>
               <InputGroup.Input
@@ -120,7 +154,7 @@ const CreateEventForm = () => {
           </div>
           <div className="button-container">
             <div>
-              <Button>Save Event Details</Button>
+              <Button disabled={!isValid || !dirty}>Save Event Details</Button>
             </div>
           </div>
         </form>

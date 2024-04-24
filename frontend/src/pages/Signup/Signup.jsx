@@ -18,7 +18,7 @@ const Signup = () => {
         </div>
       </div>
       <div>
-        <div className="header">
+        <div className="signup-header">
           <h1>Create An Account</h1>
           <p>Secure Your Spot: RSVP Now for an Unforgettable Event</p>
         </div>

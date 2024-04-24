@@ -14,14 +14,7 @@ export const useGetCurrentUser = () => {
   const { data, isSuccess, isPending, isError, error, refetch } = useQuery({
     queryKey: ["user"],
     queryFn: async () => axios.get("auth/me"),
-    enabled: false,
   });
-
-  useEffect(() => {
-    if (!user) {
-      refetch();
-    }
-  }, []);
 
   useEffect(() => {
     if (isSuccess) {

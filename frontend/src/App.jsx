@@ -8,6 +8,7 @@ import FAQ from "./pages/Faq/Faq";
 import Tracker from "./pages/Tracker/Tracker";
 import { useGetCurrentUser } from "./hooks/auth";
 import Events from "./pages/Events/Events";
+import ProtectedRoute from "./shared-components/ProtectedRoute/ProtectedRoute";
 
 function App() {
   const { isPending } = useGetCurrentUser();

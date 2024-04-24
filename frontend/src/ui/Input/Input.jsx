@@ -32,8 +32,11 @@ const Input = ({
           {placeholder}
         </label>
         <div className="info">
-          {value ? (
-            value.map((file) => <div>{file.name}</div>)
+          {value.length > 0 ? (
+            // value.map((file) => <div>{file.name}</div>)
+            <div>
+              {value.length} {value.length === 1 ? "file" : "files"} uploaded
+            </div>
           ) : (
             <>
               <HiOutlineExclamationCircle size={12} className="icon" />
