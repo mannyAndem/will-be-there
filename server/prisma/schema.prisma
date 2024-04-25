@@ -20,7 +20,7 @@ model User {
   password  String?
   provider  OAuth_enum  @default(local)
   events    Event[]
-  rsvps     RSVP[]
+  rsvps     rsvp[]
 
   @@index([email])
 }
@@ -38,7 +38,7 @@ model Event {
   organizer      User         @relation(fields: [organizerId], references: [id], onDelete: Cascade)
   organizerId    String
 
-  rsvps          RSVP[]
+  rsvps          rsvp[]
 
   @@index([date])
 }
@@ -52,7 +52,7 @@ model Media {
   event         Event        @relation(fields: [eventId], references: [id], onDelete: Cascade)
 }
 
-model RSVP {
+model rsvp {
   id          String      @id() @default(uuid())
   eventId     String
   guestNames  String[]

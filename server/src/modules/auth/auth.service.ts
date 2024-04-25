@@ -5,7 +5,6 @@ import {
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
-import { CookieOptions, Response } from 'express';
 import { comparePassword, hashPassword } from 'src/utils/password';
 import { RequestInterfaceWithUser } from 'src/utils/requestInterface';
 import { PrismaService } from '../../prisma.service';
@@ -16,8 +15,6 @@ import {
   LoginDto,
   RegisterDto,
 } from './dto/authDto';
-
-const cookieConfig: CookieOptions = {};
 
 @Injectable()
 export class AuthService {
@@ -101,11 +98,7 @@ export class AuthService {
     };
   }
 
-  async refreshToken(
-    token: string,
-    req: RequestInterfaceWithUser,
-    res: Response,
-  ) {
+  async refreshToken(token: string) {
     if (!token) {
       throw new NotFoundException('Refresh token not found');
     }
@@ -114,8 +107,6 @@ export class AuthService {
       secret: process.env.JWT_SECRET,
     });
 
-    console.log(payload);
-
     if (!payload) {
       throw new BadRequestException('Invalid refresh token');
     }
@@ -123,8 +114,6 @@ export class AuthService {
     const { email, sub } = payload;
 
     const access_token = this.generateAccessToken({ email, sub });
-
-    res.cookie('access_token', access_token, cookieConfig);
 
     return {
       status: 'success',

@@ -48,18 +48,26 @@ export class CreateEventDto {
 
 export class RSVPDto {
   @IsString({ each: true })
+  @IsOptional()
+  @ApiPropertyOptional()
   guestNames: string[];
 
   @IsEmail()
+  @ApiProperty()
   email: string;
 
   @IsString()
+  @ApiProperty()
   name: string;
 
   @IsString()
+  @ApiPropertyOptional()
+  @IsOptional()
   notes: string;
 
   @IsString({ each: true })
+  @IsOptional()
+  @ApiPropertyOptional()
   registry: string[];
 }
 

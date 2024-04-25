@@ -20,7 +20,7 @@ import {
 } from '@nestjs/swagger';
 import { AuthGuard } from 'src/guards/auth.guard';
 import { RequestInterfaceWithUser } from 'src/utils/requestInterface';
-import { CreateEventDto, UpdateEventDto } from './eventDto';
+import { CreateEventDto, RSVPDto, UpdateEventDto } from './eventDto';
 import { EventsService } from './events.service';
 
 @Controller('events')
@@ -29,7 +29,7 @@ export class EventsController {
   constructor(private eventsService: EventsService) {}
 
   @Get()
-  @ApiOperation({ summary: 'Events list' })
+  @ApiOperation({ summary: "Get user's events list" })
   @UseGuards(AuthGuard)
   @ApiBasicAuth()
   @ApiOkResponse({
@@ -62,20 +62,19 @@ export class EventsController {
     return this.eventsService.createEvent(data, req.user.sub);
   }
 
-  // @Post()
-  // @ApiOperation({ summary: 'Create event' })
-  // @UseGuards(AuthGuard)
-  // @ApiBearerAuth()
-  // @ApiCreatedResponse({
-  //   description: 'Attendee created',
-  //   type: RSVPDto,
-  // })
-  // @ApiResponse({ status: 200, description: 'Event created' })
-  // @ApiResponse({ status: 400, description: 'Event not created' })
-  // createRSVP(@Body() data: RSVPDto, @Req() req: RequestInterfaceWithUser) {
-  //   // return this.eventsService.createEvent(data, req.user.sub);
-  //   return { data, req };
-  // }
+  @Post(':id')
+  @ApiOperation({ summary: 'Create rsvp' })
+  @UseGuards(AuthGuard)
+  @ApiBearerAuth()
+  @ApiCreatedResponse({
+    description: "You've RSVPed",
+    type: RSVPDto,
+  })
+  @ApiResponse({ status: 200, description: 'RSVP created' })
+  @ApiResponse({ status: 400, description: 'RSVP not created' })
+  createRSVP(@Body() data: RSVPDto, @Param('id') eventId: string) {
+    return this.eventsService.createRsvp(data, eventId);
+  }
 
   @Patch(':id')
   @ApiOperation({ summary: 'Update event' })
