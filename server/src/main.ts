@@ -28,6 +28,7 @@ async function bootstrap() {
   );
 
   const config = new DocumentBuilder()
+    .addBearerAuth()
     .setTitle('Server Documentation')
     .setDescription(
       'This documentation shows all available APIs for consumption',

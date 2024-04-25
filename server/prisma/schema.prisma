@@ -14,50 +14,56 @@ datasource db {
 }
 
 model User {
-  id    String    @id(map: "PK_e207aa15404e9b2ce35910f9f7f") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
-  name  String
-  email String    @unique
-  password String?
-  provider OAuth_enum @default(local)
-  events Event[]
+  id        String      @id() @default(uuid())
+  name      String
+  email     String      @unique
+  password  String?
+  provider  OAuth_enum  @default(local)
+  events    Event[]
+  rsvps     RSVP[]
 
-  @@index([email], map: "idx_email")
+  @@index([email])
 }
 
 model Event {
-  id        String       @id(map: "PK_e207aa15404e9b2ewee35910f9f7f") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
-  name      String    @unique
-  date      DateTime
-  start     DateTime
-  end       DateTime
-  location  String?
-  media     Media[]
+  id             String       @id() @default(uuid())
+  name           String
+  date           DateTime
+  start          DateTime
+  end            DateTime
+  location       String?
+  media          Media[]
+  expectedGifts  String[]
 
-  organizer      User      @relation(fields: [organizerId], references: [id], onDelete: Cascade)
-  organizerId    String    @db.Uuid
+  organizer      User         @relation(fields: [organizerId], references: [id], onDelete: Cascade)
+  organizerId    String
 
-  rsvps     RSVP[]
+  rsvps          RSVP[]
 
-  @@index([date], map: "idx_date_time")
+  @@index([date])
 }
 
 model Media {
-  id        String       @id(map: "PK_e207aa15404e9b2ce35910f9freewf") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
-  eventId   String       @db.Uuid
-  cloudinaryId String?
-  imageUrl    String
+  id            String       @id() @default(uuid())
+  eventId       String
+  cloudinaryId  String?
+  imageUrl      String
 
-  event      Event  @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  event         Event        @relation(fields: [eventId], references: [id], onDelete: Cascade)
 }
 
 model RSVP {
-  id        String      @id(map: "PK_e207aa15404e9b2ce35910f9fruirhf") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
-  eventId   String      @db.Uuid
-  guestName  String
-  email     String   @unique
-  // plusOnes  Int?
+  id          String      @id() @default(uuid())
+  eventId     String
+  guestNames  String[]
+  email       String      @unique
+  name        String
+  notes       String?
+  registry    String[]
+  userId      String?
 
-  event     Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  event       Event       @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  user        User?       @relation(fields: [userId], references: [id], onDelete: SetNull)
 }
 
 enum OAuth_enum {

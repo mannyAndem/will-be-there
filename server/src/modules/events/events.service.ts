@@ -7,9 +7,10 @@ import { CreateEventDto, UpdateEventDto } from './eventDto';
 export class EventsService {
   constructor(private prisma: PrismaService) {}
 
-  async getEvents() {
+  async getEvents(userId: string) {
     const events = await this.prisma.event.findMany({
       include: { media: true },
+      where: { organizerId: userId },
     });
 
     return {

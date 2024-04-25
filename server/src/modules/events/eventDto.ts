@@ -1,5 +1,11 @@
-import { ApiProperty, PartialType } from '@nestjs/swagger';
-import { IsDateString, IsString, ValidateNested } from 'class-validator';
+import { ApiProperty, ApiPropertyOptional, PartialType } from '@nestjs/swagger';
+import {
+  IsDateString,
+  IsEmail,
+  IsOptional,
+  IsString,
+  ValidateNested,
+} from 'class-validator';
 
 class MediaDto {
   @IsString()
@@ -33,6 +39,28 @@ export class CreateEventDto {
   @ApiProperty({ type: [MediaDto] })
   @ValidateNested()
   media: MediaDto;
+
+  @IsString({ each: true })
+  @ApiPropertyOptional()
+  @IsOptional()
+  expectedGifts?: string[];
+}
+
+export class RSVPDto {
+  @IsString({ each: true })
+  guestNames: string[];
+
+  @IsEmail()
+  email: string;
+
+  @IsString()
+  name: string;
+
+  @IsString()
+  notes: string;
+
+  @IsString({ each: true })
+  registry: string[];
 }
 
 export class UpdateEventDto extends PartialType(CreateEventDto) {}
