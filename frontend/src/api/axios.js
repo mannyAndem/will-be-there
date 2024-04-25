@@ -39,12 +39,14 @@ axios.interceptors.response.use(
         const access_token = res.data.token.access_token;
         localStorage.setItem("access_token", access_token);
         initialRequest.headers.setAuthorization(`Bearer ${access_token}`);
-      } catch (error) {
-        // localStorage.removeItem("access_token");
-        // localStorage.removeItem("refresh_token");
-      }
 
-      return axios(initialRequest);
+        return axios(initialRequest);
+      } catch (err) {
+        localStorage.removeItem("access_token");
+        localStorage.removeItem("refresh_token");
+        localStorage.removeItem("user");
+        return Promise.reject(error);
+      }
     }
 
     return Promise.reject(error);

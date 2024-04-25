@@ -54,6 +54,8 @@ export const useLogin = () => {
 };
 
 export const useSignup = () => {
+  const { setUser } = useAuthContext();
+
   const { isError, isPending, isSuccess, data, error, mutate } = useMutation({
     // mutationFn: async (data) =>
     //   axios.post("auth/register", data, {
@@ -67,7 +69,6 @@ export const useSignup = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        withCredentials: false,
       });
       localStorage.setItem("access_token", res?.data?.token.access_token);
       localStorage.setItem("refresh_token", res?.data?.token.refresh_token);

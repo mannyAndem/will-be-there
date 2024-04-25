@@ -47,6 +47,7 @@ const SignupForm = () => {
     }
 
     if (isError) {
+      console.error(error);
       if (error.response?.data?.status === 500) {
         toast.error("Something went wrong on our end");
       } else {

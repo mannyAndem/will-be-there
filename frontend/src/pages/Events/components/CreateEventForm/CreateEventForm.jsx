@@ -5,9 +5,11 @@ import { HiOutlineDocumentArrowUp } from "react-icons/hi2";
 import Button from "../../../../ui/Button/Button";
 import * as yup from "yup";
 import { useCreateEvent } from "../../../../hooks/events";
+import { useEffect } from "react";
+import { toast, Toaster } from "react-hot-toast";
 
 const CreateEventForm = () => {
-  const { create } = useCreateEvent();
+  const { create, isPending, isError, isSuccess } = useCreateEvent();
   const initialValues = {
     name: "",
     date: "",
@@ -37,7 +39,13 @@ const CreateEventForm = () => {
   const handleSubmit = (values) => {
     const data = { ...values };
 
-    let startTime = new Date(
+    const date = new Date(
+      +data.date.split("/")[2],
+      +data.date.split("/")[1] - 1,
+      +data.date.split("/")[0]
+    );
+
+    const startTime = new Date(
       +data.date.split("/")[2],
       +data.date.split("/")[1] - 1,
       +data.date.split("/")[0],
@@ -45,7 +53,7 @@ const CreateEventForm = () => {
       +data.start.split(":")[1]
     );
 
-    let endTime = new Date(
+    const endTime = new Date(
       +data.date.split("/")[2],
       +data.date.split("/")[1] - 1,
       +data.date.split("/")[0],
@@ -55,9 +63,19 @@ const CreateEventForm = () => {
 
     data.start = startTime.toISOString();
     data.end = endTime.toISOString();
+    data.date = date.toISOString();
 
     create(data);
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success("Event created successfully");
+    }
+    if (isError) {
+      toast.error("Couldn't create your event");
+    }
+  }, [isSuccess, isError]);
 
   return (
     <Formik
@@ -90,7 +108,7 @@ const CreateEventForm = () => {
               {/* <InputGroup.Input
                 placeholder="DD/MM/YYYY"
                 value={values.date}
-                onChange={handleChange}
+                onChange={(e) => setFieldValue(e.target.)}
                 type="date"
               /> */}
               <InputGroup.Input
@@ -154,7 +172,9 @@ const CreateEventForm = () => {
           </div>
           <div className="button-container">
             <div>
-              <Button disabled={!isValid || !dirty}>Save Event Details</Button>
+              <Button disabled={!isValid || !dirty} pending={isPending}>
+                Save Event Details
+              </Button>
             </div>
           </div>
         </form>

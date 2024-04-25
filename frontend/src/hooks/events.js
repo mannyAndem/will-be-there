@@ -6,6 +6,7 @@ export const useCreateEvent = () => {
   const { mutate, isPending, isSuccess, isError, error, data } = useMutation({
     mutationFn: async (values) => {
       const mediaFilesInfo = [];
+
       const { media, ...data } = values;
       await media.forEach(async (file) => {
         const formData = new FormData();
@@ -44,7 +45,7 @@ export const useCreateEvent = () => {
 export const useGetEvents = () => {
   const { isSuccess, isPending, isError, data, error } = useQuery({
     queryFn: async () => {
-      const res = await axios.get("eventss");
+      const res = await axios.get("events");
       return res.data.data;
     },
     queryKey: ["events"],

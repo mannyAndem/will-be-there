@@ -2,6 +2,7 @@ import { Field } from "formik";
 import { HiOutlineExclamationCircle } from "react-icons/hi2";
 import DatePicker from "react-datepicker";
 import "./input.scss";
+import "react-datepicker/dist/react-datepicker.css";
 
 const Input = ({
   name,
