@@ -1,19 +1,11 @@
+import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
 import {
-  Body,
-  Controller,
-  Get,
-  Post,
-  Req,
-  Res,
-  UseGuards,
-} from '@nestjs/common';
-import {
+  ApiBearerAuth,
   ApiOkResponse,
   ApiOperation,
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { Response } from 'express';
 import { AuthGuard } from 'src/guards/auth.guard';
 import { RequestInterfaceWithUser } from 'src/utils/requestInterface';
 import { AuthService } from './auth.service';
@@ -85,15 +77,12 @@ export class AuthController {
   })
   @ApiResponse({ status: 200, description: 'Successful refresh' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
-  refreshTokenHandler(
-    @Res({ passthrough: true }) response: Response,
-    @Req() req: RequestInterfaceWithUser,
-    @Body() data: RefreshDto,
-  ) {
-    return this.authService.refreshToken(data.refresh_token, req, response);
+  refreshTokenHandler(@Body() data: RefreshDto) {
+    return this.authService.refreshToken(data.refresh_token);
   }
 
   @Get('me')
+  @ApiBearerAuth()
   @UseGuards(AuthGuard)
   @ApiOperation({ summary: 'Get me' })
   @ApiOkResponse({

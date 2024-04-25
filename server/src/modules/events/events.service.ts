@@ -1,15 +1,16 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import cloudinary from 'src/lib/cloudinary';
 import { PrismaService } from 'src/prisma.service';
-import { CreateEventDto, UpdateEventDto } from './eventDto';
+import { CreateEventDto, RSVPDto, UpdateEventDto } from './eventDto';
 
 @Injectable()
 export class EventsService {
   constructor(private prisma: PrismaService) {}
 
-  async getEvents() {
+  async getEvents(userId: string) {
     const events = await this.prisma.event.findMany({
-      include: { media: true },
+      include: { media: true, rsvps: true },
+      where: { organizerId: userId },
     });
 
     return {
@@ -19,6 +20,7 @@ export class EventsService {
   }
 
   async createEvent(data: CreateEventDto, userId: string) {
+    console.log(data);
     const event = await this.prisma.event.create({
       data: {
         ...data,
@@ -35,6 +37,36 @@ export class EventsService {
     return {
       status: 'success',
       data: event,
+    };
+  }
+
+  async createRsvp(data: RSVPDto, eventId: string) {
+    const user = await this.prisma.user.findUnique({
+      where: { email: data.email },
+    });
+
+    let rsvp;
+
+    if (!user) {
+      rsvp = await this.prisma.rsvp.create({
+        data: {
+          ...data,
+          event: { connect: { id: eventId } },
+        },
+      });
+    } else {
+      rsvp = await this.prisma.rsvp.create({
+        data: {
+          ...data,
+          event: { connect: { id: eventId } },
+          user: user ? { connect: { id: user.id } } : null,
+        },
+      });
+    }
+
+    return {
+      status: 'success',
+      data: rsvp,
     };
   }
 
