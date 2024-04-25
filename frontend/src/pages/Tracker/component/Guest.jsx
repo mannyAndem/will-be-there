@@ -89,9 +89,8 @@ Imbuing your bond with infinite love.  </div>
       <div className="status">
           Attendance Status:
            <div className="prob">
-              <div className="circle">
-                  <div className="green">
-                  </div>
+              <div className="circle active">
+                
               </div>
               <div className="coming"> Attending </div>
               <div className="circle"> </div>
@@ -141,9 +140,8 @@ As you both bask in love's eternal light.</div>
       <div className="status">
           Attendance Status:
            <div className="prob">
-              <div className="circle">
-                  <div className="green">
-                  </div>
+              <div className="circle active">
+                 
               </div>
               <div className="coming"> Attending </div>
               <div className="circle"> </div>
@@ -194,11 +192,10 @@ Two lives, two hearts joining as one. </div>
           Attendance Status:
            <div className="prob">
               <div className="circle">
-                  <div className="green">
-                  </div>
+              
               </div>
               <div className="coming"> Attending </div>
-              <div className="circle"> </div>
+              <div className="circle active"> </div>
               <div className="coming"> Not Attending </div>
               <div className="circle"> </div>
               <div className="coming"> Maybe </div>
@@ -245,9 +242,8 @@ Let a shower of blessings rain down. </div>
       <div className="status">
           Attendance Status:
            <div className="prob">
-              <div className="circle">
-                  <div className="green">
-                  </div>
+              <div className="circle active">
+              
               </div>
               <div className="coming"> Attending </div>
               <div className="circle"> </div>
@@ -298,13 +294,12 @@ The best of adventures still awaits for you two.  </div>
           Attendance Status:
            <div className="prob">
               <div className="circle">
-                  <div className="green">
-                  </div>
+                
               </div>
               <div className="coming"> Attending </div>
               <div className="circle"> </div>
               <div className="coming"> Not Attending </div>
-              <div className="circle"> </div>
+              <div className="circle active"> </div>
               <div className="coming"> Maybe </div>
           </div>
       </div>

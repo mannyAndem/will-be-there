@@ -16,6 +16,9 @@
             font-size: 15px;
             font-weight: 500;
         }
+        img{
+            width: 40px;
+        }
     }
 
     .attendance{
@@ -40,12 +43,18 @@
                     border-radius: 20px;
                     display: flex;
                     align-items: center;
-                    justify-content: center ;
-                    &:first-child{
-                        border:2px solid $green;
-                    }
+                    justify-content: center;                   
+                }
 
-                    &>.green{
+                .active{
+                    border: 2px solid $green !important;
+                      &::after{
+                        position: absolute;
+                        left: 0;
+                        right: 0;
+                        margin: 0 auto;
+                        z-index: 3;
+                        content: " ";
                         width: 13px;
                         height: 13px;
                         border-radius: 20px;
