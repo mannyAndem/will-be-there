@@ -9,13 +9,13 @@ import CustomerImage2 from "../../../../assets/images/customer2.png"
 
 const Reviews = () => {
     const settings = {
+        className: "center",
         accessibility:true,
         arrows:false,
-        className: "center",
         centerMode: true,
         infinite: true,
         centerPadding: "60px",
-        slidesToShow: 3,
+        slidesToShow: 2,
         slidesToScroll: 2,
         speed: 500,
    autoplay:true,
@@ -48,7 +48,7 @@ const Reviews = () => {
                             Executive Director
                         </div>
                     </div>
-                </div> <div className="reviews hide">
+                </div> <div className="reviews ">
                     <img src={Pan} alt="quote" className="quote" />
                     <div className="testimonial">
                         Lorem ipsum dolor sit amet consectetur. Massa lobortis est nunc pellentesque mi non tellus pulvinar. Nunc ornare a mauris diam est adipiscing tempor. Pellentesque fusce pellentesque integer nunc quis fames. Egestas lacus sit habitant molestie aliquam.
@@ -64,7 +64,7 @@ const Reviews = () => {
                             Executive Director
                         </div>
                     </div>
-                </div> <div className="reviews hide">
+                </div> <div className="reviews ">
                     <img src={Pan} alt="quote" className="quote" />
                     <div className="testimonial">
                         Lorem ipsum dolor sit amet consectetur. Massa lobortis est nunc pellentesque mi non tellus pulvinar. Nunc ornare a mauris diam est adipiscing tempor. Pellentesque fusce pellentesque integer nunc quis fames. Egestas lacus sit habitant molestie aliquam.

@@ -1,0 +1,70 @@
+@import "../../style/variables.scss";
+
+.guestAttendance{
+    border: 1px solid red;
+    width: 100%;
+    .namePict{
+        display: flex;
+        width: 100%;
+        align-items: center;
+        gap: 20px;
+        font-size: 20px;
+        font-weight: 600;
+        font-family: "Montserrat";
+        p{
+            font-size: 15px;
+            font-weight: 500;
+        }
+    }
+
+    .attendance{
+        .status{
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 20px;
+            font-family: "Montserrat";
+            font-weight: 500;
+
+            .prob{
+                align-items: center;
+                gap: 10px;
+                font-weight: 300;
+                display: flex;
+               
+                >.circle{
+                    width: 20px;
+                    height: 20px;
+                    border: 2px solid grey;
+                    border-radius: 20px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center ;
+                    &:first-child{
+                        border:2px solid $green;
+                    }
+
+                    &>.green{
+                        width: 13px;
+                        height: 13px;
+                        border-radius: 20px;
+                        background-color: $green;
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+.guestDetails{
+    font-family: "Montserrat";
+    &>.contact{
+        display: flex;
+        gap: 10px;
+        font-size: 20px;
+        p{
+font-weight: 500;
+        }
+    }
+}

@@ -28,7 +28,7 @@ const Login = () => {
             Streamline Your Event Experience: RSVP Easily and Seamlessly Today
           </p>
         </div>
-        <GoogleSignupButton type="login" />
+        {/* <GoogleSignupButton type="login" /> */}
         <div className="or-container">
           <hr />
           <span>Or</span>
