@@ -7,7 +7,12 @@ import {
   AccordionSummary,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import Guest1 from "../../../assets/images/guest1.png"
+import Guest1 from "../../../assets/images/guest1.png";
+import Guest2 from "../../../assets/images/guest2.png";
+import Guest3 from "../../../assets/images/roselyn.png";
+import Guest4 from "../../../assets/images/temi.png";
+import Guest5 from "../../../assets/images/remi.png"
+
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 const CustomIcon = ({ expanded }) => {
   return (
@@ -48,7 +53,7 @@ const GuestLists = () => {
     {
       title: (<div className="namePict">
                             <div className="pict">
-                                <img src={Guest1} alt="jj" />
+                                <img src={Guest1} alt="Guest Image" />
                             </div>
                             <div className="name">
                                 Kayode Ogundiya
@@ -64,8 +69,21 @@ const GuestLists = () => {
             <p>Additional Guests :</p> 2
         </div>
         <div className="contact">
-            <p>Name of Additional Guest:</p> Ifeanyi Chizaram
+            <p>Name of Additional Guest:</p> Ifeanyi Chizaram, Halimah Gafar
         </div>
+        <div className="contact">
+            <p>Attendance Status:</p> Attending
+        </div>
+
+        <div className="contact">
+            <p>Registry:</p> Car
+        </div>
+
+        <div className="more">
+        As you stand together in splendid array,
+Surrounded by loved ones on this perfect day,
+Let your union be blessed by the heavens above,
+Imbuing your bond with infinite love.  </div>
       </div>,
       partOfTheHeaderContent: <div className="attendance">
       <div className="status">
@@ -87,46 +105,210 @@ const GuestLists = () => {
     {
       title: (<div className="namePict">
       <div className="pict">
-          <img src={Guest1} alt="" />
+          <img src={Guest2} alt="Guest Image" />
       </div>
       <div className="name">
-          Adese Samson
-          <p>kayodeogundiya@gmail.com</p>
+      Adese Samson
+          <p>adesesamson@gmail.com</p>
       </div>
 
   </div>),
-      content: 'Content for Accordion 2',
-      partOfTheHeaderContent: (
-        <div>
-          <p>Part of the header for Accordion 2</p>
-          <div>
-            <span>Nested div content</span>
-            <button>Click me</button>
+      content: <div className="guestDetails">
+      <div className="contact">
+          <p>Contact Info :</p> +234 8164863846
+      </div>
+      <div className="contact">
+          <p>Additional Guests :</p> 2
+      </div>
+      <div className="contact">
+          <p>Name of Additional Guest:</p> Ifeanyi Chizaram, Halimah Gafar
+      </div>
+      <div className="contact">
+          <p>Attendance Status:</p> Attending
+      </div>
+
+      <div className="contact">
+          <p>Registry:</p> Car
+      </div>
+
+      <div className="more">
+      From this moment on, your lives intertwine,
+Woven in a tapestry creatively divine.
+May this marriage bring transcendent delight,
+As you both bask in love's eternal light.</div>
+    </div>,
+      partOfTheHeaderContent: (<div className="attendance">
+      <div className="status">
+          Attendance Status:
+           <div className="prob">
+              <div className="circle">
+                  <div className="green">
+                  </div>
+              </div>
+              <div className="coming"> Attending </div>
+              <div className="circle"> </div>
+              <div className="coming"> Not Attending </div>
+              <div className="circle"> </div>
+              <div className="coming"> Maybe </div>
           </div>
+      </div>
+  </div>
+      ),
+    },
+    {
+      title: (<div className="namePict">
+                            <div className="pict">
+                                <img src={Guest3} alt="Guest Image" />
+                            </div>
+                            <div className="name">
+                            Roselyn Edewor
+                                <p>roselynedewor@gmail.com</p>
+                            </div>
+
+                        </div>),
+      content: <div className="guestDetails">
+        <div className="contact">
+            <p>Contact Info :</p> +234 8164863846
         </div>
-      ),
-    },
-    {
-      title: 'Accordion 3',
-      content: 'Content for Accordion 3',
-      partOfTheHeaderContent: (
-        <p>Part of the header for Accordion 3 with a paragraph</p>
-      ),
-    },
-    {
-      title: 'Accordion 4',
-      content: 'Content for Accordion 4',
-      partOfTheHeaderContent: null,
-    },
-    {
-      title: 'Accordion 5',
-      content: 'Content for Accordion 5',
-      partOfTheHeaderContent: (
-        <div>
-          <h4>Part of the header for Accordion 5</h4>
-          <p>With additional content</p>
+        <div className="contact">
+            <p>Additional Guests :</p> 2
         </div>
-      ),
+        <div className="contact">
+            <p>Name of Additional Guest:</p> Ifeanyi Chizaram, Halimah Gafar
+        </div>
+        <div className="contact">
+            <p>Attendance Status:</p> Attending
+        </div>
+
+        <div className="contact">
+            <p>Registry:</p> Car
+        </div>
+
+        <div className="more">
+        May your union be a radiant bloom,
+A forever bond too beautiful to consume.
+Two lives, two hearts joining as one. </div>
+      </div>,
+      partOfTheHeaderContent: <div className="attendance">
+      <div className="status">
+          Attendance Status:
+           <div className="prob">
+              <div className="circle">
+                  <div className="green">
+                  </div>
+              </div>
+              <div className="coming"> Attending </div>
+              <div className="circle"> </div>
+              <div className="coming"> Not Attending </div>
+              <div className="circle"> </div>
+              <div className="coming"> Maybe </div>
+          </div>
+      </div>
+  </div>,
+    },
+    {
+      title: (<div className="namePict">
+                            <div className="pict">
+                                <img src={Guest4} alt="Guest Image" />
+                            </div>
+                            <div className="name">
+                            Temiloluwa Adelakun
+                                <p>temiloluwaadelekan@gmail.com</p>
+                            </div>
+
+                        </div>),
+      content: <div className="guestDetails">
+        <div className="contact">
+            <p>Contact Info :</p> +234 8164863846
+        </div>
+        <div className="contact">
+            <p>Additional Guests :</p> 2
+        </div>
+        <div className="contact">
+            <p>Name of Additional Guest:</p> Ifeanyi Chizaram, Halimah Gafar
+        </div>
+        <div className="contact">
+            <p>Attendance Status:</p> Attending
+        </div>
+
+        <div className="contact">
+            <p>Registry:</p> Car
+        </div>
+
+        <div className="more">
+        Celebrate this moment under angels' embrace,
+Joy written on every luminous face.
+As you both joyfully take your vows,
+Let a shower of blessings rain down. </div>
+      </div>,
+      partOfTheHeaderContent: <div className="attendance">
+      <div className="status">
+          Attendance Status:
+           <div className="prob">
+              <div className="circle">
+                  <div className="green">
+                  </div>
+              </div>
+              <div className="coming"> Attending </div>
+              <div className="circle"> </div>
+              <div className="coming"> Not Attending </div>
+              <div className="circle"> </div>
+              <div className="coming"> Maybe </div>
+          </div>
+      </div>
+  </div>,
+    },
+    {
+      title: (<div className="namePict">
+                            <div className="pict">
+                                <img src={Guest5} alt="Guest Image" />
+                            </div>
+                            <div className="name">
+                            Remilekun Mogbadunade
+                                <p>remilekunmogbadunade@gmail.com</p>
+                            </div>
+
+                        </div>),
+      content: <div className="guestDetails">
+        <div className="contact">
+            <p>Contact Info :</p> +234 8164863846
+        </div>
+        <div className="contact">
+            <p>Additional Guests :</p> 2
+        </div>
+        <div className="contact">
+            <p>Name of Additional Guest:</p> Ifeanyi Chizaram, Halimah Gafar
+        </div>
+        <div className="contact">
+            <p>Attendance Status:</p> Attending
+        </div>
+
+        <div className="contact">
+            <p>Registry:</p> Car
+        </div>
+
+        <div className="more">
+        Hand in hand, may your lives entwine,
+A lifetime of memories you'll define.
+United in a love that's tender and true,
+The best of adventures still awaits for you two.  </div>
+      </div>,
+      partOfTheHeaderContent: <div className="attendance">
+      <div className="status">
+          Attendance Status:
+           <div className="prob">
+              <div className="circle">
+                  <div className="green">
+                  </div>
+              </div>
+              <div className="coming"> Attending </div>
+              <div className="circle"> </div>
+              <div className="coming"> Not Attending </div>
+              <div className="circle"> </div>
+              <div className="coming"> Maybe </div>
+          </div>
+      </div>
+  </div>,
     },
   ];
 

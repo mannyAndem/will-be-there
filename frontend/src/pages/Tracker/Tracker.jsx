@@ -10,7 +10,6 @@ import mockEventImg4 from "../../assets/images/Kunle.png"
 import EventCard from "../RSVP/components/EventCard/EventCard";
 import "./tracker.scss";
 import "../RSVP/rsvp.scss";
-import AccordionUsage from "./component/Accordion";
 import GuestLists from "./component/Guest";
 
 

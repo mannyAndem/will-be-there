@@ -1,8 +1,9 @@
 @import "../../style/variables.scss";
 
 .guestAttendance{
-    border: 1px solid red;
+    
     width: 100%;
+    margin: 0 auto !important;
     .namePict{
         display: flex;
         width: 100%;
@@ -58,6 +59,8 @@
 }
 
 .guestDetails{
+    width: 90%;
+    margin: 0 auto;
     font-family: "Montserrat";
     &>.contact{
         display: flex;
@@ -67,4 +70,23 @@
 font-weight: 500;
         }
     }
+
+    >.more{
+        background-color: $fountainWhite;
+        padding: 10px;
+        border-radius: 10px;
+    }
+}
+
+.css-1086bdv-MuiPaper-root-MuiAccordion-root{
+    box-shadow: none !important;
+   border-bottom: 1px solid rgba(176, 176, 176, 0.788);
+   width: 90%;
+   margin: 0 auto;
+}
+.css-1086bdv-MuiPaper-root-MuiAccordion-root::before{
+    background-color: transparent !important;
+}
+.css-1086bdv-MuiPaper-root-MuiAccordion-root.Mui-expanded{
+    margin: 16px auto !important;
 }
