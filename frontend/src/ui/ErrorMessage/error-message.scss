@@ -1,10 +1,18 @@
 @import "../../style/variables";
 
-.error-message {
-  display: block;
-  text-align: center;
-  font-family: "Montserrat", sans-serif;
-  line-height: 19.5px;
-  font-size: 1rem;
-  color: $error;
+.error-message-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem;
+
+  .error-message {
+    text-align: center;
+    font-family: "Montserrat", sans-serif;
+    line-height: 19.5px;
+    font-size: 20px;
+    color: $error;
+  }
 }

@@ -34,80 +34,86 @@ const Events = () => {
       <div className="header-container">
         <Header />
       </div>
-      {isSuccess ? (
-        <div className="events-list">
-          {data.map((event) => (
-            <EventCard event={event} />
-          ))}
-          <CreateEventButton />
-        </div>
-      ) : isPending ? (
-        <Loader variant="dark" size="md" />
-      ) : isError ? (
-        <ErrorMessage message="Something went wrong" />
-      ) : (
-        <div></div>
-      )}
-
-      <section className="create-event-form-section">
-        <div className="section-header">
-          <h1>Create Event</h1>
-          <div>
-            <Button size="sm">
-              <div>
-                <span>Edit event details</span>
-                <LuPenLine size={30} className="pen-icon" />
+      <main className="event-main-content">
+        {isSuccess ? (
+          <>
+            <div className="events-list">
+              {data.map((event) => (
+                <EventCard event={event} />
+              ))}
+              <CreateEventButton />
+            </div>
+            <section className="create-event-form-section">
+              <div className="section-header">
+                <h1>Create Event</h1>
+                <div>
+                  <Button size="sm">
+                    <div>
+                      <span>Edit event details</span>
+                      <LuPenLine size={30} className="pen-icon" />
+                    </div>
+                  </Button>
+                </div>
               </div>
-            </Button>
-          </div>
-        </div>
-        <CreateEventForm />
-      </section>
-      <section className="create-template-section">
-        <div className="section-header">
-          <h1>Templates</h1>
-          <div>
-            <Button size="sm">My Library</Button>
-          </div>
-        </div>
-        <CreateTemplateButton />
-      </section>
-      <section className="templates-section">
-        <div className="section-header">
-          <h1>Popular RSVP Templates</h1>
-          <div>
-            <Button size="sm">Favourites</Button>
-          </div>
-        </div>
-        <div className="tabs-container">
-          <div>
-            <Tab title="Weddings" active={true} />
-          </div>
-          <div>
-            <Tab title="Birthdays" />
-          </div>
-          <div>
-            <Tab title="Christmas" />
-          </div>
-          <div>
-            <Tab title="Baby Shower" />
-          </div>
-        </div>
-        <div className="templates-container">
-          <TemplateCard img={templateExampleImg} />
-          <TemplateCard img={templateExampleImg} />
-          <TemplateCard img={templateExampleImg} />
-          <TemplateCard img={templateExampleImg} />
-          <TemplateCard img={templateExampleImg} />
-          <TemplateCard img={templateExampleImg} />
-        </div>
-      </section>
-      <div>
-        <button className="view-more-button">
-          <span>View more</span>
-          <HiOutlineChevronDoubleRight size={24} className="right-arrow-icon" />
-        </button>
-      </div>
+              <CreateEventForm />
+            </section>
+            <section className="create-template-section">
+              <div className="section-header">
+                <h1>Templates</h1>
+                <div>
+                  <Button size="sm">My Library</Button>
+                </div>
+              </div>
+              <CreateTemplateButton />
+            </section>
+            <section className="templates-section">
+              <div className="section-header">
+                <h1>Popular RSVP Templates</h1>
+                <div>
+                  <Button size="sm">Favourites</Button>
+                </div>
+              </div>
+              <div className="tabs-container">
+                <div>
+                  <Tab title="Weddings" active={true} />
+                </div>
+                <div>
+                  <Tab title="Birthdays" />
+                </div>
+                <div>
+                  <Tab title="Christmas" />
+                </div>
+                <div>
+                  <Tab title="Baby Shower" />
+                </div>
+              </div>
+              <div className="templates-container">
+                <TemplateCard img={templateExampleImg} />
+                <TemplateCard img={templateExampleImg} />
+                <TemplateCard img={templateExampleImg} />
+                <TemplateCard img={templateExampleImg} />
+                <TemplateCard img={templateExampleImg} />
+                <TemplateCard img={templateExampleImg} />
+              </div>
+            </section>
+            <div>
+              <button className="view-more-button">
+                <span>View more</span>
+                <HiOutlineChevronDoubleRight
+                  size={24}
+                  className="right-arrow-icon"
+                />
+              </button>
+            </div>
+          </>
+        ) : isPending ? (
+          <Loader variant="dark" size="md" />
+        ) : isError ? (
+          <ErrorMessage message="Something went wrong" />
+        ) : (
+          <div></div>
+        )}
+      </main>
     </div>
   );
 };
