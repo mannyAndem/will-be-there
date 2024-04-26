@@ -67,7 +67,7 @@ const EventForm = () => {
       </div>
 
       <div className="eventForm">
-        <label htmlFor="time">Time</label>
+        <label htmlFor="time">Time Start</label>
         <input
           id="start_time"
           name="start_time"
@@ -85,7 +85,7 @@ const EventForm = () => {
 
       <div className="eventForm">
         
-        <label htmlFor="time">Time</label>
+        <label htmlFor="time">Time End</label>
         <input
           id="stop_time"
           name="stop_time"
@@ -134,9 +134,7 @@ const EventForm = () => {
         ) : null}
       </div>
 
-      {/* <button type="submit" disabled={!formik.isValid}>
-        Submit
-      </button> */}
+
     </form>
 </div>
     

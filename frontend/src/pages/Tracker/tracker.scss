@@ -1,0 +1,101 @@
+@import "../../style/variables.scss";
+
+.guestAttendance{
+    
+    width: 100%;
+    margin: 0 auto !important;
+    .namePict{
+        display: flex;
+        width: 100%;
+        align-items: center;
+        gap: 20px;
+        font-size: 20px;
+        font-weight: 600;
+        font-family: "Montserrat";
+        p{
+            font-size: 15px;
+            font-weight: 500;
+        }
+        img{
+            width: 40px;
+        }
+    }
+
+    .attendance{
+        .status{
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 20px;
+            font-family: "Montserrat";
+            font-weight: 500;
+
+            .prob{
+                align-items: center;
+                gap: 10px;
+                font-weight: 300;
+                display: flex;
+               
+                >.circle{
+                    width: 20px;
+                    height: 20px;
+                    border: 2px solid grey;
+                    border-radius: 20px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;                   
+                }
+
+                .active{
+                    border: 2px solid $green !important;
+                      &::after{
+                        position: absolute;
+                        left: 0;
+                        right: 0;
+                        margin: 0 auto;
+                        z-index: 3;
+                        content: " ";
+                        width: 13px;
+                        height: 13px;
+                        border-radius: 20px;
+                        background-color: $green;
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+.guestDetails{
+    width: 90%;
+    margin: 0 auto;
+    font-family: "Montserrat";
+    &>.contact{
+        display: flex;
+        gap: 10px;
+        font-size: 20px;
+        p{
+font-weight: 500;
+        }
+    }
+
+    >.more{
+        background-color: $fountainWhite;
+        padding: 10px;
+        border-radius: 10px;
+    }
+}
+
+.css-1086bdv-MuiPaper-root-MuiAccordion-root{
+    box-shadow: none !important;
+   border-bottom: 1px solid rgba(176, 176, 176, 0.788);
+   width: 90%;
+   margin: 0 auto;
+}
+.css-1086bdv-MuiPaper-root-MuiAccordion-root::before{
+    background-color: transparent !important;
+}
+.css-1086bdv-MuiPaper-root-MuiAccordion-root.Mui-expanded{
+    margin: 16px auto !important;
+}
