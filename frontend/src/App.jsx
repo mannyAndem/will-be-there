@@ -19,7 +19,8 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password" element={<ResetPassword />} />
-        <Route path="/tracker" element={<Tracker />} />
+        <Route path="/tracker/*" element={<Tracker />} />
+        <Route path="/tracker/:id" element={<Tracker />} />
         <Route path="/faq" element={<FAQ />} />
         <Route
           path="/events"

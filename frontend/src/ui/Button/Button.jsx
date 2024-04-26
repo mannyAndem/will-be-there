@@ -5,6 +5,7 @@ const Button = ({
   children,
   pending,
   disabled,
+  onClick,
   size = "md",
   variant = "primary",
 }) => {
@@ -15,6 +16,7 @@ const Button = ({
         (size == "sm" ? "button-sm" : "button-md") +
         (variant === "secondary" ? " secondary" : " primary")
       }
+      onClick={onClick}
       disabled={disabled}
     >
       {pending && <Loader />}

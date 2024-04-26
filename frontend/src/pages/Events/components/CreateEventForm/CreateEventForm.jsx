@@ -8,9 +8,12 @@ import Button from "../../../../ui/Button/Button";
 import InputGroup from "../../../../ui/InputGroup/InputGroup";
 import "./create-event-form.scss";
 import { HiXCircle } from "react-icons/hi2";
+import { useNavigate } from "react-router-dom";
 
 const CreateEventForm = () => {
-  const { create, isPending, isError, isSuccess, error } = useCreateEvent();
+  const { create, isPending, isError, isSuccess, error, data } =
+    useCreateEvent();
+  const navigate = useNavigate();
 
   const initialValues = {
     name: "",
@@ -77,6 +80,10 @@ const CreateEventForm = () => {
   useEffect(() => {
     if (isSuccess) {
       toast.success("Event created successfully");
+      console.log(data);
+      setTimeout(() => {
+        navigate(`/tracker?event=${data.id}`);
+      }, 1000);
     }
     if (isError) {
       toast.error(error.response?.data?.message ?? "Something went wrong");

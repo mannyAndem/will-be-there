@@ -1,5 +1,5 @@
 import Header from "../../ui/Header/Header";
-import EventCard from "./components/EventCard/EventCard";
+import EventCard from "../../shared-components/EventCard/EventCard";
 import mockEventImg from "../../assets/images/event-image.png";
 import "./events.scss";
 import CreateEventButton from "./components/CreateEventButton/CreateEventButton";

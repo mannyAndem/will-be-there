@@ -2,6 +2,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import axios from "../api/axios";
 import { queryClient } from "../react-query/react-query";
+import { dark } from "@mui/material/styles/createPalette";
 
 export const useCreateEvent = () => {
   const { mutate, isPending, isSuccess, isError, error, data } = useMutation({
@@ -19,18 +20,29 @@ export const useCreateEvent = () => {
       data.media = mediaRes.data;
       console.log(data);
 
-      return axios.post("events", data, {
+      const res = await axios.post("events", data, {
         headers: {
           "Content-Type": "application/json",
         },
       });
+
+      return res.data.data;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["events"] });
     },
   });
 
-  return { create: mutate, isPending, isSuccess, isError, error };
+  useEffect(() => {
+    if (isError) {
+      console.error(error);
+    }
+    if (isSuccess) {
+      console.log(data);
+    }
+  }, [isError, isSuccess]);
+
+  return { create: mutate, isPending, isSuccess, isError, error, data };
 };
 
 export const useGetEvents = () => {
@@ -40,6 +52,18 @@ export const useGetEvents = () => {
       return res.data.data;
     },
     queryKey: ["events"],
+  });
+
+  return { isSuccess, isError, isPending, data, error };
+};
+
+export const useGetEvent = (id) => {
+  const { isSuccess, isPending, isError, data, error } = useQuery({
+    queryFn: async () => {
+      const res = await axios.get(`events/${id}`);
+      return res.data.data;
+    },
+    queryKey: [`event/${id}`],
   });
 
   return { isSuccess, isError, isPending, data, error };
