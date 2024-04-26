@@ -1,41 +1,28 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import axios from "../api/axios";
 import { useEffect } from "react";
-import { queryClient } from "../react-query/react-query";
+import axios from "../api/axios";
 
 export const useCreateEvent = () => {
   const { mutate, isPending, isSuccess, isError, error, data } = useMutation({
     mutationFn: async (values) => {
-      const mediaFilesInfo = [];
-
       const { media, ...data } = values;
+      const formData = new FormData();
+      media.forEach((file) => formData.append("media", file));
 
-      await media.forEach(async (file) => {
-        const formData = new FormData();
-        formData.append("media", file);
-        const res = await axios.post("uploads/media", formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        });
-
-        mediaFilesInfo.push(res.data);
+      const mediaRes = await axios.post("uploads/medias", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       });
 
-      data.media = [...mediaFilesInfo];
+      data.media = mediaRes.data;
       console.log(data);
 
-      const res = await axios.post("events", JSON.stringify(data), {
+      return axios.post("events", data, {
         headers: {
           "Content-Type": "application/json",
         },
       });
-      console.log(res);
-
-      return res.data;
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["events"] });
     },
   });
 

@@ -1,12 +1,12 @@
-import { Formik } from "formik";
-import InputGroup from "../../../../ui/InputGroup/InputGroup";
-import "./create-event-form.scss";
-import { HiOutlineDocumentArrowUp } from "react-icons/hi2";
-import Button from "../../../../ui/Button/Button";
-import * as yup from "yup";
 import { useCreateEvent } from "../../../../hooks/events";
 import { useEffect } from "react";
 import { toast, Toaster } from "react-hot-toast";
+import { Formik } from "formik";
+import { HiOutlineDocumentArrowUp } from "react-icons/hi2";
+import * as yup from "yup";
+import Button from "../../../../ui/Button/Button";
+import InputGroup from "../../../../ui/InputGroup/InputGroup";
+import "./create-event-form.scss";
 
 const CreateEventForm = () => {
   const { create, isPending, isError, isSuccess } = useCreateEvent();
@@ -78,108 +78,113 @@ const CreateEventForm = () => {
   }, [isSuccess, isError]);
 
   return (
-    <Formik
-      initialValues={initialValues}
-      validationSchema={formSchema}
-      onSubmit={handleSubmit}
-    >
-      {({
-        values,
-        handleChange,
-        errors,
-        touched,
-        setFieldValue,
-        isValid,
-        dirty,
-        handleSubmit,
-      }) => (
-        <form className="create-event-form" onSubmit={handleSubmit}>
-          <div>
-            <InputGroup name="name" error={touched.name && errors.name}>
-              <InputGroup.Label>Event Name</InputGroup.Label>
-              <InputGroup.Input
-                placeholder="Enter the event name"
-                value={values.name}
-                onChange={handleChange}
-              />
-            </InputGroup>
-            <InputGroup name="date" error={touched.date && errors.date}>
-              <InputGroup.Label>Date</InputGroup.Label>
-              {/* <InputGroup.Input
-                placeholder="DD/MM/YYYY"
+    <>
+      <Toaster containerStyle={{ fontFamily: "Montserrat" }} />
+      <Formik
+        initialValues={initialValues}
+        validationSchema={formSchema}
+        onSubmit={handleSubmit}
+      >
+        {({
+          values,
+          handleChange,
+          errors,
+          touched,
+          setFieldValue,
+          isValid,
+          dirty,
+          handleSubmit,
+        }) => (
+          <form className="create-event-form" onSubmit={handleSubmit}>
+            <div>
+              <InputGroup name="name" error={touched.name && errors.name}>
+                <InputGroup.Label>Event Name</InputGroup.Label>
+                <InputGroup.Input
+                  placeholder="Enter the event name"
+                  value={values.name}
+                  onChange={handleChange}
+                />
+              </InputGroup>
+              <InputGroup name="date" error={touched.date && errors.date}>
+                <InputGroup.Label>Date</InputGroup.Label>
+                {/* <InputGroup.Input
+                placeholder="DD/MM/YYYY"first
                 value={values.date}
                 onChange={(e) => setFieldValue(e.target.)}
                 type="date"
               /> */}
-              <InputGroup.Input
-                placeholder="DD/MM/YYYY"
-                value={values.date}
-                onChange={handleChange}
-              />
-            </InputGroup>
-            <div className="time-container">
-              <InputGroup name="start" error={touched.start && errors.start}>
-                <InputGroup.Label>Time</InputGroup.Label>
                 <InputGroup.Input
-                  placeholder="Start time"
-                  value={values.start}
+                  placeholder="DD/MM/YYYY"
+                  value={values.date}
                   onChange={handleChange}
-                  type="time"
                 />
               </InputGroup>
-              <InputGroup name="end" error={touched.end && errors.end}>
-                <InputGroup.Label style={{ opacity: 0 }}>Time</InputGroup.Label>
+              <div className="time-container">
+                <InputGroup name="start" error={touched.start && errors.start}>
+                  <InputGroup.Label>Time</InputGroup.Label>
+                  <InputGroup.Input
+                    placeholder="Start time"
+                    value={values.start}
+                    onChange={handleChange}
+                    type="time"
+                  />
+                </InputGroup>
+                <InputGroup name="end" error={touched.end && errors.end}>
+                  <InputGroup.Label style={{ opacity: 0 }}>
+                    Time
+                  </InputGroup.Label>
+                  <InputGroup.Input
+                    placeholder="End time"
+                    value={values.end}
+                    onChange={handleChange}
+                    type="time"
+                  />
+                </InputGroup>
+              </div>
+              <div className="location-container">
+                <InputGroup
+                  name="location"
+                  error={touched.location && errors.location}
+                >
+                  <InputGroup.Label>Location</InputGroup.Label>
+                  <InputGroup.TextArea
+                    placeholder="Location of the event"
+                    value={values.location}
+                    onChange={handleChange}
+                  />
+                </InputGroup>
+              </div>
+              <InputGroup name="media">
+                <InputGroup.Label>Image</InputGroup.Label>
                 <InputGroup.Input
-                  placeholder="End time"
-                  value={values.end}
-                  onChange={handleChange}
-                  type="time"
+                  placeholder={
+                    <div className="image-input-placeholder">
+                      <span>Click here to upload Image or Video</span>
+                      <HiOutlineDocumentArrowUp
+                        size={24}
+                        className="document-icon"
+                      />
+                    </div>
+                  }
+                  value={values.media}
+                  onChange={(e) =>
+                    setFieldValue("media", Array.from(e.target.files), true)
+                  }
+                  type="file"
                 />
               </InputGroup>
             </div>
-            <div className="location-container">
-              <InputGroup
-                name="location"
-                error={touched.location && errors.location}
-              >
-                <InputGroup.Label>Location</InputGroup.Label>
-                <InputGroup.TextArea
-                  placeholder="Location of the event"
-                  value={values.location}
-                  onChange={handleChange}
-                />
-              </InputGroup>
+            <div className="button-container">
+              <div>
+                <Button disabled={!isValid || !dirty} pending={isPending}>
+                  Save Event Details
+                </Button>
+              </div>
             </div>
-            <InputGroup name="media">
-              <InputGroup.Label>Image</InputGroup.Label>
-              <InputGroup.Input
-                placeholder={
-                  <div className="image-input-placeholder">
-                    <span>Click here to upload Image or Video</span>
-                    <HiOutlineDocumentArrowUp
-                      size={24}
-                      className="document-icon"
-                    />
-                  </div>
-                }
-                value={values.media}
-                onChange={(e) =>
-                  setFieldValue("media", Array.from(e.target.files), true)
-                }
-                type="file"
-              />
-            </InputGroup>
-          </div>
-          <div className="button-container">
-            <div>
-              <Button disabled={!isValid || !dirty} pending={isPending}>
-                Save Event Details
-              </Button>
-            </div>
-          </div>
-        </form>
-      )}
-    </Formik>
+          </form>
+        )}
+      </Formik>
+    </>
   );
 };
 
