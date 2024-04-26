@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "../api/axios";
 import { useEffect } from "react";
+import { queryClient } from "../react-query/react-query";
 
 export const useCreateEvent = () => {
   const { mutate, isPending, isSuccess, isError, error, data } = useMutation({
@@ -8,6 +9,7 @@ export const useCreateEvent = () => {
       const mediaFilesInfo = [];
 
       const { media, ...data } = values;
+
       await media.forEach(async (file) => {
         const formData = new FormData();
         formData.append("media", file);
@@ -16,17 +18,24 @@ export const useCreateEvent = () => {
             "Content-Type": "multipart/form-data",
           },
         });
+
         mediaFilesInfo.push(res.data);
       });
 
-      data.media = mediaFilesInfo;
+      data.media = [...mediaFilesInfo];
       console.log(data);
 
-      return axios.post("events", JSON.stringify(data), {
+      const res = await axios.post("events", JSON.stringify(data), {
         headers: {
           "Content-Type": "application/json",
         },
       });
+      console.log(res);
+
+      return res.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["events"] });
     },
   });
 
