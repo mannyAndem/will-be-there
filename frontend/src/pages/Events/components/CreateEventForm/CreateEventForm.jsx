@@ -1,63 +1,79 @@
-import { Formik } from "formik";
-import InputGroup from "../../../../ui/InputGroup/InputGroup";
-import "./create-event-form.scss";
-import { HiOutlineDocumentArrowUp } from "react-icons/hi2";
-import Button from "../../../../ui/Button/Button";
-import * as yup from "yup";
-import { useCreateEvent } from "../../../../hooks/events";
+import { Formik } from 'formik'
+import { HiOutlineDocumentArrowUp } from 'react-icons/hi2'
+import * as yup from 'yup'
+import axios from '../../../../api/axios'
+import Button from '../../../../ui/Button/Button'
+import InputGroup from '../../../../ui/InputGroup/InputGroup'
+import './create-event-form.scss'
 
 const CreateEventForm = () => {
-  const { create } = useCreateEvent();
+  // const { create } = useCreateEvent()
   const initialValues = {
-    name: "",
-    date: "",
-    start: "",
-    end: "",
-    location: "",
+    name: '',
+    date: '',
+    start: '',
+    end: '',
+    location: '',
     media: [],
-  };
+  }
 
   const formSchema = yup.object().shape({
-    name: yup.string().required("Event name is required"),
+    name: yup.string().required('Event name is required'),
     date: yup
       .string()
       .matches(
         /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/,
-        "Invalid date"
+        'Invalid date'
       ),
-    start: yup.string().required("Start time is required"),
-    end: yup.string().required("End time is required"),
-    location: yup.string().required("Location is required"),
-    media: yup
-      .array()
-      .of(yup.mixed())
-      .min(1, "You must add atleast one event image"),
-  });
+    start: yup.string().required('Start time is required'),
+    end: yup.string().required('End time is required'),
+    location: yup.string().required('Location is required'),
+    media: yup.array().of(yup.mixed()).min(1, 'You must add atleast one event image'),
+  })
 
-  const handleSubmit = (values) => {
-    const data = { ...values };
+  // const handleSubmit = (values) => {
+  //   const data = { ...values }
 
-    let startTime = new Date(
-      +data.date.split("/")[2],
-      +data.date.split("/")[1] - 1,
-      +data.date.split("/")[0],
-      +data.start.split(":")[0],
-      +data.start.split(":")[1]
-    );
+  //   let startTime = new Date(
+  //     +data.date.split('/')[2],
+  //     +data.date.split('/')[1] - 1,
+  //     +data.date.split('/')[0],
+  //     +data.start.split(':')[0],
+  //     +data.start.split(':')[1]
+  //   )
 
-    let endTime = new Date(
-      +data.date.split("/")[2],
-      +data.date.split("/")[1] - 1,
-      +data.date.split("/")[0],
-      +data.end.split(":")[0],
-      +data.end.split(":")[1]
-    );
+  //   let endTime = new Date(
+  //     +data.date.split('/')[2],
+  //     +data.date.split('/')[1] - 1,
+  //     +data.date.split('/')[0],
+  //     +data.end.split(':')[0],
+  //     +data.end.split(':')[1]
+  //   )
 
-    data.start = startTime.toISOString();
-    data.end = endTime.toISOString();
+  //   data.start = startTime.toISOString()
+  //   data.end = endTime.toISOString()
 
-    create(data);
-  };
+  //   create(data)
+  // }
+
+  const handleSubmit = async (values) => {
+    const formData = new FormData()
+    values.media.forEach((file) => {
+      formData.append('media', file)
+    })
+
+    const mediaRes = await axios.post('uploads/medias', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
+
+    if (mediaRes.data) {
+      const res = await axios.post('events', { ...values, media: mediaRes.data })
+
+      console.log(res.data)
+    }
+  }
 
   return (
     <Formik
@@ -88,7 +104,7 @@ const CreateEventForm = () => {
             <InputGroup name="date" error={touched.date && errors.date}>
               <InputGroup.Label>Date</InputGroup.Label>
               {/* <InputGroup.Input
-                placeholder="DD/MM/YYYY"
+                placeholder="DD/MM/YYYY"first
                 value={values.date}
                 onChange={handleChange}
                 type="date"
@@ -120,10 +136,7 @@ const CreateEventForm = () => {
               </InputGroup>
             </div>
             <div className="location-container">
-              <InputGroup
-                name="location"
-                error={touched.location && errors.location}
-              >
+              <InputGroup name="location" error={touched.location && errors.location}>
                 <InputGroup.Label>Location</InputGroup.Label>
                 <InputGroup.TextArea
                   placeholder="Location of the event"
@@ -138,16 +151,11 @@ const CreateEventForm = () => {
                 placeholder={
                   <div className="image-input-placeholder">
                     <span>Click here to upload Image or Video</span>
-                    <HiOutlineDocumentArrowUp
-                      size={24}
-                      className="document-icon"
-                    />
+                    <HiOutlineDocumentArrowUp size={24} className="document-icon" />
                   </div>
                 }
                 value={values.media}
-                onChange={(e) =>
-                  setFieldValue("media", Array.from(e.target.files), true)
-                }
+                onChange={(e) => setFieldValue('media', Array.from(e.target.files), true)}
                 type="file"
               />
             </InputGroup>
@@ -160,7 +168,7 @@ const CreateEventForm = () => {
         </form>
       )}
     </Formik>
-  );
-};
+  )
+}
 
-export default CreateEventForm;
+export default CreateEventForm
