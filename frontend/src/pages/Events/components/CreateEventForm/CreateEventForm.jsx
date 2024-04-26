@@ -9,7 +9,7 @@ import InputGroup from "../../../../ui/InputGroup/InputGroup";
 import "./create-event-form.scss";
 
 const CreateEventForm = () => {
-  const { create, isPending, isError, isSuccess } = useCreateEvent();
+  const { create, isPending, isError, isSuccess, error } = useCreateEvent();
   const initialValues = {
     name: "",
     date: "",
@@ -73,7 +73,7 @@ const CreateEventForm = () => {
       toast.success("Event created successfully");
     }
     if (isError) {
-      toast.error("Couldn't create your event");
+      toast.error(error.response?.data?.message ?? "Something went wrong");
     }
   }, [isSuccess, isError]);
 

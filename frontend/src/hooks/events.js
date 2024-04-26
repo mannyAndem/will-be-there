@@ -26,16 +26,7 @@ export const useCreateEvent = () => {
     },
   });
 
-  useEffect(() => {
-    if (isError) {
-      console.log(error);
-    }
-    if (isSuccess) {
-      console.log(data);
-    }
-  }, [isError, isSuccess]);
-
-  return { create: mutate, isPending, isSuccess, isError };
+  return { create: mutate, isPending, isSuccess, isError, error };
 };
 
 export const useGetEvents = () => {
