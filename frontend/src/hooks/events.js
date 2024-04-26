@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import axios from "../api/axios";
+import { queryClient } from "../react-query/react-query";
 
 export const useCreateEvent = () => {
   const { mutate, isPending, isSuccess, isError, error, data } = useMutation({
@@ -23,6 +24,9 @@ export const useCreateEvent = () => {
           "Content-Type": "application/json",
         },
       });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["events"] });
     },
   });
 

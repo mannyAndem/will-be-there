@@ -1,15 +1,17 @@
 import { useCreateEvent } from "../../../../hooks/events";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast, Toaster } from "react-hot-toast";
 import { Formik } from "formik";
-import { HiOutlineDocumentArrowUp } from "react-icons/hi2";
+import { HiOutlineDocumentArrowUp, HiPlus } from "react-icons/hi2";
 import * as yup from "yup";
 import Button from "../../../../ui/Button/Button";
 import InputGroup from "../../../../ui/InputGroup/InputGroup";
 import "./create-event-form.scss";
+import { HiXCircle } from "react-icons/hi2";
 
 const CreateEventForm = () => {
   const { create, isPending, isError, isSuccess, error } = useCreateEvent();
+
   const initialValues = {
     name: "",
     date: "",
@@ -17,7 +19,10 @@ const CreateEventForm = () => {
     end: "",
     location: "",
     media: [],
+    expectedGifts: [],
   };
+
+  const [giftValue, setGiftValue] = useState("");
 
   const formSchema = yup.object().shape({
     name: yup.string().required("Event name is required"),
@@ -34,6 +39,7 @@ const CreateEventForm = () => {
       .array()
       .of(yup.mixed())
       .min(1, "You must add atleast one event image"),
+    expectedGifts: yup.array().of(yup.string()).notRequired(),
   });
 
   const handleSubmit = (values) => {
@@ -172,6 +178,54 @@ const CreateEventForm = () => {
                   }
                   type="file"
                 />
+              </InputGroup>
+            </div>
+            <div>
+              <h3 className="gift-header">Gift Items (Optional)</h3>
+
+              <InputGroup name="gifts">
+                <InputGroup.Label>Gifts</InputGroup.Label>
+                <div className="add-gift-container">
+                  <InputGroup.Input
+                    placeholder="Include gifts"
+                    value={giftValue}
+                    onChange={(e) => setGiftValue(e.target.value)}
+                  />
+                  <button
+                    className="add-gift-button"
+                    type="button"
+                    onClick={() => {
+                      if (giftValue) {
+                        setFieldValue("expectedGifts", [
+                          ...values.expectedGifts,
+                          giftValue,
+                        ]);
+                        setGiftValue("");
+                      }
+                    }}
+                  >
+                    <HiPlus size={24} />
+                  </button>
+                </div>
+                <div className="gifts-list">
+                  {values.expectedGifts.map((gift, index) => (
+                    <div className="gift">
+                      <span>{gift}</span>
+                      <HiXCircle
+                        size={16}
+                        className="x-icon"
+                        onClick={() =>
+                          setFieldValue(
+                            "gifts",
+                            values.expectedGifts.filter((_, i) =>
+                              i == index ? false : true
+                            )
+                          )
+                        }
+                      />
+                    </div>
+                  ))}
+                </div>
               </InputGroup>
             </div>
             <div className="button-container">
