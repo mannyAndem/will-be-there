@@ -1,56 +1,51 @@
-import defaultAxios from "axios";
-import { queryClient } from "../react-query/react-query";
+import defaultAxios from 'axios'
 
 const axios = defaultAxios.create({
   baseURL: import.meta.env.VITE_BACKEND_URL,
-});
+})
 
 axios.interceptors.request.use(async (config) => {
-  const token = localStorage.getItem("access_token");
+  const token = localStorage.getItem('access_token')
 
   if (token) {
-    config.headers.setAuthorization(`Bearer ${token}`);
+    config.headers.setAuthorization(`Bearer ${token}`)
   }
 
-  return config;
-});
+  return config
+})
 
 axios.interceptors.response.use(
   (response) => response,
   async (error) => {
-    const initialRequest = error.config;
-    const refresh_token = localStorage.getItem("refresh_token");
+    const initialRequest = error.config
+    const refresh_token = localStorage.getItem('refresh_token')
 
-    if (
-      error.response?.status === 401 &&
-      !initialRequest._retry &&
-      refresh_token
-    ) {
-      initialRequest._retry = true;
-      const data = { refresh_token };
+    if (error.response?.status === 401 && !initialRequest._retry && refresh_token) {
+      initialRequest._retry = true
+      const data = { refresh_token }
       try {
-        const res = await axios.post("auth/refresh", JSON.stringify(data), {
+        const res = await axios.post('auth/refresh', JSON.stringify(data), {
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
-        });
+        })
 
-        console.log(res);
-        const access_token = res.data.token.access_token;
-        localStorage.setItem("access_token", access_token);
-        initialRequest.headers.setAuthorization(`Bearer ${access_token}`);
+        console.log(res)
+        const access_token = res.data.token.access_token
+        localStorage.setItem('access_token', access_token)
+        initialRequest.headers.setAuthorization(`Bearer ${access_token}`)
 
-        return axios(initialRequest);
+        return axios(initialRequest)
       } catch (err) {
-        localStorage.removeItem("access_token");
-        localStorage.removeItem("refresh_token");
-        localStorage.removeItem("user");
-        return Promise.reject(error);
+        localStorage.removeItem('access_token')
+        localStorage.removeItem('refresh_token')
+        localStorage.removeItem('user')
+        return Promise.reject(error)
       }
     }
 
-    return Promise.reject(error);
+    return Promise.reject(error)
   }
-);
+)
 
-export default axios;
+export default axios

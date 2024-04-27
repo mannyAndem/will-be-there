@@ -18,7 +18,7 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { AuthGuard } from 'src/guards/auth.guard';
+import { AuthGuard } from 'src/modules/auth/guards/auth.guard';
 import { RequestInterfaceWithUser } from 'src/utils/requestInterface';
 import { CreateEventDto, RSVPDto, UpdateEventDto } from './eventDto';
 import { EventsService } from './events.service';
@@ -78,8 +78,6 @@ export class EventsController {
 
   @Patch(':id')
   @ApiOperation({ summary: 'Update event' })
-  @UseGuards(AuthGuard)
-  @ApiBearerAuth()
   @ApiCreatedResponse({
     description: 'Event updated',
     type: UpdateEventDto,
