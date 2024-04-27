@@ -68,7 +68,9 @@ const Tracker = () => {
               <GuestLists />
             </>
           ) : (
-            <span>Select an event to track.</span>
+            <span className="not-selected">
+              Select an event to view guest list
+            </span>
           )}
         </>
       ) : isPending ? (

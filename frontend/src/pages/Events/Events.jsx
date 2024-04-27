@@ -12,22 +12,33 @@ import Tab from "./Tab/Tab";
 import TemplateCard from "./components/TemplateCard/TemplateCard";
 import templateExampleImg from "../../assets/images/rsvp-image-example.jpg";
 import { useGetEvents } from "../../hooks/events";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Loader from "../../ui/Loader/Loader";
 import ErrorMessage from "../../ui/ErrorMessage/ErrorMessage";
+import { useSearchParams } from "react-router-dom";
 
 const Events = () => {
-  const { data, isSuccess, isError, isPending, error } = useGetEvents();
+  const { data: events, isSuccess, isError, isPending, error } = useGetEvents();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [event, setEvent] = useState(null);
 
   useEffect(() => {
     if (isSuccess) {
-      console.log(data);
+      console.log(events);
+
+      const id = searchParams.get("event");
+
+      if (id) {
+        const event = events.find((event) => event.id == id);
+        console.log(event);
+        setEvent(event);
+      }
     }
 
     if (isError) {
       console.log(error);
     }
-  }, [isSuccess, isError, data]);
+  }, [isSuccess, isError, events, searchParams]);
 
   return (
     <div className="events-container">
@@ -38,7 +49,7 @@ const Events = () => {
         {isSuccess ? (
           <>
             <div className="events-list">
-              {data.map((event) => (
+              {events.map((event) => (
                 <EventCard event={event} />
               ))}
               <CreateEventButton />
@@ -55,7 +66,7 @@ const Events = () => {
                   </Button>
                 </div>
               </div>
-              <CreateEventForm />
+              <CreateEventForm event={event} />
             </section>
             <section className="create-template-section">
               <div className="section-header">

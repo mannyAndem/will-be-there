@@ -10,21 +10,24 @@ import "./create-event-form.scss";
 import { HiXCircle } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
 
-const CreateEventForm = () => {
+const CreateEventForm = ({ event }) => {
   const { create, isPending, isError, isSuccess, error, data } =
     useCreateEvent();
   const navigate = useNavigate();
 
+  console.log(event);
+
   const initialValues = {
-    name: "",
-    date: "",
-    start: "",
-    end: "",
-    location: "",
+    name: event?.name ?? "",
+    date: event?.date ?? "",
+    start: event?.start ?? "",
+    end: event?.end ?? "",
+    location: event?.location ?? "",
     media: [],
-    expectedGifts: [],
+    expectedGifts: event?.expectedGifts ?? [],
   };
 
+  console.log(initialValues);
   const [giftValue, setGiftValue] = useState("");
 
   const formSchema = yup.object().shape({
@@ -97,6 +100,7 @@ const CreateEventForm = () => {
         initialValues={initialValues}
         validationSchema={formSchema}
         onSubmit={handleSubmit}
+        enableReinitialize
       >
         {({
           values,

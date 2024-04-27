@@ -1,9 +1,5 @@
 import Header from "../../ui/Header/Header";
 import "./rsvp.scss";
-import { LuPenLine } from "react-icons/lu";
-import Button from "../../ui/Button/Button";
-import mockEventImg from "../../assets/images/event-image.png";
-import EventCard from "./components/EventCard/EventCard";
 import Banner from "./components/Banner/Banner";
 import RsvpForm from "./components/RsvpForm/RsvpForm";
 import { useSearchParams } from "react-router-dom";
