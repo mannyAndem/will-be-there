@@ -138,9 +138,8 @@ const RsvpForm = ({ event }) => {
               </div>
               <InputGroup name="registry">
                 <InputGroup.Label>Registry</InputGroup.Label>
-                <Select
-                  onChange={(e) => setFieldValue("registry", e.target.value)}
-                >
+                <Select name="registry" onChange={handleChange}>
+                  <option value="">Choose gift</option>
                   {event.expectedGifts.map((gift) => (
                     <option value={gift}>{gift}</option>
                   ))}

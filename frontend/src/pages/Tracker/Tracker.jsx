@@ -30,6 +30,7 @@ const Tracker = () => {
     if (isSuccess) {
       const id = searchParams.get("event");
       const event = events.find((event) => event.id == id);
+      console.log(event);
       setEvent(event);
     }
   }, [isSuccess, searchParams]);
@@ -64,8 +65,14 @@ const Tracker = () => {
                   </Button>
                 </div>
               </div>
-
-              <GuestLists />
+              {event.rsvps.length === 0 ? (
+                <div className="no-guests">
+                  No guests have RSVP'd yet. Share your event link so guests can
+                  reserve an invite!
+                </div>
+              ) : (
+                <GuestLists guests={event.rsvps} />
+              )}
             </>
           ) : (
             <span className="not-selected">

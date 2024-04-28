@@ -6,9 +6,12 @@ import { useSearchParams } from "react-router-dom";
 import { useGetEvent } from "../../hooks/events";
 import Loader from "../../ui/Loader/Loader";
 import { useEffect } from "react";
+import LoginPopup from "./components/LoginPopup/LoginPopup";
+import { useAuthContext } from "../../contexts/AuthContext";
 
 const Rsvp = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const { user } = useAuthContext();
 
   const {
     data: event,
@@ -26,6 +29,7 @@ const Rsvp = () => {
       <div className="header-container">
         <Header />
       </div>
+      <LoginPopup isLoggedIn={!!user} />
       {/* <div className="previous-events-header">
         <h2>Previous Events</h2>
       </div> */}

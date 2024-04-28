@@ -24,7 +24,7 @@ const ShareEventModal = ({ isOpen, close, event }) => {
     window.open(
       `https://mail.google.com/mail/?view=cm&fs=1su=RSVP%FOR%${event.name.toUpperCase()}&body=${
         import.meta.env.VITE_FRONTEND_URL
-      }/rsvp?event=${event.id}`,
+      }\/rsvp\?event=${event.id}`,
       "_blank"
     );
   };
