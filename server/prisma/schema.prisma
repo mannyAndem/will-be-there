@@ -56,11 +56,12 @@ model rsvp {
   id          String      @id() @default(uuid())
   eventId     String
   guestNames  String[]
-  email       String      @unique
+  email       String
   name        String
   notes       String?
   registry    String[]
   userId      String?
+  rsvpStatus  RsvpStatus  @default(attending)
 
   event       Event       @relation(fields: [eventId], references: [id], onDelete: Cascade)
   user        User?       @relation(fields: [userId], references: [id], onDelete: SetNull)
@@ -71,3 +72,8 @@ enum OAuth_enum {
   google
 }
 
+enum RsvpStatus {
+  attending
+  notAttending
+  unsure
+}
