@@ -91,3 +91,17 @@
         width: 100%;
     }
 }
+
+@media (max-width:426px) {
+    .albumContainer{
+        .mask{
+            height: fit-content;
+            &>h2{
+                font-size: 30px;
+            }
+            &>p{
+                font-size: 14px;
+            }
+        }
+    }
+}

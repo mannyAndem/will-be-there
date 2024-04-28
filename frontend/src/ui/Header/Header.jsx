@@ -7,15 +7,41 @@ import { useAuthContext } from "../../contexts/AuthContext";
 
 const Header = () => {
   const { user } = useAuthContext();
-
   console.log(user);
+  const mobileMenu = () => {
+    let menu = document.querySelector(".desktop");
+    let close = document.querySelector(".menu");
+       if (menu.style.display === "flex") {
+      menu.style.display = "none";
+      close.classList.remove('active')
+    } else {
+      menu.style.display = "flex";
+      close.classList.add('active')
+
+    }
+  }
+
 
   return (
     <header className="header">
       <Link to="/" className="brand">
         WILL.BE.THERE
       </Link>
-      <Navbar />
+      <div className="menu" onClick={mobileMenu}>
+        <div className="lines">
+
+        </div>
+
+        <div className="lines">
+          
+          </div>
+
+          <div className="lines">
+          
+          </div>
+      </div>
+   <div className="desktop">  
+   <Navbar />
       {!user ? (
         <div>
           <Link to="/login">
@@ -30,6 +56,7 @@ const Header = () => {
           <div className="profile-image">{user.name[0].toUpperCase()}</div>
         </div>
       )}
+      </div>
     </header>
   );
 };

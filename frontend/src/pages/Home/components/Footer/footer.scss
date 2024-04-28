@@ -45,3 +45,24 @@ footer{
 
     }
 }
+
+
+@media (max-width:426px) {
+    footer{
+        padding: 10px 0;
+        height: fit-content;
+        &>.footerContents{
+         flex-direction: column;
+         gap: 20px;
+         .company{
+            h1{
+                font-size: 30px;
+            }
+            h3{
+                font-size: 12px;
+                opacity: .9;
+            }
+         }
+        }
+    }
+}

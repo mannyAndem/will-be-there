@@ -1,5 +1,4 @@
 import React from 'react';
-// import ContentCard from './ContentCard';
 import ContentCard from './ContentCard';
 import "./cardstyle.scss"
 import Pana from "../../../../assets/images/pana-2.png"

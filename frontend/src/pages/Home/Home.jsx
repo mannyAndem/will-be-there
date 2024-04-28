@@ -36,8 +36,11 @@ const Home = () => {
           </Link>
 
           <Link to={"/events"}>
-            <HomePageButton className="create">
-              Create your own events now
+            <HomePageButton className="create-d">
+              Create Event Your Events Now
+            </HomePageButton>
+            <HomePageButton className="create-m">
+              Create Event
             </HomePageButton>
           </Link>
         </div>
