@@ -9,10 +9,10 @@
     padding: 1rem 1.5rem;
     font-size: 1rem;
     font-weight: 600;
-    border-radius: 0.25rem;
+    border-radius: 12px;
     transition: all 0.2s ease-in-out;
   
-    &.more,&.create {
+    &.more,&.create,&.create-d, &.create-m{
       background-color: $green;
       color: #ffffff;
   
@@ -21,5 +21,25 @@
         color: $green;
       }
     }
+    &.create-m{
+      display: none;
+    }
   
+  }
+
+  @media (max-width:426px) {
+    .homeButton{
+      width: 170px;
+      padding: 15px 20px;
+      font-weight: 400;
+      font-size: .9rem;
+      &.create-d{
+        display: none;
+      }
+      &.create-m{
+        display: block;
+      }
+    }
+
+   
   }

@@ -6,7 +6,7 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { AuthGuard } from 'src/guards/auth.guard';
+import { AuthGuard } from 'src/modules/auth/guards/auth.guard';
 import { RequestInterfaceWithUser } from 'src/utils/requestInterface';
 import { AuthService } from './auth.service';
 import {
@@ -130,5 +130,25 @@ export class AuthController {
   @ApiResponse({ status: 404, description: 'User not found' })
   changePasswordHandler(@Body() data: ChangePasswordDto) {
     return this.authService.changePassword(data);
+  }
+
+  @Post('google')
+  @ApiOperation({ summary: 'Google Login' })
+  @ApiOkResponse({
+    schema: {
+      example: {
+        status: 'success',
+        user: {},
+        token: {
+          access_token: 'string',
+          refresh_token: 'string',
+        },
+      },
+    },
+  })
+  @ApiResponse({ status: 200, description: 'Successful login' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  async googleAuth(@Body() data: { code: string }) {
+    return this.authService.googleLogin(data.code);
   }
 }

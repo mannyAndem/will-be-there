@@ -95,7 +95,10 @@ export class EventsService {
   }
 
   async getEvent(id: string) {
-    const event = await this.prisma.event.findFirst({ where: { id } });
+    const event = await this.prisma.event.findFirst({
+      where: { id },
+      include: { media: true },
+    });
 
     if (!event) throw new BadRequestException('Event not found');
 

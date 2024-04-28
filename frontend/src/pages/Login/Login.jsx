@@ -1,14 +1,14 @@
-import { Toaster } from "react-hot-toast";
-import { Link } from "react-router-dom";
-import slogan from "../../assets/images/title.svg";
-import GoogleSignupButton from "../../shared-components/GoogleSignupButton/GoogleSignupButton";
-import LoginForm from "./components/LoginForm/LoginForm";
-import "./login.scss";
-import loginHero from "/amico.png";
+import { Link } from 'react-router-dom'
+import slogan from '../../assets/images/title.svg'
+import GoogleSignupButton from '../../shared-components/GoogleSignupButton/GoogleSignupButton'
+import LoginForm from './components/LoginForm/LoginForm'
+import './login.scss'
+import loginHero from '/amico.png'
 
 const Login = () => {
   return (
-    <div className="container">
+
+   <div className="container">
       <div>
         <div className="brand-container">
           <img src={slogan} />
@@ -24,11 +24,9 @@ const Login = () => {
       <div>
         <div className="login-header">
           <h1>Sign In</h1>
-          <p>
-            Streamline Your Event Experience: RSVP Easily and Seamlessly Today
-          </p>
+          <p>Streamline Your Event Experience: RSVP Easily and Seamlessly Today</p>
         </div>
-        {/* <GoogleSignupButton type="login" /> */}
+        <GoogleSignupButton type="login" />
         <div className="or-container">
           <hr />
           <span>Or</span>
@@ -37,12 +35,12 @@ const Login = () => {
         <div className="form-container">{<LoginForm />}</div>
         <div className="link-container">
           <span>
-            Already have an account, <Link to="/signup">Sign up</Link>
+            Don't have an account, <Link to="/signup">Sign up</Link>
           </span>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login

@@ -5,6 +5,7 @@
   grid-template-columns: 1fr 1fr;
   min-height: 100vh;
 
+
   & > div:first-child {
     height: 100%;
     padding-right: 6rem;
@@ -106,6 +107,61 @@
 
       a {
         color: $green;
+      }
+    }
+  }
+}
+
+
+@media (max-width:426px) {
+  .container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    &>div:first-child{
+      width: 100%;
+      padding: 0;
+      .brand-container{
+        padding: 3rem;
+        border-radius: 0;
+        img{
+          width: 10rem;
+        }
+        p{
+          font-size: 1rem;
+        }
+      }
+     .img-container{
+      display: none;
+     }
+     
+    }
+    &>div:last-child{
+      width: 100%;
+      .login-header{
+        text-align: center;
+        h1{
+          text-align: left;
+          font-size: 2rem;
+        }
+        P{
+          font-size: 1rem;
+        }
+
+        .signup-with-google{
+          font-size: 1rem;
+          padding-block: 1rem;
+        }
+       
+      }
+      .or-container{
+        span{
+          font-size: 1rem;
+        }
+      }
+
+      .link-container{
+        font-size: 1rem;
       }
     }
   }

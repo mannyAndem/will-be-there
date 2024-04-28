@@ -91,3 +91,23 @@
     transform: none;
     width: 90%; margin: 0 auto;
 }
+
+
+@media (max-width:426px) {
+    .slider-container{
+        h2{
+            font-size: 20px;
+            width: 80%;
+        }
+    }
+
+    .reviews{
+        width: 80% !important;
+        &>.testimonial{
+            width: 200px;
+            padding: 0 20px;
+            font-size: 12px;
+            
+        }
+    }
+}

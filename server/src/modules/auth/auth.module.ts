@@ -11,7 +11,7 @@ import { AuthService } from './auth.service';
   providers: [AuthService, PrismaService],
   controllers: [AuthController],
   imports: [
-    PassportModule.register({ session: true }),
+    PassportModule.register({ session: false }),
     JwtModule.registerAsync({
       useFactory: (configService: ConfigService) => ({
         secret: configService.get<string>('JWT_SECRET'),

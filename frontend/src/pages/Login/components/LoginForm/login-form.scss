@@ -21,3 +21,15 @@ form {
     align-self: center;
   }
 }
+
+
+@media(max-width:426px){
+  form{
+    .forgot-pass{
+      margin-top: 10px;
+      font-size: 1rem;
+    }
+
+    
+  }
+}

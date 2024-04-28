@@ -5,6 +5,7 @@ import {
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
+import { OAuth2Client } from 'google-auth-library';
 import { comparePassword, hashPassword } from 'src/utils/password';
 import { RequestInterfaceWithUser } from 'src/utils/requestInterface';
 import { PrismaService } from '../../prisma.service';
@@ -18,6 +19,12 @@ import {
 
 @Injectable()
 export class AuthService {
+  oAuth2Client = new OAuth2Client(
+    process.env.GOOGLE_CLIENT_ID,
+    process.env.GOOGLE_CLIENT_SECRET,
+    'postmessage',
+  );
+
   constructor(
     private prisma: PrismaService,
     private readonly jwtService: JwtService,
@@ -181,6 +188,50 @@ export class AuthService {
       status: 'success',
       message: 'Password successfully updated. Please login again',
     };
+  }
+
+  async googleLogin(code: string) {
+    const { tokens, res } = await this.oAuth2Client.getToken(code);
+
+    console.log(res);
+
+    if (!tokens) {
+      throw new BadRequestException('Google login failed');
+    }
+
+    return;
+
+    // const profile = await this.oAuth2Client.getTokenInfo(tokens.access_token);
+
+    // if (!profile) {
+    //   throw new BadRequestException('Google login failed');
+    // }
+
+    // let user = await this.prisma.user.findUnique({
+    //   where: {
+    //     email: profile.email,
+    //     provider: 'google',
+    //   },
+    // });
+
+    // if (!user) {
+    //   user = await this.prisma.user.create({
+    //     data: {
+    //       email: profile.email,
+    //       name: profile.name,
+    //       provider: 'google',
+    //     },
+    //   });
+    // }
+
+    // return {
+    //   status: 'success',
+    //   user,
+    //   token: {
+    //     access_token: tokens.access_token,
+    //     refresh_token: tokens.refresh_token,
+    //   },
+    // };
   }
 
   generateAccessToken(payload: any): string {
