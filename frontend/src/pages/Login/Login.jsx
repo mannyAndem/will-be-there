@@ -7,7 +7,8 @@ import loginHero from '/amico.png'
 
 const Login = () => {
   return (
-    <div className="container">
+
+   <div className="container">
       <div>
         <div className="brand-container">
           <img src={slogan} />
@@ -34,7 +35,7 @@ const Login = () => {
         <div className="form-container">{<LoginForm />}</div>
         <div className="link-container">
           <span>
-            Already have an account, <Link to="/signup">Sign up</Link>
+            Don't have an account, <Link to="/signup">Sign up</Link>
           </span>
         </div>
       </div>
