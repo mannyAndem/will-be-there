@@ -41,17 +41,27 @@ export class EventsService {
   }
 
   async createRsvp(data: RSVPDto, eventId: string) {
+    // check if user exists
     const user = await this.prisma.user.findUnique({
       where: { email: data.email },
     });
 
+    // check if rsvp exists
+    const existingRsvp = await this.prisma.rsvp.findMany({
+      where: {
+        AND: [{ email: data.email }, { eventId: eventId }],
+      },
+    });
+
     let rsvp;
 
-    if (!user) {
-      rsvp = await this.prisma.rsvp.create({
+    if (existingRsvp && existingRsvp.length > 0) {
+      rsvp = await this.prisma.rsvp.update({
+        where: {
+          id: existingRsvp[0].id,
+        },
         data: {
           ...data,
-          event: { connect: { id: eventId } },
         },
       });
     } else {
