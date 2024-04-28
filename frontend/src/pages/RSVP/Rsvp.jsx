@@ -34,7 +34,7 @@ const Rsvp = () => {
       </div> */}
       {isSuccess ? (
         <section className="rsvp-form-section">
-          <Banner img={event.media?.[0]} />
+          <Banner img={event.media?.[0]?.imageUrl} />
           <div className="rsvp-form-container">
             <RsvpForm event={event} />
           </div>
