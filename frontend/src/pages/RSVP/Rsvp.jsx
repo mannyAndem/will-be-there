@@ -34,9 +34,9 @@ const Rsvp = () => {
       </div> */}
       {isSuccess ? (
         <section className="rsvp-form-section">
-          <Banner img={event.media} />
+          <Banner img={event.media?.[0]} />
           <div className="rsvp-form-container">
-            <RsvpForm />
+            <RsvpForm event={event} />
           </div>
         </section>
       ) : isPending ? (

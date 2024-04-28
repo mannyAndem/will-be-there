@@ -8,8 +8,6 @@ import { useAuthContext } from "../../contexts/AuthContext";
 const Header = () => {
   const { user } = useAuthContext();
 
-  console.log(user);
-
   return (
     <header className="header">
       <Link to="/" className="brand">

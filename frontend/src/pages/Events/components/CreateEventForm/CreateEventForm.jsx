@@ -1,4 +1,4 @@
-import { useCreateEvent } from "../../../../hooks/events";
+import { useCreateEvent, usePatchEvent } from "../../../../hooks/events";
 import { useEffect, useRef, useState } from "react";
 import { toast, Toaster } from "react-hot-toast";
 import { Formik } from "formik";
@@ -11,23 +11,35 @@ import { HiXCircle } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
 
 const CreateEventForm = ({ event }) => {
-  const { create, isPending, isError, isSuccess, error, data } =
-    useCreateEvent();
+  const {
+    create,
+    isPending: isCreatePending,
+    isError: isCreateError,
+    isSuccess: isCreateSuccess,
+    error: createError,
+    data,
+  } = useCreateEvent();
+  const {
+    patch,
+    isPending: isPatchPending,
+    isError: isPatchError,
+    isSuccess: isPatchSuccess,
+    error: patchError,
+  } = usePatchEvent();
   const navigate = useNavigate();
 
   console.log(event);
 
   const initialValues = {
     name: event?.name ?? "",
-    date: event?.date ?? "",
-    start: event?.start ?? "",
-    end: event?.end ?? "",
+    date: event?.date.split("T")[0].split("-").reverse().join("/") ?? "",
+    start: event?.start.split("T")[1].split(":").splice(0, 2).join(":") ?? "",
+    end: event?.end.split("T")[1].split(":").splice(0, 2).join(":") ?? "",
     location: event?.location ?? "",
-    media: [],
-    expectedGifts: event?.expectedGifts ?? [],
+    media: event?.media ?? [],
+    expectedGifts: event ? [...event.expectedGifts] : [],
   };
 
-  console.log(initialValues);
   const [giftValue, setGiftValue] = useState("");
 
   const formSchema = yup.object().shape({
@@ -77,21 +89,34 @@ const CreateEventForm = ({ event }) => {
     data.end = endTime.toISOString();
     data.date = date.toISOString();
 
-    create(data);
+    if (event) {
+      patch({ values: data, eventId: event.id });
+    } else {
+      create(data);
+    }
   };
 
   useEffect(() => {
-    if (isSuccess) {
+    if (isCreateSuccess) {
       toast.success("Event created successfully");
-      console.log(data);
       setTimeout(() => {
         navigate(`/tracker?event=${data.id}`);
       }, 1000);
     }
-    if (isError) {
+    if (isCreateError) {
       toast.error(error.response?.data?.message ?? "Something went wrong");
     }
-  }, [isSuccess, isError]);
+  }, [isCreateSuccess, isCreateError]);
+
+  useEffect(() => {
+    if (isPatchSuccess) {
+      toast.success("Event updated successfully");
+    }
+    if (isPatchError) {
+      toast.error(patchError.response?.data?.message ?? "Something went wrong");
+      console.error(patchError);
+    }
+  }, [isPatchSuccess, isPatchError]);
 
   return (
     <>
@@ -220,19 +245,19 @@ const CreateEventForm = ({ event }) => {
                 </div>
                 <div className="gifts-list">
                   {values.expectedGifts.map((gift, index) => (
-                    <div className="gift">
+                    <div className="gift" key={index}>
                       <span>{gift}</span>
                       <HiXCircle
                         size={16}
                         className="x-icon"
-                        onClick={() =>
+                        onClick={() => {
                           setFieldValue(
-                            "gifts",
+                            "expectedGifts",
                             values.expectedGifts.filter((_, i) =>
                               i == index ? false : true
                             )
-                          )
-                        }
+                          );
+                        }}
                       />
                     </div>
                   ))}
@@ -241,7 +266,10 @@ const CreateEventForm = ({ event }) => {
             </div>
             <div className="button-container">
               <div>
-                <Button disabled={!isValid || !dirty} pending={isPending}>
+                <Button
+                  disabled={!isValid || !dirty}
+                  pending={isPatchPending || isCreatePending}
+                >
                   Save Event Details
                 </Button>
               </div>
