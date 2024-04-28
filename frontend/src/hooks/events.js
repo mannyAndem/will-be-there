@@ -2,7 +2,6 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import axios from "../api/axios";
 import { queryClient } from "../react-query/react-query";
-import { dark } from "@mui/material/styles/createPalette";
 
 export const useCreateEvent = () => {
   const { mutate, isPending, isSuccess, isError, error, data } = useMutation({
@@ -20,7 +19,7 @@ export const useCreateEvent = () => {
       data.media = mediaRes.data;
       console.log(data);
 
-      const res = await axios.post("events", data, {
+      const res = await axios.post("events", JSON.stringify(data), {
         headers: {
           "Content-Type": "application/json",
         },
@@ -33,16 +32,46 @@ export const useCreateEvent = () => {
     },
   });
 
-  useEffect(() => {
-    if (isError) {
-      console.error(error);
-    }
-    if (isSuccess) {
-      console.log(data);
-    }
-  }, [isError, isSuccess]);
-
   return { create: mutate, isPending, isSuccess, isError, error, data };
+};
+
+export const usePatchEvent = () => {
+  const { mutate, isPending, isSuccess, isError, error, data } = useMutation({
+    mutationFn: async ({ values, eventId }) => {
+      const { media, ...data } = values;
+      let mediaRes = null;
+
+      const formData = new FormData();
+      media.forEach((file) => formData.append("media", file));
+
+      if (media[0] instanceof File) {
+        console.log("is file.");
+        mediaRes = await axios.post("uploads/medias", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+
+        data.media = mediaRes.data;
+      } else {
+        console.log("isn't file");
+        data.media = media;
+      }
+
+      const res = axios.patch(`events/${eventId}`, JSON.stringify(data), {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      return res.data.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["events"] });
+    },
+  });
+
+  return { patch: mutate, isPending, isSuccess, isError, error, data };
 };
 
 export const useGetEvents = () => {
@@ -67,4 +96,20 @@ export const useGetEvent = (id) => {
   });
 
   return { isSuccess, isError, isPending, data, error };
+};
+
+export const useCreateRsvp = () => {
+  const { isSuccess, isPending, isError, error, data, mutate } = useMutation({
+    mutationFn: async ({ eventId, data }) => {
+      const res = await axios.post(`events/${eventId}`, JSON.stringify(data), {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      return res.data.data;
+    },
+  });
+
+  return { create: mutate, isSuccess, isPending, isError, error, data };
 };

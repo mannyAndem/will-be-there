@@ -27,3 +27,18 @@
     }
    }
 }
+
+@media (max-width:426px) {
+    .companyNav{
+        h1{
+            font-size: 20px;
+        }
+
+        .linksContainer{
+            gap: 10px;
+            .links{
+                font-size: 12px;
+            }
+        }
+    }
+}

@@ -1,0 +1,26 @@
+@import "../../style/variables";
+
+.select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding: 20px 16px;
+  background-color: $gray;
+  border-radius: 12px;
+  font-family: "Montserrat";
+  font-size: 1.25rem;
+  border: none;
+  width: 100%;
+  color: $dark;
+  position: relative;
+  background-position: right 20px center;
+  background-repeat: no-repeat;
+
+  &:focus {
+    outline: 1px solid $green;
+  }
+
+  &[aria-invalid="true"] {
+    background-color: $veryLightRed;
+    outline-color: $error;
+  }
+}

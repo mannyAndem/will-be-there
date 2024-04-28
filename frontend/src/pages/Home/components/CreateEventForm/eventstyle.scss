@@ -112,3 +112,48 @@
     font-size: 12px;
     font-weight: normal;
 }
+
+
+
+@media (max-width:426px) {
+    .formBody{
+        .formEvent{
+            gap: 5px;
+
+            &>.eventForm{
+                &>label{
+                    font-size: 5.9px;
+                }
+            }
+            input[type="text"],
+            input[type="date"],
+            input[type="time"]{
+                font-size: 7.4px;
+            }
+            >.file,>.location{
+            
+                right: 200px;
+                top: -40px;
+                width: 150px;
+                border-radius: 6.3px;
+                &>label{
+                    font-size: 9.4px;
+                }
+            }
+
+            >.location{
+                left: 60px;
+                top: 170px;
+
+                label{
+                    padding: 10px;
+                    gap: 10px;
+                    img{
+                        width: 15px;
+                        height: 15px;
+                    }
+                }
+            }
+        }
+    }
+}

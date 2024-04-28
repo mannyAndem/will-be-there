@@ -3,5 +3,11 @@
     margin: 0 auto 30px;
     display: flex;
     justify-content: space-between;
-
+}
+@media (max-width:426px) {
+    .mainContainer{
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
 }

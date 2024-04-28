@@ -4,3 +4,10 @@
     margin: 0 auto 40px;
     justify-content: space-between;
 }
+@media (max-width:426px) {
+    .mainAlbumContainer{
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+    }
+}

@@ -19,3 +19,10 @@
     cursor: default;
   }
 }
+
+
+@media (max-width:426px) {
+  .signup-with-google{
+    font-size: 1rem !important;
+  }
+}

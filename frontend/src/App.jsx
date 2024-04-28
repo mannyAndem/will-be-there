@@ -30,7 +30,14 @@ function App() {
             </ProtectedRoute>
           }
         />
-        <Route path="/rsvp" element={<Rsvp />} />
+        <Route
+          path="/rsvp"
+          element={
+            <ProtectedRoute>
+              <Rsvp />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </div>
   );

@@ -10,6 +10,29 @@
     .guest-info-container {
       display: flex;
       gap: 24px;
+
+      .guest-input-container {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+
+        .info {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+          font-size: 12px;
+          font-family: "Montserrat";
+          margin-top: 4px;
+
+          span {
+            font-size: inherit;
+          }
+
+          .icon {
+            color: #fcae1e;
+          }
+        }
+      }
     }
     .note-container {
       grid-row: span 2;

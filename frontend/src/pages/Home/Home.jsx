@@ -12,6 +12,13 @@ import Reviews from "./components/CustomerRevs/CustomerReviews";
 import Footer from "./components/Footer/Footer";
 
 const Home = () => {
+  const guest_and_organizers=()=>{
+    const guest = document.querySelector(".guest");
+    const guestSection= document.querySelector(".guestSection")
+    const organizer=document.querySelector(".organizer");
+    const organizerSection=document.getElementById("organizer");
+    // TO work on this later
+  }
   return (
     <div className="home">
       <div className="main_body">
@@ -36,8 +43,11 @@ const Home = () => {
           </Link>
 
           <Link to={"/events"}>
-            <HomePageButton className="create">
-              Create your own events now
+            <HomePageButton className="create-d">
+              Create Event Your Events Now
+            </HomePageButton>
+            <HomePageButton className="create-m">
+              Create Event
             </HomePageButton>
           </Link>
         </div>
@@ -54,7 +64,7 @@ const Home = () => {
           <div className="guest">Guest</div>
         </div>
 
-        <div className="organizerSection">
+        <div className="organizerSection" id="organizers">
           <div className="heading">Create Your Perfect Event Effortlessly</div>
           <div className="details">
             Our event creation feature empowers you to design and customize your
@@ -74,6 +84,27 @@ const Home = () => {
             <div className="blobRight bottom"></div>
           </div>
         </div>
+
+        <div className="guestSection">
+          <div className="heading">Create Your Perfect Event Effortlessly</div>
+          <div className="details">
+            Our event creation feature empowers you to design and customize your
+            ideal event with ease and precision. <span>WILL.BE.THERE</span> puts
+            you in control, allowing you to tailor every aspect to your unique
+            vision.
+          </div>
+
+          <div className="organizerFormLayout">
+            <div className="blobLeft top"></div>
+
+            <div className="form">
+              <img src={formPicture} alt="A glass and roses on a table" />
+              <EventForm />
+            </div>
+
+            <div className="blobRight bottom"></div>
+          </div>
+        </div>  
       </div>
 
       <Card />
