@@ -233,6 +233,16 @@ export class AuthService {
     return {
       status: 'success',
       user,
+      token: {
+        access_token: this.generateAccessToken({
+          email: user.email,
+          sub: user.id,
+        }),
+        refresh_token: this.generateRefreshToken({
+          email: user.email,
+          sub: user.id,
+        }),
+      },
     };
   }
 
