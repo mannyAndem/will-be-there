@@ -3,9 +3,12 @@ import resetPasswordHero from "../../assets/images/reset-password-hero.png";
 import { Link } from "react-router-dom";
 import slogan from "../../assets/images/title.svg";
 import ResetPasswordForm from "./components/ResetPasswordForm/ResetPasswordForm";
+import Header from "../../ui/Header/Header";
+import Footer from "../Home/components/Footer/Footer";
 
 const ResetPassword = () => {
   return (
+    <> <Header/>
     <div className="reset-password-container">
       <div>
         <div className="brand-container">
@@ -33,6 +36,8 @@ const ResetPassword = () => {
         </div>
       </div>
     </div>
+    <Footer/>
+    </>
   );
 };
 

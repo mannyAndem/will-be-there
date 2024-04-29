@@ -4,9 +4,12 @@ import GoogleSignupButton from '../../shared-components/GoogleSignupButton/Googl
 import LoginForm from './components/LoginForm/LoginForm'
 import './login.scss'
 import loginHero from '/amico.png'
+import Header from '../../ui/Header/Header'
+import Footer from '../Home/components/Footer/Footer'
 
 const Login = () => {
   return (
+    <> <Header />
     <div className="container">
       <div>
         <div className="brand-container">
@@ -39,6 +42,8 @@ const Login = () => {
         </div>
       </div>
     </div>
+    <Footer />
+    </>
   )
 }
 

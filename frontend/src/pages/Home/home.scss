@@ -112,7 +112,7 @@
       }
     }
 
-    .organizerSection {
+    .organizerSection,.guestSection {
       .heading {
         font-size: 30px;
         font-weight: 600;
@@ -138,7 +138,14 @@
         display: flex;
         align-items: center;
         justify-content: center;
-
+.guests_ads{
+  width: 600px;
+  z-index: 1;
+  margin: 0 auto;
+  img{
+    width: inherit;
+  }
+}
         .form {
           display: flex;
           margin: 0 auto;
@@ -176,6 +183,13 @@
           bottom: 0;
           right: 0;
         }
+      }
+    }
+
+    .guestSection{
+
+      .heading{
+        width: 450px;
       }
     }
   }
@@ -221,7 +235,7 @@
           padding: 8px 20px;
         }
       }
-      .organizerSection{
+      .organizerSection, .guestSection{
         
         .heading{
           font-size: 24px;
@@ -235,6 +249,9 @@
         .organizerFormLayout{
           width: 90%;
           height: 350px;
+          .guests_ads{
+            width: 350px;
+          }
           .form{
             width: 90%;
 
@@ -253,6 +270,21 @@
           .top{
             transform: rotate(70deg);
           }
+        }
+      }
+
+      .guestSection{
+        .organizerFormLayout{
+          .top{
+            top: 30px;
+            transform: rotate(60deg) ;
+          }
+          .bottom{
+            transform: rotate(40deg);
+            bottom: 40px;
+            
+          }
+        
         }
       }
     }
