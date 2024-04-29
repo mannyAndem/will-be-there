@@ -11,6 +11,11 @@ import CreateTemplateButton from "./components/CreateTemplateButton/CreateTempla
 import Tab from "./Tab/Tab";
 import TemplateCard from "./components/TemplateCard/TemplateCard";
 import templateExampleImg from "../../assets/images/rsvp-image-example.jpg";
+import templateExampleImg2 from "../../assets/images/rsvp-image-example2.jpg";
+import templateExampleImg3 from "../../assets/images/rsvp-image-example3.jpg";
+import templateExampleImg4 from "../../assets/images/rsvp-image-example4.jpg";
+import templateExampleImg5 from "../../assets/images/rsvp-image-example5.jpg";
+import templateExampleImg6 from "../../assets/images/rsvp-image-example6.jpg";
 import { useGetEvents } from "../../hooks/events";
 import { useEffect, useState } from "react";
 import Loader from "../../ui/Loader/Loader";
@@ -98,11 +103,11 @@ const Events = () => {
                 </div>
               </div>
               <div className="templates-container">
-                <TemplateCard img={templateExampleImg} />
-                <TemplateCard img={templateExampleImg} />
-                <TemplateCard img={templateExampleImg} />
-                <TemplateCard img={templateExampleImg} />
-                <TemplateCard img={templateExampleImg} />
+                <TemplateCard img={templateExampleImg2} />
+                <TemplateCard img={templateExampleImg3} />
+                <TemplateCard img={templateExampleImg4} />
+                <TemplateCard img={templateExampleImg5} />
+                <TemplateCard img={templateExampleImg6} />
                 <TemplateCard img={templateExampleImg} />
               </div>
             </section>
