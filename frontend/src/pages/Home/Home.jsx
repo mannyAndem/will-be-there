@@ -1,5 +1,6 @@
 import "./home.scss";
 import Header from "../../ui/Header/Header";
+import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import HomePageButton from "../../ui/HomepageButton/HomepageButton";
 import topBanner from "../../assets/images/banner.png";
@@ -13,26 +14,33 @@ import Reviews from "./components/CustomerRevs/CustomerReviews";
 import Footer from "./components/Footer/Footer";
 
 const Home = () => {
-  const guest = document.querySelector(".guest");
-  const guestSection= document.getElementById("guestSection")
-  const organizer=document.getElementById(".organizer");
-  const organizerSection=document.getElementById("organizers");
-  const guest_func=()=>{
-    guest.classList.add("active");
-    organizer.style.display="none"
-    organizerSection.style.display="none";
-    guestSection.style.display="block";
-   
-  }
 
-  const organizer_func=()=>{
-  
-    guest.classList.remove("active")
-    organizer.classList.add("active")
-    guestSection.style.display="none"
-    organizerSection.style.display="block";
-    
-  }
+  const [isGuest, setIsGuest] = useState(false);
+  const organizer = useRef(null);
+  const guest = useRef(null);
+  const organizerSection = useRef(null);
+  const guestSection = useRef(null);
+
+  const guest_func = () => {
+    if (organizer.current && guest.current && organizerSection.current && guestSection.current) {
+      organizer.current.classList.remove('active');
+      guest.current.classList.add('active');
+      organizerSection.current.style.display = 'none';
+      guestSection.current.style.display = 'block';
+    }
+    setIsGuest(true);
+  };
+
+  const organizer_func = () => {
+    if (organizer.current && guest.current && organizerSection.current && guestSection.current) {
+      guest.current.classList.remove('active');
+      organizer.current.classList.add('active');
+      guestSection.current.style.display = 'none';
+      organizerSection.current.style.display = 'block';
+    }
+    setIsGuest(false);
+  };
+
   return (
     <div className="home">
       <div className="main_body">
@@ -73,12 +81,12 @@ const Home = () => {
         </div>
 
         <div id="switchTab">
-          <div className="organizer active" onClick={organizer_func} id="organizer">Organizer</div>
+          <div className={isGuest? 'organizer':'organizer active'}  onClick={organizer_func} ref={organizer}>Organizer</div>
 
-          <div className="guest" onClick={guest_func}>Guest</div>
+          <div className={isGuest ? 'guest active': 'guest'} onClick={guest_func} ref={guest}>Guest</div>
         </div>
 
-        <div className="organizerSection" id="organizers">
+        <div ref={organizerSection} className="organizerSection" style={{display: !isGuest? 'block': 'none'}} id="organizers">
           <div className="heading">Create Your Perfect Event Effortlessly</div>
           <div className="details">
             Our event creation feature empowers you to design and customize your
@@ -99,7 +107,7 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="guestSection" id="guestSection">
+        <div ref={guestSection} className="guestSection" style={{display: isGuest? 'block': 'none'}} id="guestSection">
           <div className="heading">Update Your Availability On-the-Go</div>
           <div className="details">
           Never miss a beat!  Our easy-to-use RSVP system lets you update your availability for the event anytime, anywhere.
