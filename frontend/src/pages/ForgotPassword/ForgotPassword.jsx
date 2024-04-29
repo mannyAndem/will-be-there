@@ -3,9 +3,12 @@ import forgotPasswordHero from "../../assets/images/forgot-password-hero.png";
 import { Link } from "react-router-dom";
 import slogan from "../../assets/images/title.svg";
 import ForgotPasswordForm from "./components/ForgotPasswordForm/ForgotPasswordForm";
+import Header from "../../ui/Header/Header";
+import Footer from "../Home/components/Footer/Footer";
 
 const ForgotPassword = () => {
   return (
+    <><Header />
     <div className="forgot-password-container">
       <div>
         <div className="brand-container">
@@ -40,6 +43,8 @@ const ForgotPassword = () => {
         </div>
       </div>
     </div>
+    <Footer />
+    </>
   );
 };
 

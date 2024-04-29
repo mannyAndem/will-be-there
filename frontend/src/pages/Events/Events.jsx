@@ -21,6 +21,8 @@ import { useEffect, useState } from "react";
 import Loader from "../../ui/Loader/Loader";
 import ErrorMessage from "../../ui/ErrorMessage/ErrorMessage";
 import { useSearchParams } from "react-router-dom";
+import Footer from "../Home/components/Footer/Footer";
+
 
 const Events = () => {
   const { data: events, isSuccess, isError, isPending, error } = useGetEvents();
@@ -129,6 +131,7 @@ const Events = () => {
           <div></div>
         )}
       </main>
+      <Footer />
     </div>
   );
 };

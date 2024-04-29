@@ -1,10 +1,12 @@
 import "./home.scss";
 import Header from "../../ui/Header/Header";
+import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import HomePageButton from "../../ui/HomepageButton/HomepageButton";
 import topBanner from "../../assets/images/banner.png";
 import EventForm from "./components/CreateEventForm/Event";
 import formPicture from "../../assets/images/form-picture.png";
+import GuestsSect from "../../assets/images/Guests.png"
 import Card from "./components/ComponentCard/MainComponent";
 import Brands from "../../assets/images/brands.png";
 import MainAlbum from "./components/Album/MainAlbum";
@@ -12,13 +14,33 @@ import Reviews from "./components/CustomerRevs/CustomerReviews";
 import Footer from "./components/Footer/Footer";
 
 const Home = () => {
-  const guest_and_organizers=()=>{
-    const guest = document.querySelector(".guest");
-    const guestSection= document.querySelector(".guestSection")
-    const organizer=document.querySelector(".organizer");
-    const organizerSection=document.getElementById("organizer");
-    // TO work on this later
-  }
+
+  const [isGuest, setIsGuest] = useState(false);
+  const organizer = useRef(null);
+  const guest = useRef(null);
+  const organizerSection = useRef(null);
+  const guestSection = useRef(null);
+
+  const guest_func = () => {
+    if (organizer.current && guest.current && organizerSection.current && guestSection.current) {
+      organizer.current.classList.remove('active');
+      guest.current.classList.add('active');
+      organizerSection.current.style.display = 'none';
+      guestSection.current.style.display = 'block';
+    }
+    setIsGuest(true);
+  };
+
+  const organizer_func = () => {
+    if (organizer.current && guest.current && organizerSection.current && guestSection.current) {
+      guest.current.classList.remove('active');
+      organizer.current.classList.add('active');
+      guestSection.current.style.display = 'none';
+      organizerSection.current.style.display = 'block';
+    }
+    setIsGuest(false);
+  };
+
   return (
     <div className="home">
       <div className="main_body">
@@ -59,12 +81,12 @@ const Home = () => {
         </div>
 
         <div id="switchTab">
-          <div className="organizer active ">Organizer</div>
+          <div className={isGuest? 'organizer':'organizer active'}  onClick={organizer_func} ref={organizer}>Organizer</div>
 
-          <div className="guest">Guest</div>
+          <div className={isGuest ? 'guest active': 'guest'} onClick={guest_func} ref={guest}>Guest</div>
         </div>
 
-        <div className="organizerSection" id="organizers">
+        <div ref={organizerSection} className="organizerSection" style={{display: !isGuest? 'block': 'none'}} id="organizers">
           <div className="heading">Create Your Perfect Event Effortlessly</div>
           <div className="details">
             Our event creation feature empowers you to design and customize your
@@ -85,21 +107,17 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="guestSection">
-          <div className="heading">Create Your Perfect Event Effortlessly</div>
+        <div ref={guestSection} className="guestSection" style={{display: isGuest? 'block': 'none'}} id="guestSection">
+          <div className="heading">Update Your Availability On-the-Go</div>
           <div className="details">
-            Our event creation feature empowers you to design and customize your
-            ideal event with ease and precision. <span>WILL.BE.THERE</span> puts
-            you in control, allowing you to tailor every aspect to your unique
-            vision.
+          Never miss a beat!  Our easy-to-use RSVP system lets you update your availability for the event anytime, anywhere.
           </div>
 
           <div className="organizerFormLayout">
             <div className="blobLeft top"></div>
 
-            <div className="form">
-              <img src={formPicture} alt="A glass and roses on a table" />
-              <EventForm />
+            <div className="guests_ads">
+<img src={GuestsSect} alt="Guests section" />
             </div>
 
             <div className="blobRight bottom"></div>
