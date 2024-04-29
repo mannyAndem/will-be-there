@@ -5,6 +5,7 @@ import {
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
+import axios from 'axios';
 import { OAuth2Client } from 'google-auth-library';
 import { comparePassword, hashPassword } from 'src/utils/password';
 import { RequestInterfaceWithUser } from 'src/utils/requestInterface';
@@ -199,39 +200,40 @@ export class AuthService {
       throw new BadRequestException('Google login failed');
     }
 
-    return;
+    const userInfo = await axios.get(
+      'https://www.googleapis.com/oauth2/v3/userinfo',
+      {
+        headers: { Authorization: `Bearer ${tokens.access_token}` },
+      },
+    );
 
-    // const profile = await this.oAuth2Client.getTokenInfo(tokens.access_token);
+    const profile = userInfo.data;
 
-    // if (!profile) {
-    //   throw new BadRequestException('Google login failed');
-    // }
+    let user = await this.prisma.user.findUnique({
+      where: {
+        email: profile.email,
+      },
+    });
 
-    // let user = await this.prisma.user.findUnique({
-    //   where: {
-    //     email: profile.email,
-    //     provider: 'google',
-    //   },
-    // });
+    if (user.provider !== 'google')
+      throw new BadRequestException(
+        'Looks like you might have signed up with Google earlier. Try signing in with Google!',
+      );
 
-    // if (!user) {
-    //   user = await this.prisma.user.create({
-    //     data: {
-    //       email: profile.email,
-    //       name: profile.name,
-    //       provider: 'google',
-    //     },
-    //   });
-    // }
+    if (!user) {
+      user = await this.prisma.user.create({
+        data: {
+          email: profile.email,
+          name: profile.name,
+          provider: 'google',
+        },
+      });
+    }
 
-    // return {
-    //   status: 'success',
-    //   user,
-    //   token: {
-    //     access_token: tokens.access_token,
-    //     refresh_token: tokens.refresh_token,
-    //   },
-    // };
+    return {
+      status: 'success',
+      user,
+    };
   }
 
   generateAccessToken(payload: any): string {

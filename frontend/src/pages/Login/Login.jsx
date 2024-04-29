@@ -7,8 +7,7 @@ import loginHero from '/amico.png'
 
 const Login = () => {
   return (
-
-   <div className="container">
+    <div className="container">
       <div>
         <div className="brand-container">
           <img src={slogan} />
@@ -26,7 +25,7 @@ const Login = () => {
           <h1>Sign In</h1>
           <p>Streamline Your Event Experience: RSVP Easily and Seamlessly Today</p>
         </div>
-        <GoogleSignupButton type="login" />
+        <GoogleSignupButton />
         <div className="or-container">
           <hr />
           <span>Or</span>
@@ -35,7 +34,7 @@ const Login = () => {
         <div className="form-container">{<LoginForm />}</div>
         <div className="link-container">
           <span>
-            Don't have an account, <Link to="/signup">Sign up</Link>
+            Don&apos;t have an account, <Link to="/signup">Sign up</Link>
           </span>
         </div>
       </div>
