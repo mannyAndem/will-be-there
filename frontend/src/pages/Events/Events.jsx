@@ -30,7 +30,6 @@ const Events = () => {
 
       if (id) {
         const event = events.find((event) => event.id == id);
-        console.log(event);
         setEvent(event);
       } else {
         setEvent(null);

@@ -265,14 +265,25 @@ const CreateEventForm = ({ event }) => {
               </InputGroup>
             </div>
             <div className="button-container">
-              <div>
-                <Button
-                  disabled={!isValid || !dirty}
-                  pending={isPatchPending || isCreatePending}
-                >
-                  Save Event Details
-                </Button>
-              </div>
+              {event ? (
+                <div>
+                  <Button
+                    disabled={!isValid || !dirty}
+                    pending={isPatchPending}
+                  >
+                    Save Edit
+                  </Button>
+                </div>
+              ) : (
+                <div>
+                  <Button
+                    disabled={!isValid || !dirty}
+                    pending={isCreatePending}
+                  >
+                    Save Event Details
+                  </Button>
+                </div>
+              )}
             </div>
           </form>
         )}
