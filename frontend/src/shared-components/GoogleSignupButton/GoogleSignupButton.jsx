@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import axios from '../../api/axios'
 import './google-signup-button.scss'
 
-const GoogleSignupButton = ({ type }) => {
+const GoogleSignupButton = () => {
   const navigate = useNavigate()
   // const { isError, isSuccess, googleLogin, isPending, error } =
   //   useGoogleAuth(type);
@@ -26,11 +26,17 @@ const GoogleSignupButton = ({ type }) => {
 
   const googleLogin = useGoogleLogin({
     onSuccess: async ({ code }) => {
-      const tokens = await axios.post('/auth/google', {
-        code,
-      })
+      try {
+        const req = await axios.post('/auth/google', {
+          code,
+        })
 
-      console.log(tokens)
+        if (req.status.toString().startsWith('2')) {
+          navigate('/')
+        }
+      } catch (error) {
+        console.log(error)
+      }
     },
     flow: 'auth-code',
   })
