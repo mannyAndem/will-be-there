@@ -61,7 +61,7 @@ const CreateEventForm = ({ event }) => {
       .min(1, "You must add atleast one event image"),
     expectedGifts: yup.array().of(yup.string()).notRequired(),
     eventType: yup.string().required("Event type is required"),
-    description: yup.string().notRequired(),
+    description: yup.string().required("Description is required"),
   });
 
   const handleSubmit = (values) => {
@@ -168,6 +168,25 @@ const CreateEventForm = ({ event }) => {
                   onChange={handleChange}
                 />
               </InputGroup>
+              <InputGroup name="media">
+                <InputGroup.Label>Image</InputGroup.Label>
+                <InputGroup.Input
+                  placeholder={
+                    <div className="image-input-placeholder">
+                      <span>Click here to upload Image or Video</span>
+                      <HiOutlineDocumentArrowUp
+                        size={24}
+                        className="document-icon"
+                      />
+                    </div>
+                  }
+                  value={values.media}
+                  onChange={(e) =>
+                    setFieldValue("media", Array.from(e.target.files), true)
+                  }
+                  type="file"
+                />
+              </InputGroup>
               <div className="time-container">
                 <InputGroup name="start" error={touched.start && errors.start}>
                   <InputGroup.Label>Time</InputGroup.Label>
@@ -190,6 +209,19 @@ const CreateEventForm = ({ event }) => {
                   />
                 </InputGroup>
               </div>
+              <div className="description-container">
+                <InputGroup
+                  name="description"
+                  error={touched.description && errors.description}
+                >
+                  <InputGroup.Label>Event Description</InputGroup.Label>
+                  <InputGroup.TextArea
+                    placeholder="Event Description"
+                    value={values.description}
+                    onChange={handleChange}
+                  />
+                </InputGroup>
+              </div>
               <InputGroup
                 name="eventType"
                 error={touched.eventType && errors.eventType}
@@ -203,38 +235,6 @@ const CreateEventForm = ({ event }) => {
                   <option value="inPerson">Physical</option>
                   <option value="virtual">Virtual</option>
                 </InputGroup.Select>
-              </InputGroup>
-              {/* <div className="location-container">
-                <InputGroup
-                  name="location"
-                  error={touched.location && errors.location}
-                >
-                  <InputGroup.Label>Location</InputGroup.Label>
-                  <InputGroup.TextArea
-                    placeholder="Location of the event"
-                    value={values.location}
-                    onChange={handleChange}
-                  />
-                </InputGroup>
-              </div> */}
-              <InputGroup name="media">
-                <InputGroup.Label>Image</InputGroup.Label>
-                <InputGroup.Input
-                  placeholder={
-                    <div className="image-input-placeholder">
-                      <span>Click here to upload Image or Video</span>
-                      <HiOutlineDocumentArrowUp
-                        size={24}
-                        className="document-icon"
-                      />
-                    </div>
-                  }
-                  value={values.media}
-                  onChange={(e) =>
-                    setFieldValue("media", Array.from(e.target.files), true)
-                  }
-                  type="file"
-                />
               </InputGroup>
               <InputGroup
                 name="location"
