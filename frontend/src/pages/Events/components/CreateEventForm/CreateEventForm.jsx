@@ -38,6 +38,8 @@ const CreateEventForm = ({ event }) => {
     location: event?.location ?? "",
     media: event?.media ?? [],
     expectedGifts: event ? [...event.expectedGifts] : [],
+    eventType: event?.eventType ?? "inPerson",
+    description: event?.description ?? "",
   };
 
   const [giftValue, setGiftValue] = useState("");
@@ -58,6 +60,8 @@ const CreateEventForm = ({ event }) => {
       .of(yup.mixed())
       .min(1, "You must add atleast one event image"),
     expectedGifts: yup.array().of(yup.string()).notRequired(),
+    eventType: yup.string().required("Event type is required"),
+    description: yup.string().notRequired(),
   });
 
   const handleSubmit = (values) => {
@@ -104,7 +108,10 @@ const CreateEventForm = ({ event }) => {
       }, 1000);
     }
     if (isCreateError) {
-      toast.error(error.response?.data?.message ?? "Something went wrong");
+      console.error(createError);
+      toast.error(
+        createError.response?.data?.message ?? "Something went wrong"
+      );
     }
   }, [isCreateSuccess, isCreateError]);
 
@@ -183,7 +190,21 @@ const CreateEventForm = ({ event }) => {
                   />
                 </InputGroup>
               </div>
-              <div className="location-container">
+              <InputGroup
+                name="eventType"
+                error={touched.eventType && errors.eventType}
+              >
+                <InputGroup.Label>Event Type</InputGroup.Label>
+                <InputGroup.Select
+                  placeholder="Choose event type"
+                  value={values.eventType}
+                  onChange={handleChange}
+                >
+                  <option value="inPerson">Physical</option>
+                  <option value="virtual">Virtual</option>
+                </InputGroup.Select>
+              </InputGroup>
+              {/* <div className="location-container">
                 <InputGroup
                   name="location"
                   error={touched.location && errors.location}
@@ -195,7 +216,7 @@ const CreateEventForm = ({ event }) => {
                     onChange={handleChange}
                   />
                 </InputGroup>
-              </div>
+              </div> */}
               <InputGroup name="media">
                 <InputGroup.Label>Image</InputGroup.Label>
                 <InputGroup.Input
@@ -213,6 +234,17 @@ const CreateEventForm = ({ event }) => {
                     setFieldValue("media", Array.from(e.target.files), true)
                   }
                   type="file"
+                />
+              </InputGroup>
+              <InputGroup
+                name="location"
+                error={touched.location && errors.location}
+              >
+                <InputGroup.Label>Location</InputGroup.Label>
+                <InputGroup.TextArea
+                  placeholder="Location of the event"
+                  value={values.location}
+                  onChange={handleChange}
                 />
               </InputGroup>
             </div>
