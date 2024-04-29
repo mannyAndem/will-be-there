@@ -33,7 +33,9 @@ model Event {
   end            DateTime
   location       String?
   media          Media[]
+  eventType      EventType    @default(inPerson)
   expectedGifts  String[]
+  description    String
 
   organizer      User         @relation(fields: [organizerId], references: [id], onDelete: Cascade)
   organizerId    String
@@ -76,4 +78,9 @@ enum RsvpStatus {
   attending
   notAttending
   unsure
+}
+
+enum EventType {
+  virtual
+  inPerson
 }

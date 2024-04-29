@@ -1,5 +1,5 @@
 import { ApiProperty, ApiPropertyOptional, PartialType } from '@nestjs/swagger';
-import { RsvpStatus } from '@prisma/client';
+import { EventType, RsvpStatus } from '@prisma/client';
 import {
   IsDateString,
   IsEmail,
@@ -41,6 +41,14 @@ export class CreateEventDto {
   @ApiProperty({ type: [MediaDto] })
   @ValidateNested()
   media: MediaDto;
+
+  @IsString()
+  @ApiProperty()
+  description: string;
+
+  @IsEnum(EventType)
+  @ApiProperty({ enum: EventType })
+  eventType: EventType;
 
   @IsString({ each: true })
   @ApiPropertyOptional()
