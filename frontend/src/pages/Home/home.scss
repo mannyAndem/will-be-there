@@ -187,7 +187,6 @@
     }
 
     .guestSection{
-
       .heading{
         width: 450px;
       }
@@ -207,6 +206,9 @@
   }
 }
 
+#guestSection{
+  display: none;
+}
 @media (max-width:426px) {
   .home{
     >.main_body{

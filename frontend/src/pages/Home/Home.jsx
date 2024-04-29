@@ -15,15 +15,14 @@ import Footer from "./components/Footer/Footer";
 const Home = () => {
   const guest = document.querySelector(".guest");
   const guestSection= document.getElementById("guestSection")
-  const organizer=document.querySelector(".organizer");
+  const organizer=document.getElementById(".organizer");
   const organizerSection=document.getElementById("organizers");
   const guest_func=()=>{
-   if(organizer.classList.contains("active")){
-    organizer.classList.remove("active");
     guest.classList.add("active");
+    organizer.style.display="none"
     organizerSection.style.display="none";
     guestSection.style.display="block";
-   }
+   
   }
 
   const organizer_func=()=>{
@@ -74,7 +73,7 @@ const Home = () => {
         </div>
 
         <div id="switchTab">
-          <div className="organizer active" onClick={organizer_func}>Organizer</div>
+          <div className="organizer active" onClick={organizer_func} id="organizer">Organizer</div>
 
           <div className="guest" onClick={guest_func}>Guest</div>
         </div>
