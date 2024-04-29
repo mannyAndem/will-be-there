@@ -42,7 +42,6 @@ export const usePatchEvent = () => {
       let mediaRes = null;
 
       if (media[0] instanceof File) {
-        console.log("is file.");
         const formData = new FormData();
         media.forEach((file) => formData.append("media", file));
         mediaRes = await axios.post("uploads/medias", formData, {
@@ -53,11 +52,12 @@ export const usePatchEvent = () => {
 
         data.media = mediaRes.data;
       } else {
-        console.log("isn't file");
+        media.forEach((data) => {
+          delete data.id;
+          delete data.eventId;
+        });
         data.media = media;
       }
-
-      console.log(data);
 
       const res = await axios.patch(`events/${eventId}`, JSON.stringify(data), {
         headers: {

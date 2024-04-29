@@ -93,11 +93,27 @@ const GuestLists = ({ guests }) => {
         <div className="status">
           Attendance Status:
           <div className="prob">
-            <div className="circle active"></div>
+            <div
+              className={`circle ${
+                guest.rsvpStatus == "attending" ? "active" : ""
+              }`}
+            ></div>
             <div className="coming"> Attending </div>
-            <div className="circle"> </div>
+            <div
+              className={`circle ${
+                guest.rsvpStatus == "notAttending" ? "active" : ""
+              }`}
+            >
+              {" "}
+            </div>
             <div className="coming"> Not Attending </div>
-            <div className="circle"> </div>
+            <div
+              className={`circle ${
+                guest.rsvpStatus == "unsure" ? "active" : ""
+              }`}
+            >
+              {" "}
+            </div>
             <div className="coming"> Maybe </div>
           </div>
         </div>
