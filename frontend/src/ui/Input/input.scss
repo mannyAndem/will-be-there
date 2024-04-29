@@ -24,6 +24,10 @@
     opacity: 50%;
     font-weight: 500;
   }
+
+  @include sm {
+    font-size: 1rem;
+  }
 }
 
 .file-input-container {
@@ -53,6 +57,10 @@
       &[aria-invalid="true"] {
         background-color: $veryLightRed;
         outline-color: $error;
+      }
+
+      @include sm {
+        font-size: 1rem !important;
       }
     }
   }

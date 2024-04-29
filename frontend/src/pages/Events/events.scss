@@ -14,12 +14,27 @@
       align-items: center;
       gap: 40px;
       flex-wrap: wrap;
+
+      @include sm {
+        padding: 26px 16px;
+        gap: 16px;
+        flex-wrap: nowrap;
+        overflow-x: scroll;
+
+        div {
+          flex-shrink: 0 !important;
+        }
+      }
     }
 
     h1 {
       font-family: "Montserrat", sans-serif;
       font-size: 2.5rem;
       font-weight: 600;
+
+      @include sm {
+        font-size: 1.5rem;
+      }
     }
 
     .section-header {
@@ -28,6 +43,12 @@
       align-items: center;
       justify-content: space-between;
       margin-bottom: 32px;
+
+      @include sm {
+        button {
+          display: none;
+        }
+      }
     }
 
     .create-event-form-section {
@@ -48,6 +69,10 @@
         .pen-icon {
           color: white;
         }
+      }
+
+      @include sm {
+        padding: 20px 16px;
       }
     }
 

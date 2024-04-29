@@ -26,4 +26,8 @@
     opacity: 50%;
     font-weight: 500;
   }
+
+  @include sm {
+    font-size: 1rem;
+  }
 }
