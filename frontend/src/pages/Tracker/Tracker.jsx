@@ -57,7 +57,7 @@ const Tracker = () => {
                 close={closeModal}
                 event={event}
               />
-              <div className="previous-events-header">
+              <div className="tracker-events-header">
                 <h2>Guest List For {event.name}</h2>
                 <div>
                   <Button size="sm" onClick={openModal}>

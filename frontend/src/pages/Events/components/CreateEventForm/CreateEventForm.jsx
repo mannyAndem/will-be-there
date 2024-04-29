@@ -303,7 +303,7 @@ const CreateEventForm = ({ event }) => {
                     disabled={!isValid || !dirty}
                     pending={isPatchPending}
                   >
-                    Save Edit
+                    Save Event Details
                   </Button>
                 </div>
               ) : (

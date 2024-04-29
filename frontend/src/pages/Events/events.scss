@@ -78,6 +78,10 @@
 
     .create-template-section {
       padding: 40px 64px;
+
+      @include sm {
+        display: none;
+      }
     }
     .templates-section {
       padding: 40px 64px;
@@ -92,6 +96,10 @@
         grid-template-columns: 1fr 1fr 1fr;
         gap: 24px;
         margin-top: 56px;
+      }
+
+      @include sm {
+        display: none;
       }
     }
 
@@ -111,6 +119,10 @@
 
       .right-arrow-icon {
         color: $green;
+      }
+
+      @include sm {
+        display: none;
       }
     }
   }
