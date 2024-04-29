@@ -1,7 +1,9 @@
 import { ApiProperty, ApiPropertyOptional, PartialType } from '@nestjs/swagger';
+import { RsvpStatus } from '@prisma/client';
 import {
   IsDateString,
   IsEmail,
+  IsEnum,
   IsOptional,
   IsString,
   ValidateNested,
@@ -69,6 +71,10 @@ export class RSVPDto {
   @IsOptional()
   @ApiPropertyOptional()
   registry: string[];
+
+  @IsEnum(RsvpStatus)
+  @ApiProperty({ enum: RsvpStatus })
+  rsvpStatus: RsvpStatus;
 }
 
 export class UpdateEventDto extends PartialType(CreateEventDto) {}
