@@ -1,11 +1,21 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import cloudinary from 'src/lib/cloudinary';
 import { PrismaService } from 'src/prisma.service';
+import { MailService } from '../mail/mail.service';
 import { CreateEventDto, RSVPDto, UpdateEventDto } from './eventDto';
 
 @Injectable()
 export class EventsService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private mailService: MailService,
+    private configService: ConfigService,
+  ) {}
 
   async getEvents(userId: string) {
     const events = await this.prisma.event.findMany({
@@ -41,17 +51,22 @@ export class EventsService {
   }
 
   async createRsvp(data: RSVPDto, eventId: string) {
-    // check if user exists
     const user = await this.prisma.user.findUnique({
       where: { email: data.email },
     });
 
-    // check if rsvp exists
     const existingRsvp = await this.prisma.rsvp.findMany({
       where: {
         AND: [{ email: data.email }, { eventId: eventId }],
       },
     });
+
+    const event = await this.prisma.event.findFirst({
+      where: { id: eventId },
+      include: { organizer: true },
+    });
+
+    if (!event) throw new NotFoundException('Event not found');
 
     let rsvp;
 
@@ -65,14 +80,40 @@ export class EventsService {
         },
       });
     } else {
-      rsvp = await this.prisma.rsvp.create({
-        data: {
-          ...data,
-          event: { connect: { id: eventId } },
-          user: user ? { connect: { id: user.id } } : null,
-        },
-      });
+      if (user) {
+        rsvp = await this.prisma.rsvp.create({
+          data: {
+            ...data,
+            event: { connect: { id: eventId } },
+            user: user ? { connect: { id: user.id } } : null,
+          },
+        });
+      } else {
+        rsvp = await this.prisma.rsvp.create({
+          data: {
+            ...data,
+            event: { connect: { id: eventId } },
+          },
+        });
+      }
     }
+    const templateId = this.configService.get('RSVP_TEMPLATE_ID'); // get email template ID
+
+    await this.mailService.sendMail({
+      variables: {
+        user: data.name,
+        eventName: event.name,
+        eventDate: new Date(event.date).toDateString(),
+        startTime: new Date(event.start).toTimeString(),
+        endTime: new Date(event.end).toTimeString(),
+        eventLocation: event.location,
+        eventDescription: event.description,
+        organizerName: event.organizer.name,
+      },
+      templateId,
+      title: 'RSVP Confirmation',
+      recipient: data.email,
+    });
 
     return {
       status: 'success',
