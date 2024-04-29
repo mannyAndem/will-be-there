@@ -19,6 +19,7 @@ const RsvpForm = ({ event }) => {
     registry: "",
     guestNames: [],
     guestNumber: 0,
+    rsvpStatus: "attending",
   };
 
   const formSchema = yup.object().shape({
@@ -31,6 +32,7 @@ const RsvpForm = ({ event }) => {
     registry: yup.string().notRequired(),
     guestNames: yup.array().of(yup.string()).notRequired(),
     guestNumber: yup.number(),
+    rsvpStatus: yup.string().required("Attendance status is required"),
   });
 
   const handleSubmit = (values) => {
@@ -146,9 +148,58 @@ const RsvpForm = ({ event }) => {
                 </Select>
               </InputGroup>
             </div>
+            <div className="attendance-container">
+              <h3>Attendance Status</h3>
+              <div className="radio-buttons-container">
+                <div>
+                  <Button
+                    variant={
+                      values.rsvpStatus === "attending"
+                        ? "primary"
+                        : "secondary"
+                    }
+                    size="sm"
+                    type="button"
+                    onClick={() => setFieldValue("rsvpStatus", "attending")}
+                  >
+                    Attending
+                  </Button>
+                </div>
+                <div>
+                  <Button
+                    variant={
+                      values.rsvpStatus === "notAttending"
+                        ? "primary"
+                        : "secondary"
+                    }
+                    type="button"
+                    size="sm"
+                    onClick={() => setFieldValue("rsvpStatus", "notAttending")}
+                  >
+                    Not Attending
+                  </Button>
+                </div>
+                <div>
+                  <Button
+                    variant={
+                      values.rsvpStatus === "unsure" ? "primary" : "secondary"
+                    }
+                    type="button"
+                    size="sm"
+                    onClick={() => setFieldValue("rsvpStatus", "unsure")}
+                  >
+                    Maybe
+                  </Button>
+                </div>
+              </div>
+            </div>
             <div className="button-container">
               <div>
-                <Button pending={isPending} disabled={!isValid || !dirty}>
+                <Button
+                  pending={isPending}
+                  disabled={!isValid || !dirty}
+                  type="submit"
+                >
                   Reserve Invite
                 </Button>
               </div>

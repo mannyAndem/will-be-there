@@ -6,11 +6,13 @@ const Button = ({
   pending,
   disabled,
   onClick,
+  type,
   size = "md",
   variant = "primary",
 }) => {
   return (
     <button
+      type={type}
       className={
         "button " +
         (size == "sm" ? "button-sm" : "button-md") +

@@ -43,6 +43,23 @@
     }
   }
 
+  .attendance-container {
+    margin-top: 40px;
+
+    h3 {
+      font-size: 2.5rem;
+      font-family: "Montserrat", sans-serif;
+      font-weight: 600;
+    }
+
+    .radio-buttons-container {
+      margin-top: 20px;
+      display: flex;
+      gap: 24px;
+      width: 100%;
+    }
+  }
+
   .button-container {
     margin-top: 48px;
     margin-inline: auto;

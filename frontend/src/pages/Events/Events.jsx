@@ -24,8 +24,6 @@ const Events = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      console.log(events);
-
       const id = searchParams.get("event");
 
       if (id) {
