@@ -1,9 +1,27 @@
 @import "../../style/variables.scss";
 
-.previous-events-header {
+.tracker-events-header {
+  padding: 40px 64px 20px 64px;
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
+
+  h2 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    font-family: "Montserrat", sans-serif;
+
+    @include sm {
+      font-size: 1.5rem;
+    }
+  }
+
+  @include sm {
+    padding: 20px 16px !important;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
 }
 
 .loader-container {
@@ -21,6 +39,10 @@
   font-size: 2.5rem;
   text-align: center;
   padding: 64px;
+
+  @include sm {
+    font-size: 1.5rem;
+  }
 }
 .no-guests {
   margin: 60px auto;

@@ -9,7 +9,7 @@ import { useGetEvent, useGetEvents } from "../../hooks/events";
 import { useSearchParams } from "react-router-dom";
 import Loader from "../../ui/Loader/Loader";
 import EventCard from "../../shared-components/EventCard/EventCard";
-
+import Footer from "../Home/components/Footer/Footer";
 const Tracker = () => {
   const [event, setEvent] = useState(null);
 
@@ -57,7 +57,7 @@ const Tracker = () => {
                 close={closeModal}
                 event={event}
               />
-              <div className="previous-events-header">
+              <div className="tracker-events-header">
                 <h2>Guest List For {event.name}</h2>
                 <div>
                   <Button size="sm" onClick={openModal}>
@@ -87,6 +87,7 @@ const Tracker = () => {
       ) : (
         <div></div>
       )}
+      <Footer />
     </div>
   );
 };

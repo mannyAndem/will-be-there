@@ -1,6 +1,7 @@
 @import "../../style/variables";
 
-.rsvp-container, .tracker-container {
+.rsvp-container,
+.tracker-container {
   .header-container {
     box-shadow: 0px 4px 6px 2px #0000001a;
   }
@@ -20,6 +21,10 @@
     display: flex;
     align-items: center;
     gap: 40px;
+
+    @include sm {
+      padding: 20px 16px;
+    }
   }
 
   .rsvp-form-section {

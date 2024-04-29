@@ -4,9 +4,12 @@ import slogan from '../../assets/images/title.svg'
 import GoogleSignupButton from '../../shared-components/GoogleSignupButton/GoogleSignupButton'
 import SignupForm from './components/SignupForm/SignupForm'
 import './signup.scss'
+import Header from '../../ui/Header/Header'
+import Footer from '../Home/components/Footer/Footer'
 
 const Signup = () => {
   return (
+    <><Header/>
     <div className="container">
       <div>
         <div className="brand-container">
@@ -38,6 +41,8 @@ const Signup = () => {
         </div>
       </div>
     </div>
+    <Footer/>
+    </>
   )
 }
 

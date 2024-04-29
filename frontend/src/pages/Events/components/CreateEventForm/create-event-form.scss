@@ -11,7 +11,7 @@
       display: flex;
       gap: 24px;
     }
-    .location-container {
+    .description-container {
       grid-row: span 2;
 
       div {
@@ -28,6 +28,11 @@
         color: rgba($dark, 0.5);
       }
     }
+    @include sm {
+      display: flex !important;
+      flex-direction: column;
+      gap: 16px;
+    }
   }
 
   .gift-header {
@@ -36,6 +41,10 @@
     font-weight: 600;
     margin-top: 60px;
     margin-bottom: 24px;
+
+    @include sm {
+      font-size: 1.5rem;
+    }
   }
   .add-gift-container {
     position: relative;
@@ -50,6 +59,10 @@
       transform: translateY(-50%);
       cursor: pointer;
     }
+
+    @include sm {
+      width: 100%;
+    }
   }
 
   .gifts-list {
@@ -57,6 +70,7 @@
     align-items: center;
     gap: 24px;
     margin-top: 16px;
+    flex-wrap: wrap;
 
     .gift {
       display: flex;
@@ -65,6 +79,7 @@
       border: 1px solid $smoke;
       border-radius: 12px;
       padding: 14px 20px;
+      flex-shrink: 0;
 
       span {
         font-family: "Montserrat";
@@ -78,11 +93,19 @@
         cursor: pointer;
       }
     }
+
+    @include sm {
+      gap: 16px;
+    }
   }
 
   .button-container {
     margin-top: 48px;
     margin-inline: auto;
     width: 40%;
+
+    @include sm {
+      width: 100% !important;
+    }
   }
 }

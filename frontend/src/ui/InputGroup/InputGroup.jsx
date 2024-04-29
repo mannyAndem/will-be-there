@@ -2,6 +2,7 @@ import { createContext, useContext } from "react";
 import "./inputGroup.scss";
 import Input from "../Input/Input";
 import TextArea from "../TextArea/TextArea";
+import Select from "../Select/Select";
 
 const InputGroupContext = createContext(null);
 
@@ -78,5 +79,28 @@ InputGroup.TextArea = ({ value, onChange, placeholder, ...rest }) => {
       placeholder={placeholder}
       {...rest}
     />
+  );
+};
+
+InputGroup.Select = ({ value, onChange, placeholder, children, ...rest }) => {
+  const context = useInputGroupContext();
+
+  if (!context) {
+    throw new Error("InputGroup.TextArea must have a parent InputGroup.");
+  }
+
+  const { id, name, error } = context;
+  return (
+    <Select
+      error={error}
+      id={id ? id : name}
+      name={name}
+      value={value}
+      onChange={onChange}
+      placeholder={placeholder}
+      {...rest}
+    >
+      {children}
+    </Select>
   );
 };

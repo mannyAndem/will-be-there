@@ -23,4 +23,8 @@
     background-color: $veryLightRed;
     outline-color: $error;
   }
+
+  @include sm {
+    font-size: 1rem;
+  }
 }

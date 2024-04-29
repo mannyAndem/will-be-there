@@ -5,6 +5,7 @@ import HomePageButton from "../../ui/HomepageButton/HomepageButton";
 import topBanner from "../../assets/images/banner.png";
 import EventForm from "./components/CreateEventForm/Event";
 import formPicture from "../../assets/images/form-picture.png";
+import GuestsSect from "../../assets/images/Guests.png"
 import Card from "./components/ComponentCard/MainComponent";
 import Brands from "../../assets/images/brands.png";
 import MainAlbum from "./components/Album/MainAlbum";
@@ -12,12 +13,26 @@ import Reviews from "./components/CustomerRevs/CustomerReviews";
 import Footer from "./components/Footer/Footer";
 
 const Home = () => {
-  const guest_and_organizers=()=>{
-    const guest = document.querySelector(".guest");
-    const guestSection= document.querySelector(".guestSection")
-    const organizer=document.querySelector(".organizer");
-    const organizerSection=document.getElementById("organizer");
-    // TO work on this later
+  const guest = document.querySelector(".guest");
+  const guestSection= document.getElementById("guestSection")
+  const organizer=document.querySelector(".organizer");
+  const organizerSection=document.getElementById("organizers");
+  const guest_func=()=>{
+   if(organizer.classList.contains("active")){
+    organizer.classList.remove("active");
+    guest.classList.add("active");
+    organizerSection.style.display="none";
+    guestSection.style.display="block";
+   }
+  }
+
+  const organizer_func=()=>{
+  
+    guest.classList.remove("active")
+    organizer.classList.add("active")
+    guestSection.style.display="none"
+    organizerSection.style.display="block";
+    
   }
   return (
     <div className="home">
@@ -59,9 +74,9 @@ const Home = () => {
         </div>
 
         <div id="switchTab">
-          <div className="organizer active ">Organizer</div>
+          <div className="organizer active" onClick={organizer_func}>Organizer</div>
 
-          <div className="guest">Guest</div>
+          <div className="guest" onClick={guest_func}>Guest</div>
         </div>
 
         <div className="organizerSection" id="organizers">
@@ -85,21 +100,17 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="guestSection">
-          <div className="heading">Create Your Perfect Event Effortlessly</div>
+        <div className="guestSection" id="guestSection">
+          <div className="heading">Update Your Availability On-the-Go</div>
           <div className="details">
-            Our event creation feature empowers you to design and customize your
-            ideal event with ease and precision. <span>WILL.BE.THERE</span> puts
-            you in control, allowing you to tailor every aspect to your unique
-            vision.
+          Never miss a beat!  Our easy-to-use RSVP system lets you update your availability for the event anytime, anywhere.
           </div>
 
           <div className="organizerFormLayout">
             <div className="blobLeft top"></div>
 
-            <div className="form">
-              <img src={formPicture} alt="A glass and roses on a table" />
-              <EventForm />
+            <div className="guests_ads">
+<img src={GuestsSect} alt="Guests section" />
             </div>
 
             <div className="blobRight bottom"></div>

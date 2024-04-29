@@ -9,6 +9,7 @@
   font-family: "Montserrat";
   border: none;
   cursor: pointer;
+  white-space: nowrap;
 
   &:disabled {
     opacity: 50%;
@@ -17,6 +18,10 @@
 
   .pending {
     opacity: 0;
+  }
+
+  @include sm {
+    font-size: 1rem;
   }
 }
 
@@ -44,17 +49,15 @@
   padding: 24px 40px;
 }
 
-
-@media (max-width:426px) {
-  .button{
+@media (max-width: 426px) {
+  .button {
     font-size: 1rem;
-
   }
 
-  .button-sm{
+  .button-sm {
     padding: 10px 20px;
   }
-  .button-md{
+  .button-md {
     padding: 15px 20px;
   }
 }

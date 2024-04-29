@@ -8,6 +8,8 @@ import Loader from "../../ui/Loader/Loader";
 import { useEffect } from "react";
 import LoginPopup from "./components/LoginPopup/LoginPopup";
 import { useAuthContext } from "../../contexts/AuthContext";
+import Footer from "../Home/components/Footer/Footer";
+
 
 const Rsvp = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -25,6 +27,7 @@ const Rsvp = () => {
   }, [isSuccess]);
 
   return (
+    <>
     <div className="rsvp-container">
       <div className="header-container">
         <Header />
@@ -51,6 +54,8 @@ const Rsvp = () => {
         <div></div>
       )}
     </div>
+    <Footer/>
+    </>
   );
 };
 
