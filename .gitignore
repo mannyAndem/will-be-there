@@ -15,6 +15,7 @@ dist-ssr
 *.local
 **/package-lock.json
 
+.git_old
 .env
 
 # Editor directories and files
