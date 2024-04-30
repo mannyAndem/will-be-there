@@ -7,7 +7,6 @@ import {
   AccordionSummary,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
-<<<<<<< HEAD
 // Importing the test images
 import Guest1 from "../../../assets/images/guest1.png";
 import Guest2 from "../../../assets/images/guest2.png";
@@ -15,8 +14,6 @@ import Guest3 from "../../../assets/images/roselyn.png";
 import Guest4 from "../../../assets/images/temi.png";
 import Guest5 from "../../../assets/images/remi.png";
 
-=======
->>>>>>> 43fe6c23fbe93ba7c7f103fe9a05fff6940905f7
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { HiUserCircle } from "react-icons/hi2";
 
@@ -32,8 +29,9 @@ const CustomIcon = ({ expanded }) => {
 const StyledAccordionSummary = styled((props) => (
   <AccordionSummary
     {...props}
-    expandIcon={<CustomIcon expanded={props.expanded} /> }
-aria-controls="panel-content"  >
+    expandIcon={<CustomIcon expanded={props.expanded} />}
+    aria-controls="panel-content"
+  >
     <div className="headerContents">
       <header>{props.title}</header>
       <div className={`partOfTheHeader ${props.expanded ? "hidden" : ""}`}>
