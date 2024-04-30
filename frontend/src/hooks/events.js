@@ -87,16 +87,17 @@ export const useGetEvents = () => {
   return { isSuccess, isError, isPending, data, error };
 };
 
-export const useGetEvent = (id) => {
-  const { isSuccess, isPending, isError, data, error } = useQuery({
+export const useGetEvent = (id, enabled) => {
+  const { isSuccess, isPending, isError, data, error, refetch } = useQuery({
     queryFn: async () => {
       const res = await axios.get(`events/${id}`);
       return res.data.data;
     },
     queryKey: [`event/${id}`],
+    enabled: enabled ?? true,
   });
 
-  return { isSuccess, isError, isPending, data, error };
+  return { isSuccess, isError, isPending, data, error, refetch };
 };
 
 export const useCreateRsvp = () => {
@@ -109,6 +110,9 @@ export const useCreateRsvp = () => {
       });
 
       return res.data.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["user"] });
     },
   });
 

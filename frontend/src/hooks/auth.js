@@ -7,31 +7,28 @@ import { useMutation } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import axios from "../api/axios";
 import { useAuthContext } from "../contexts/AuthContext";
+import { useQuery } from "@tanstack/react-query";
 
-// export const useGetCurrentUser = () => {
-//   const { user, setUser } = useAuthContext();
-//   const { data, isSuccess, isPending, isError, error, refetch } = useQuery({
-//     queryKey: ["user"],
-//     queryFn: async () => axios.get("auth/me"),
-//   });
+export const useGetCurrentUser = (enabled) => {
+  const { setUser } = useAuthContext();
+  const { data, isSuccess, isPending, isError, error, refetch } = useQuery({
+    queryKey: ["user"],
+    queryFn: async () => {
+      const res = await axios.get("auth/me");
+      console.log(res);
+      localStorage.setItem("user", JSON.stringify(res.data.user));
+      setUser(res.data.user);
+      return res.data.user;
+    },
+    enabled: enabled ?? true,
+  });
 
-//   useEffect(() => {
-//     if (isSuccess) {
-//       console.log(data);
-//       setUser(data.data.user);
-//       localStorage.setItem("user", JSON.stringify(data.data.user));
-//     }
-//     if (isError) {
-//       localStorage.removeItem("user");
-//       console.error(error);
-//     }
-//   }, [isSuccess, isError]);
-
-//   return { isSuccess, isError, isPending };
-// };
+  return { isSuccess, isError, isPending, refetch };
+};
 
 export const useLogin = () => {
   const { setUser } = useAuthContext();
+  const { refetch } = useGetCurrentUser(false);
 
   const { isError, isPending, isSuccess, error, mutate, data } = useMutation({
     mutationFn: async (data) => {
@@ -43,11 +40,13 @@ export const useLogin = () => {
       });
       localStorage.setItem("access_token", res?.data?.token.access_token);
       localStorage.setItem("refresh_token", res?.data?.token.refresh_token);
-      const userRes = await axios.get("auth/me");
-      console.log(userRes);
-      localStorage.setItem("user", JSON.stringify(userRes.data.user));
-      setUser(userRes.data.user);
-      return userRes.data.user;
+
+      await refetch();
+      // const userRes = await axios.get("auth/me");
+      // console.log(userRes);
+      // localStorage.setItem("user", JSON.stringify(userRes.data.user));
+      // setUser(userRes.data.user);
+      // return userRes.data.user;
     },
   });
 
@@ -56,6 +55,7 @@ export const useLogin = () => {
 
 export const useSignup = () => {
   const { setUser } = useAuthContext();
+  const { refetch } = useGetCurrentUser();
 
   const { isError, isPending, isSuccess, data, error, mutate } = useMutation({
     mutationFn: async (data) => {
@@ -68,12 +68,13 @@ export const useSignup = () => {
       localStorage.setItem("refresh_token", res?.data?.token.refresh_token);
 
       // getting current user
-      const userRes = await axios.get("auth/me");
+      await refetch();
+      // const userRes = await axios.get("auth/me");
 
-      localStorage.setItem("user", JSON.stringify(userRes.data.user));
+      // localStorage.setItem("user", JSON.stringify(userRes.data.user));
 
-      setUser(userRes.data.user);
-      return userRes.data.user;
+      // setUser(userRes.data.user);
+      // return userRes.data.user;
     },
   });
 

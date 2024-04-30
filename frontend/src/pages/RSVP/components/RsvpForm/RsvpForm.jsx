@@ -8,18 +8,20 @@ import { HiOutlineExclamationCircle } from "react-icons/hi2";
 import { useCreateRsvp } from "../../../../hooks/events";
 import { Toaster, toast } from "react-hot-toast";
 import { useEffect } from "react";
-const RsvpForm = ({ event }) => {
+const RsvpForm = ({ event, rsvp }) => {
   const { create, isPending, isError, isSuccess, error, data } =
     useCreateRsvp();
 
+  console.log(rsvp);
+
   const initialValues = {
-    name: "",
-    email: "",
-    notes: "",
-    registry: "",
-    guestNames: [],
-    guestNumber: 0,
-    rsvpStatus: "attending",
+    name: rsvp?.name ?? "",
+    email: rsvp?.email ?? "",
+    notes: rsvp?.notes ?? "",
+    registry: rsvp?.registry[0] ?? "",
+    guestNames: rsvp?.guestNames ?? [],
+    guestNumber: rsvp?.guestNames.length ?? 0,
+    rsvpStatus: rsvp?.rsvpStatus ?? "attending",
   };
 
   const formSchema = yup.object().shape({
@@ -62,6 +64,7 @@ const RsvpForm = ({ event }) => {
         initialValues={initialValues}
         validationSchema={formSchema}
         onSubmit={handleSubmit}
+        enableReinitialize
       >
         {({
           values,
@@ -140,7 +143,11 @@ const RsvpForm = ({ event }) => {
               </div>
               <InputGroup name="registry">
                 <InputGroup.Label>Registry</InputGroup.Label>
-                <Select name="registry" onChange={handleChange}>
+                <Select
+                  name="registry"
+                  value={values.registry}
+                  onChange={handleChange}
+                >
                   <option value="">Choose gift</option>
                   {event.expectedGifts.map((gift) => (
                     <option value={gift}>{gift}</option>

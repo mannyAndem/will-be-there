@@ -26,21 +26,38 @@
     align-items: center;
     gap: 40px;
 
+    .no-rsvps {
+      span {
+        font-size: 1.5rem;
+        font-weight: 500;
+        font-family: "Montserrat";
+        color: $green;
+      }
+    }
+
     @include sm {
       padding: 20px 16px;
     }
   }
 
   .no-event {
-    height: 60vh;
+    padding-top: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
 
     span {
       font-family: "Montserrat", sans-serif;
-      font-size: 2.5rem;
+      font-size: 1.5rem;
       font-weight: 500;
+
+      @include sm {
+        font-size: 1rem;
+      }
+    }
+
+    @include sm {
+      padding-top: 16px;
     }
   }
   .rsvp-form-section {
