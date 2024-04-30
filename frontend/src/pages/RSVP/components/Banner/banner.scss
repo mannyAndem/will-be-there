@@ -27,5 +27,13 @@
         color: $gray;
       }
     }
+
+    @include sm {
+      justify-content: center;
+    }
+  }
+
+  @include sm {
+    aspect-ratio: 4 / 3;
   }
 }

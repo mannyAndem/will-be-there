@@ -97,18 +97,19 @@ export class EventsService {
         });
       }
     }
-    const templateId = this.configService.get('RSVP_TEMPLATE_ID'); // get email template ID
+    const templateId = this.configService.get('RSVP_TEMPLATE_ID');
 
     await this.mailService.sendMail({
       variables: {
         user: data.name,
         eventName: event.name,
-        eventDate: new Date(event.date).toDateString(),
-        startTime: new Date(event.start).toTimeString(),
-        endTime: new Date(event.end).toTimeString(),
+        eventDate: new Date(event.date).toLocaleDateString(),
+        startTime: new Date(event.start).toLocaleTimeString(),
+        endTime: new Date(event.end).toLocaleTimeString(),
         eventLocation: event.location,
         eventDescription: event.description,
         organizerName: event.organizer.name,
+        year: new Date().getFullYear(),
       },
       templateId,
       title: 'RSVP Confirmation',

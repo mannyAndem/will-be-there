@@ -10,6 +10,7 @@ lerna-debug.log*
 # subdirectories node_modules
 node_modules
 **/node_modules
+**/uploads
 dist
 dist-ssr
 *.local

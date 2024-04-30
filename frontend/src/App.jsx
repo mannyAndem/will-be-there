@@ -12,7 +12,7 @@ import Rsvp from "./pages/RSVP/Rsvp";
 
 function App() {
   return (
-    <div className="routes">
+    <div className="routes app-container">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />

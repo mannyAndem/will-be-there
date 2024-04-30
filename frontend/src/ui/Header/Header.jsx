@@ -1,37 +1,30 @@
-import { Link } from "react-router-dom";
-import Navbar from "../Navbar/Navbar";
-import Button from "../Button/Button";
-import "./header.scss";
-import { IoNotificationsSharp } from "react-icons/io5";
-import { useAuthContext } from "../../contexts/AuthContext";
+import { IoNotificationsSharp } from 'react-icons/io5'
+import { Link } from 'react-router-dom'
+import { useAuthContext } from '../../contexts/AuthContext'
+import Button from '../Button/Button'
+import Navbar from '../Navbar/Navbar'
+import './header.scss'
 
 const Header = () => {
-  const { user } = useAuthContext();
+  const { user } = useAuthContext()
   const mobileMenu = () => {
-    let menu = document.querySelector(".desktop");
-    let close = document.querySelector(".menu");
-    if (menu.style.display === "flex") {
-      menu.style.display = "none";
-      close.classList.remove("active");
+    let menu = document.querySelector('.desktop')
+    let close = document.querySelector('.menu')
+    if (menu.style.display === 'flex') {
+      menu.style.display = 'none'
+      close.classList.remove('active')
     } else {
-      menu.style.display = "flex";
-      close.classList.add("active");
+      menu.style.display = 'flex'
+      close.classList.add('active')
     }
-  };
+  }
 
   return (
-    <header className="header">
-      <Link to="/" className="brand">
-        WILL.BE.THERE
-      </Link>
-      <div className="menu" onClick={mobileMenu}>
-        <div className="lines"></div>
-
-        <div className="lines"></div>
-
-        <div className="lines"></div>
-      </div>
-      <div className="desktop">
+    <>
+      <header className="desktop-header">
+        <Link to="/" className="brand">
+          WILL.BE.THERE
+        </Link>
         <Navbar />
         {!user ? (
           <div>
@@ -47,9 +40,31 @@ const Header = () => {
             <div className="profile-image">{user.name[0].toUpperCase()}</div>
           </div>
         )}
-      </div>
-    </header>
-  );
-};
+      </header>
+      <header className="mobile-header">
+        <Link to="/" className="brand">
+          WILL.BE.THERE
+        </Link>
+        <div className="menu-user-container">
+          {user && (
+            <div className="user-container">
+              <div className="profile-image">{user.name[0].toUpperCase()}</div>
+            </div>
+          )}
+          <div className="menu" onClick={mobileMenu}>
+            <div className="lines"></div>
 
-export default Header;
+            <div className="lines"></div>
+
+            <div className="lines"></div>
+          </div>
+        </div>
+        <div className="desktop">
+          <Navbar />
+        </div>
+      </header>
+    </>
+  )
+}
+
+export default Header

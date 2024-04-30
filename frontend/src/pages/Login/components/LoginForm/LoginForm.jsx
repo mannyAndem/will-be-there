@@ -50,7 +50,7 @@ const LoginForm = () => {
         validationSchema={formSchema}
       >
         {({ values, touched, errors, handleSubmit, handleChange }) => (
-          <form onSubmit={handleSubmit}>
+          <form className="login-form" onSubmit={handleSubmit}>
             <InputGroup name="email" error={touched.email && errors.email}>
               <InputGroup.Label>Email</InputGroup.Label>
               <InputGroup.Input

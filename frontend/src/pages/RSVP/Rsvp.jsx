@@ -10,10 +10,10 @@ import LoginPopup from "./components/LoginPopup/LoginPopup";
 import { useAuthContext } from "../../contexts/AuthContext";
 import Footer from "../Home/components/Footer/Footer";
 
-
 const Rsvp = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const { user } = useAuthContext();
+  console.log(user);
 
   const {
     data: event,
@@ -28,33 +28,35 @@ const Rsvp = () => {
 
   return (
     <>
-    <div className="rsvp-container">
-      <div className="header-container">
-        <Header />
-      </div>
-      <LoginPopup isLoggedIn={!!user} />
-      {/* <div className="previous-events-header">
+      <div className="rsvp-container">
+        <div className="header-container">
+          <Header />
+        </div>
+        <LoginPopup isLoggedIn={!!user} />
+        {/* <div className="previous-events-header">
         <h2>Previous Events</h2>
       </div> */}
-      {/* <div className="events-list">
+        {/* <div className="events-list">
         <EventCard img={mockEventImg} title="Halimahs Lunch Date" />
       </div> */}
-      {isSuccess ? (
-        <section className="rsvp-form-section">
-          <Banner img={event.media?.[0]?.imageUrl} />
-          <div className="rsvp-form-container">
-            <RsvpForm event={event} />
+        {isSuccess ? (
+          <section className="rsvp-form-section">
+            <Banner img={event.media?.[0]?.imageUrl} />
+            <div className="rsvp-form-container">
+              <RsvpForm event={event} />
+            </div>
+          </section>
+        ) : isPending ? (
+          <div className="loader-container">
+            <Loader size="md" />
           </div>
-        </section>
-      ) : isPending ? (
-        <div className="loader-container">
-          <Loader size="md" />
-        </div>
-      ) : (
-        <div></div>
-      )}
-    </div>
-    <Footer/>
+        ) : (
+          <div className="no-event">
+            <span>Click on a link shared by an event organizer to rsvp.</span>
+          </div>
+        )}
+      </div>
+      <Footer />
     </>
   );
 };

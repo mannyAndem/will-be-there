@@ -8,14 +8,15 @@
   bottom: 0;
   background-color: rgba($dark, 0.3);
   z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
 }
 
 .share-event-modal {
-  position: fixed;
   max-width: 640px;
-  bottom: 50%;
-  right: 50%;
-  transform: translate(50%, 50%);
+  width: 100%;
   z-index: 50;
   background-color: #fff;
   border-radius: 12px;
@@ -28,9 +29,13 @@
     align-items: center;
 
     h3 {
-      font-size: 40px;
+      font-size: 2.5rem;
       font-weight: 600;
       font-family: "Montserrat";
+
+      @include sm {
+        font-size: 1.5rem;
+      }
     }
 
     .close-icon {
@@ -57,6 +62,10 @@
       font-size: 1.5rem;
       font-family: "Montserrat", sans-serif;
       font-weight: 600;
+
+      @include sm {
+        font-size: 1rem;
+      }
     }
   }
 
@@ -75,8 +84,26 @@
         width: 60px;
         height: 60px;
         object-fit: contain;
+
+        @include sm {
+          width: 30px;
+          height: 30px;
+        }
+      }
+
+      @include sm {
+        padding: 10px;
       }
     }
+
+    @include sm {
+      gap: 16px;
+      justify-content: space-between;
+    }
+  }
+
+  @include sm {
+    padding: 16px;
   }
 }
 
