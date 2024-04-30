@@ -135,6 +135,9 @@ export class AuthService {
       where: {
         email: req.user.email,
       },
+      include: {
+        rsvps: true,
+      },
     });
 
     return {
