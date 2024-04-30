@@ -1,6 +1,6 @@
 @import "../../style/variables";
 
-.header {
+.desktop-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -50,31 +50,58 @@
       color: $green;
     }
   }
+
+  @include sm {
+    display: none;
+  }
 }
 
-@media (max-width: 426px) {
-  .header {
-    padding: 1rem;
-    .brand {
-      font-size: 24px;
-    }
-    .user-container {
-      .profile-image {
-        font-size: 20px;
-        font-weight: 500;
-        width: 60px;
-      }
-      .bell-container {
-        width: 35px;
-        .icon {
-          width: 18px;
-        }
-      }
+.mobile-header {
+  display: none !important;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  box-shadow: 2px 2px 10px rgb(155, 151, 151);
 
-      .profile-image {
-        width: 35px;
-        font-size: 15px;
-      }
+  .menu-user-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .brand {
+    font-size: 24px;
+    font-weight: 700;
+    font-family: "Sharpie", sans-serif;
+    color: $green;
+    text-decoration: none;
+  }
+  .user-container {
+    .profile-image {
+      font-size: 20px;
+      font-weight: 500;
+      width: 60px;
     }
+
+    .profile-image {
+      width: 35px;
+      font-size: 15px;
+      aspect-ratio: 1;
+      background-color: $gray;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-transform: uppercase;
+      font-weight: 700;
+      font-family: "Montserrat", sans-serif;
+      color: $green;
+    }
+  }
+
+  @include sm {
+    display: flex !important;
   }
 }

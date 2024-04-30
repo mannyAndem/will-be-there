@@ -64,7 +64,7 @@ const SignupForm = () => {
         validationSchema={formSchema}
       >
         {({ values, touched, errors, handleSubmit, handleChange }) => (
-          <form onSubmit={handleSubmit}>
+          <form className="signup-form" onSubmit={handleSubmit}>
             <InputGroup name="name" error={touched.name && errors.name}>
               <InputGroup.Label>Full Name</InputGroup.Label>
               <InputGroup.Input

@@ -43,21 +43,16 @@
 
 .button-sm {
   padding: 14px 24px;
+
+  @include sm {
+    padding: 10px 20px;
+  }
 }
 
 .button-md {
   padding: 24px 40px;
-}
 
-@media (max-width: 426px) {
-  .button {
-    font-size: 1rem;
-  }
-
-  .button-sm {
-    padding: 10px 20px;
-  }
-  .button-md {
+  @include sm {
     padding: 15px 20px;
   }
 }

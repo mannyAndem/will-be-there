@@ -1,6 +1,6 @@
 @import "../../../../style/variables";
 
-form {
+.login-form {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -13,23 +13,20 @@ form {
     text-decoration: underline;
     color: $green;
     margin-top: 6px;
+
+    @include sm {
+      margin-top: 10px;
+      font-size: 1rem;
+    }
   }
 
   .button-container {
     margin-top: 3rem;
     width: 60%;
     align-self: center;
-  }
-}
 
-
-@media(max-width:426px){
-  form{
-    .forgot-pass{
-      margin-top: 10px;
-      font-size: 1rem;
+    @include sm {
+      width: 100%;
     }
-
-    
   }
 }

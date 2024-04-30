@@ -1,6 +1,6 @@
 @import "../../../../style/variables";
 
-form {
+.signup-form {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -9,5 +9,14 @@ form {
     margin-top: 3rem;
     width: 60%;
     align-self: center;
+
+    @include sm {
+      margin-top: 1.5rem !important;
+      width: 100% !important;
+    }
+  }
+
+  @include sm {
+    gap: 1rem;
   }
 }

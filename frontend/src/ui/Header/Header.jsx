@@ -20,34 +20,50 @@ const Header = () => {
   }
 
   return (
-    <header className="header">
-      <Link to="/" className="brand">
-        WILL.BE.THERE
-      </Link>
-      {/* <div className="menu" onClick={mobileMenu}>
-        <div className="lines"></div>
-
-        <div className="lines"></div>
-
-        <div className="lines"></div>
-      </div> */}
-      <Navbar />
-      {!user ? (
-        <div>
-          <Link to="/login">
-            <Button size="sm">Log In</Button>
-          </Link>
-        </div>
-      ) : (
-        <div className="user-container">
-          <div className="bell-container">
-            <IoNotificationsSharp className="icon" size={30} />
+    <>
+      <header className="desktop-header">
+        <Link to="/" className="brand">
+          WILL.BE.THERE
+        </Link>
+        <Navbar />
+        {!user ? (
+          <div>
+            <Link to="/login">
+              <Button size="sm">Log In</Button>
+            </Link>
           </div>
-          <div className="profile-image">{user.name[0].toUpperCase()}</div>
+        ) : (
+          <div className="user-container">
+            <div className="bell-container">
+              <IoNotificationsSharp className="icon" size={30} />
+            </div>
+            <div className="profile-image">{user.name[0].toUpperCase()}</div>
+          </div>
+        )}
+      </header>
+      <header className="mobile-header">
+        <Link to="/" className="brand">
+          WILL.BE.THERE
+        </Link>
+        <div className="menu-user-container">
+          {user && (
+            <div className="user-container">
+              <div className="profile-image">{user.name[0].toUpperCase()}</div>
+            </div>
+          )}
+          <div className="menu" onClick={mobileMenu}>
+            <div className="lines"></div>
+
+            <div className="lines"></div>
+
+            <div className="lines"></div>
+          </div>
         </div>
-      )}
-      {/* <div className="desktop"></div> */}
-    </header>
+        <div className="desktop">
+          <Navbar />
+        </div>
+      </header>
+    </>
   )
 }
 

@@ -42,7 +42,7 @@
   }
 
   & > div:last-child {
-    padding: 4rem;
+    padding: 16px 20px;
 
     .signup-header {
       display: flex;
@@ -56,11 +56,19 @@
       font-family: "Montserrat", sans-serif;
       font-weight: 500;
       font-size: 2.5rem;
+
+      @include sm {
+        font-size: 1.5rem !important;
+      }
     }
 
     P {
       font-family: "Montserrat", sans-serif;
       font-size: 1.25rem;
+
+      @include sm {
+        font-size: 1rem !important;
+      }
     }
 
     .or-container {
