@@ -7,6 +7,7 @@ import {
   AccordionSummary,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
+// Importing the test images
 import Guest1 from "../../../assets/images/guest1.png";
 import Guest2 from "../../../assets/images/guest2.png";
 import Guest3 from "../../../assets/images/roselyn.png";
@@ -27,8 +28,8 @@ const CustomIcon = ({ expanded }) => {
 const StyledAccordionSummary = styled((props) => (
   <AccordionSummary
     {...props}
-    expandIcon={<CustomIcon expanded={props.expanded} />}
-  >
+    expandIcon={<CustomIcon expanded={props.expanded} /> }
+aria-controls="panel-content"  >
     <div className="headerContents">
       <header>{props.title}</header>
       <div className={`partOfTheHeader ${props.expanded ? "hidden" : ""}`}>
@@ -399,6 +400,7 @@ const GuestLists = ({ guests }) => {
           key={index}
           expanded={expandedAccordions.includes(index)}
           onChange={handleChange(index)}
+          slotProps={{ transition: { unmountOnExit: true } }}
         >
           <StyledAccordionSummary
             expanded={expandedAccordions.includes(index)}
