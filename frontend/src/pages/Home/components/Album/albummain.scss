@@ -1,8 +1,8 @@
 .mainAlbumContainer {
   display: flex;
-  width: 90%;
-  margin: 0 auto 40px;
-  justify-content: space-around;
+  width: clamp(400px, 100%, 1150px);
+  margin: 0 auto 100px;
+  justify-content: space-between;
 }
 @media (max-width: 426px) {
   .mainAlbumContainer {
