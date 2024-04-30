@@ -74,15 +74,6 @@
   text-align: center;
   color: $green;
 }
-
-.no-created-events {
-  display: block;
-  font-size: 1.5rem;
-  font-weight: 500;
-  font-family: "Montserrat";
-  color: $green;
-}
-
 .guestAttendance {
   width: 100%;
   margin: 0 auto !important;
@@ -122,7 +113,7 @@
           width: 20px;
           height: 20px;
           border: 2px solid grey;
-          border-radius: 20px;
+          border-radius: 50%;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -163,11 +154,10 @@
 
   > .more {
     background-color: $fountainWhite;
-    padding: 10px;
+    padding: 12px;
     border-radius: 10px;
   }
 }
-
 .css-1086bdv-MuiPaper-root-MuiAccordion-root {
   box-shadow: none !important;
   border-bottom: 1px solid rgba(176, 176, 176, 0.788);
@@ -179,4 +169,56 @@
 }
 .css-1086bdv-MuiPaper-root-MuiAccordion-root.Mui-expanded {
   margin: 16px auto !important;
+}
+
+
+@media (max-width:426px){
+  
+ .guestAttendance{
+  .namePict{
+    font-size: 14px;
+    p{
+      font-size: 12px;
+    }
+
+  }
+
+  .attendance{
+    .status{
+      margin: 10px auto;
+      display: block;
+      font-size: 10px;
+      justify-content: space-between;
+
+      .prob{
+        margin-top: 10px;
+        gap: 5px;
+font-size: 10px;
+        >.circle{
+          width: 12px;
+          height: 12px;
+          border: 1px solid grey;
+        }
+        .active{
+          border: 1px solid $green !important;
+          &::after{
+            width: 8px;
+            height: 8px;
+          }
+        }
+      }
+    }
+  }
+ }
+.guestDetails{
+  &>.contact{
+    font-size: 12px;
+    margin: 5px 0;
+  }
+  >.more{
+    font-size: 12px;
+    
+  }
+}
+
 }
