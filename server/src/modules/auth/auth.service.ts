@@ -136,7 +136,9 @@ export class AuthService {
         email: req.user.email,
       },
       include: {
-        rsvps: true,
+        rsvps: {
+          include: { event: true },
+        },
       },
     });
 
@@ -218,7 +220,7 @@ export class AuthService {
       },
     });
 
-    if (user.provider !== 'google')
+    if (user && user.provider !== 'google')
       throw new BadRequestException(
         'Looks like you might have signed up with Google earlier. Try signing in with Google!',
       );
