@@ -1,13 +1,6 @@
-<<<<<<< HEAD
-.mainContainer{
-    width: clamp;
 
-    margin: 0 auto 30px;
-    display: flex;
-    justify-content: space-between;
-=======
 .mainContainer {
-  width: 90%;
+  width: clamp(400px, 100%, 1200px);
   margin: 0 auto 30px;
   display: flex;
   justify-content: space-around;
@@ -18,5 +11,5 @@
     align-items: center;
     gap: 30px;
   }
->>>>>>> 43fe6c23fbe93ba7c7f103fe9a05fff6940905f7
+
 }

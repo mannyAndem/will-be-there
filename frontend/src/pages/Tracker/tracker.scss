@@ -10,6 +10,8 @@
     font-size: 2.5rem;
     font-weight: 600;
     font-family: "Montserrat", sans-serif;
+     margin: 5px 0;
+    
 
     @include sm {
       font-size: 1rem;
@@ -76,16 +78,17 @@
 }
 .guestAttendance {
   width: 100%;
-  margin: 0 auto !important;
+  margin: 10px auto !important;
   .namePict {
     display: flex;
     width: 100%;
-    align-items: center;
+    align-items: flex-start;
     gap: 20px;
     font-size: 20px;
     font-weight: 600;
     font-family: "Montserrat";
     p {
+      margin: 10px 0;
       font-size: 15px;
       font-weight: 500;
     }
@@ -95,7 +98,7 @@
   }
 
   .attendance {
-    .status {
+     .status {
       display: flex;
       align-items: center;
       gap: 20px;
@@ -140,6 +143,7 @@
 }
 
 .guestDetails {
+  border-top: 1px solid $blue;
   width: 90%;
   margin: 0 auto;
   font-family: "Montserrat";
@@ -173,7 +177,16 @@
 
 
 @media (max-width:426px){
-  
+  .tracker-events-header{
+    width: fit-content;
+    margin: 0 auto;
+    text-align: center;
+    h2{
+      margin: 15px 0;
+    }
+    
+    
+  }
  .guestAttendance{
   .namePict{
     font-size: 14px;
