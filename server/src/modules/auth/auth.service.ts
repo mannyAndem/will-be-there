@@ -137,7 +137,13 @@ export class AuthService {
       },
       include: {
         rsvps: {
-          include: { event: true },
+          include: {
+            event: {
+              include: {
+                media: true,
+              },
+            },
+          },
         },
       },
     });
