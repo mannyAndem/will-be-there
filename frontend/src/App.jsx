@@ -19,8 +19,14 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password" element={<ResetPassword />} />
-        <Route path="/tracker/*" element={<Tracker />} />
-        <Route path="/tracker/:id" element={<Tracker />} />
+        <Route
+          path="/tracker"
+          element={
+            <ProtectedRoute>
+              <Tracker />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/faq" element={<FAQ />} />
         <Route
           path="/events"
@@ -30,14 +36,7 @@ function App() {
             </ProtectedRoute>
           }
         />
-        <Route
-          path="/rsvp"
-          element={
-            <ProtectedRoute>
-              <Rsvp />
-            </ProtectedRoute>
-          }
-        />
+        <Route path="/rsvp" element={<Rsvp />} />
       </Routes>
     </div>
   );
