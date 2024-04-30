@@ -1,13 +1,13 @@
-.mainAlbumContainer{
-    display: flex;
-    width: 90%;
-    margin: 0 auto 40px;
-    justify-content: space-between;
+.mainAlbumContainer {
+  display: flex;
+  width: 90%;
+  margin: 0 auto 40px;
+  justify-content: space-around;
 }
-@media (max-width:426px) {
-    .mainAlbumContainer{
-        flex-direction: column;
-        gap: 20px;
-        align-items: center;
-    }
+@media (max-width: 426px) {
+  .mainAlbumContainer {
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
 }
