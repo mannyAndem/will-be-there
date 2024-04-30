@@ -5,7 +5,6 @@
   grid-template-columns: 1fr 1fr;
   min-height: 100vh;
 
-
   & > div:first-child {
     height: 100%;
     padding-right: 6rem;
@@ -16,7 +15,7 @@
       height: 100%;
       background-color: $green;
       border-radius: 0px 80px 80px 0px;
-      img{
+      img {
         display: none;
       }
       p {
@@ -26,7 +25,6 @@
         font-weight: 500;
         margin-top: 12px;
         margin-left: 26px;
-       
       }
     }
     .img-container {
@@ -58,11 +56,19 @@
       font-family: "Montserrat", sans-serif;
       font-weight: 500;
       font-size: 2.5rem;
+
+      @include sm {
+        font-size: 1.5rem;
+      }
     }
 
     P {
       font-family: "Montserrat", sans-serif;
       font-size: 1.25rem;
+
+      @include sm {
+        font-size: 1rem;
+      }
     }
 
     .signup-with-google {
@@ -115,55 +121,54 @@
   }
 }
 
-
-@media (max-width:426px) {
-  .container{
+@media (max-width: 426px) {
+  .container {
     display: flex;
     flex-direction: column;
     width: 100%;
-    &>div:first-child{
+    & > div:first-child {
       width: 100%;
       padding: 0;
-      .brand-container{
+      .brand-container {
         padding: 3rem;
         border-radius: 0;
-        img{
+        img {
           width: 10rem;
         }
-        p{
+        p {
           font-size: 1rem;
         }
       }
-     .img-container{
-      display: none;
-     }
-     
+      .img-container {
+        display: none;
+      }
     }
-    &>div:last-child{
+    & > div:last-child {
       width: 100%;
-      .login-header{
+      padding: 16px 20px;
+      .login-header {
         text-align: center;
-        h1{
+        h1 {
           text-align: left;
           font-size: 2rem;
         }
-        P{
+        P {
+          text-align: left;
           font-size: 1rem;
         }
 
-        .signup-with-google{
+        .signup-with-google {
           font-size: 1rem;
           padding-block: 1rem;
         }
-       
       }
-      .or-container{
-        span{
+      .or-container {
+        span {
           font-size: 1rem;
         }
       }
 
-      .link-container{
+      .link-container {
         font-size: 1rem;
       }
     }

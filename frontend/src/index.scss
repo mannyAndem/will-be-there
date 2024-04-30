@@ -17,6 +17,10 @@
   padding: 0;
 }
 
+.app-container {
+  overflow-x: hidden;
+}
+
 h1,
 h2,
 h3,
@@ -29,6 +33,6 @@ span,
 button {
   color: $dark;
 }
-button{
+button {
   border: none;
 }

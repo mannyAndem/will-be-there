@@ -20,18 +20,11 @@ const Header = () => {
   };
 
   return (
-    <header className="header">
-      <Link to="/" className="brand">
-        WILL.BE.THERE
-      </Link>
-      <div className="menu" onClick={mobileMenu}>
-        <div className="lines"></div>
-
-        <div className="lines"></div>
-
-        <div className="lines"></div>
-      </div>
-      <div className="desktop">
+    <>
+      <header className="desktop-header">
+        <Link to="/" className="brand">
+          WILL.BE.THERE
+        </Link>
         <Navbar />
         {!user ? (
           <div>
@@ -47,8 +40,30 @@ const Header = () => {
             <div className="profile-image">{user.name[0].toUpperCase()}</div>
           </div>
         )}
-      </div>
-    </header>
+      </header>
+      <header className="mobile-header">
+        <Link to="/" className="brand">
+          WILL.BE.THERE
+        </Link>
+        <div className="menu-user-container">
+          {user && (
+            <div className="user-container">
+              <div className="profile-image">{user.name[0].toUpperCase()}</div>
+            </div>
+          )}
+          <div className="menu" onClick={mobileMenu}>
+            <div className="lines"></div>
+
+            <div className="lines"></div>
+
+            <div className="lines"></div>
+          </div>
+        </div>
+        <div className="desktop">
+          <Navbar />
+        </div>
+      </header>
+    </>
   );
 };
 

@@ -1,6 +1,29 @@
 @import "../../style/variables.scss";
 
-.tracker-events-header {
+.tracker-event-header {
+  padding: 40px 64px 20px 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h2 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    font-family: "Montserrat", sans-serif;
+
+    @include sm {
+      font-size: 1rem;
+    }
+  }
+
+  @include sm {
+    padding: 20px 16px !important;
+    // flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+}
+.tracker-header {
   padding: 40px 64px 20px 64px;
   display: flex;
   justify-content: space-between;
@@ -25,9 +48,8 @@
 }
 
 .loader-container {
-  position: fixed;
   width: 100%;
-  height: 100%;
+  height: 60vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -52,6 +74,15 @@
   text-align: center;
   color: $green;
 }
+
+.no-created-events {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 500;
+  font-family: "Montserrat";
+  color: $green;
+}
+
 .guestAttendance {
   width: 100%;
   margin: 0 auto !important;

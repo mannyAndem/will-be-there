@@ -72,7 +72,7 @@ const RsvpForm = ({ event }) => {
           errors,
           setFieldValue,
         }) => (
-          <form className="create-event-form" onSubmit={handleSubmit}>
+          <form className="rsvp-form" onSubmit={handleSubmit}>
             {console.log(values)}
             <div>
               <InputGroup name="name" error={errors.name}>

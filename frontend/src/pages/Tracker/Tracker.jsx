@@ -33,21 +33,25 @@ const Tracker = () => {
       console.log(event);
       setEvent(event);
     }
-  }, [isSuccess, searchParams]);
+  }, [isSuccess, searchParams, events]);
 
   return (
     <div className="tracker-container">
       <Header />
       {isSuccess ? (
         <>
-          <div className="previous-events-header">
+          <div className="tracker-header">
             <h2>Event List</h2>
           </div>
 
           <div className="events-list">
-            {events.map((event) => (
-              <EventCard event={event} />
-            ))}
+            {events.length > 0 ? (
+              events.map((event) => <EventCard event={event} />)
+            ) : (
+              <span className="no-created-events">
+                Start creating events to view them here
+              </span>
+            )}
           </div>
 
           {event ? (
@@ -57,7 +61,7 @@ const Tracker = () => {
                 close={closeModal}
                 event={event}
               />
-              <div className="tracker-events-header">
+              <div className="tracker-event-header">
                 <h2>Guest List For {event.name}</h2>
                 <div>
                   <Button size="sm" onClick={openModal}>
